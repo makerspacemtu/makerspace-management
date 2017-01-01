@@ -13,7 +13,7 @@
 
           .form-group
             = f.label :password
-            = f.email_field :password, class: "form-control"
+            = f.password_field  :password, class: "form-control"
 
           - if devise_mapping.rememberable?
             .form-check

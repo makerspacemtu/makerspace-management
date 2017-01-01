@@ -24,8 +24,10 @@
       .row
         .col-md-12
           - if notice.present?
-            %p= notice
+            .alert.alert-info
+              = notice
           - if alert.present?
-            %p= alert
+            .alert.alert-info
+              = alert
 
           = yield
