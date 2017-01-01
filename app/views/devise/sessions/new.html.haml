@@ -1,0 +1,24 @@
+.row
+  .col-md-6.offset-md-3
+    .card
+      .card-block
+        %h4.card-title
+          %i.fa.fa-sign-in
+          Log in
+
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .form-group
+            = f.label :email
+            = f.email_field :email, autofocus: true, class: "form-control"
+
+          .form-group
+            = f.label :password
+            = f.email_field :password, class: "form-control"
+
+          - if devise_mapping.rememberable?
+            .form-check
+              = f.label :remember_me, class: "form-check-label" do
+                = f.check_box :remember_me, class: "form-check-input"
+                Remember Me
+
+          = f.submit "Log in", class: "btn btn-primary"

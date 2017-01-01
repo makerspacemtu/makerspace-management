@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+
+ $brand-primary: #76bf43;
+
+@import "bootstrap";
+@import "font-awesome";
+
+html,
+body {
+  height: 100%;
+}
+
+.container--main {
+  padding-top: 70px;
+}
