@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20170101223246) do
     t.string   "position_name"
     t.datetime "member_since",                           null: false
     t.boolean  "is_admin",               default: false, null: false
+    t.text     "biography"
+    t.string   "card_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

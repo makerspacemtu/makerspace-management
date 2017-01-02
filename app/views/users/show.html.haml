@@ -1,0 +1,36 @@
+.row
+  .col-md-4
+    .card
+      = image_tag @user.profile_image_url, class: 'card-img-top'
+      .card-block
+        %h4.card-title
+          = @user.full_name
+        %p.card-text
+          = @user.biography
+        %p.card-text
+          %small.text-muted
+            Member since #{@user.member_since.strftime('%B %-d, %Y')}
+
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          = link_to "https://twitter.com/#{@user.twitter_username}" do
+            %i.fa.fa-twitter
+            @#{@user.twitter_username}
+        %li.list-group-item
+          = link_to "https://facebook.com/#{@user.facebook_username}" do
+            %i.fa.fa-facebook
+            \/#{@user.facebook_username}
+        %li.list-group-item
+          = link_to "https://github.com/#{@user.github_username}" do
+            %i.fa.fa-github
+            \/#{@user.github_username}
+        %li.list-group-item
+          = link_to "slack://user?team=T20T77H1T" do
+            %i.fa.fa-slack
+            @#{@user.slack_username}
+
+      .card-block
+        = link_to edit_user_path(@user), class: "card-link" do
+          Edit Profile
+
+  .col-md-8

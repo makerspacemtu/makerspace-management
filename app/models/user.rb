@@ -25,11 +25,20 @@
 #  position_name          :string
 #  member_since           :datetime         not null
 #  is_admin               :boolean          default(FALSE), not null
+#  biography              :text
+#  card_id                :string
 #
 
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :member_since, presence: true
+  validates :is_admin, presence: true
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
