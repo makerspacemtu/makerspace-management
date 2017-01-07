@@ -44,15 +44,15 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def is_admin?
+  def admin?
     user_type == 'Admin'
   end
 
-  def is_staff?
+  def staff?
     user_type == 'Staff'
   end
 
-  def is_member?
+  def member?
     user_type == 'Member'
   end
 end
