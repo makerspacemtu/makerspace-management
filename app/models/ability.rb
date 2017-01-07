@@ -13,12 +13,18 @@ class Ability
       # admins can edit & udate any user
       can :edit, User
       can :update, User
+      # admins can create new users
+      can :create, User
+      can :update_password, User, id: user.id
+      can :password, User, id: user.id
     elsif user.staff?
       # staff can see any user
       can :read, User
       # staff can only edit & update themselves
       can :edit, User, id: user.id
       can :update, User, id: user.id
+      can :update_password, User, id: user.id
+      can :password, User, id: user.id
     end
     # members cannot currently do anything
   end

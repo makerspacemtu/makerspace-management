@@ -43,4 +43,10 @@
             %i.fa.fa-pencil
             Edit Profile
 
+          - if can? :password, @user
+            %div
+              = link_to password_user_path(@user), class: "card-link" do
+                %i.fa.fa-lock
+                Change Password
+
   .col-md-8

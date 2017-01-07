@@ -32,7 +32,7 @@
 class User < ApplicationRecord
   USER_TYPES = ['Admin', 'Staff', 'Member']
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :first_name, presence: true

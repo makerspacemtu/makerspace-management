@@ -1,15 +1,5 @@
 .row
   .col-lg-6.offset-lg-3.col-md-12
-    - unless @user.errors.empty?
-      .alert.alert-danger
-        %strong
-          #{pluralize(@user.errors.size, 'error')} occurred
-
-        %ul
-          - @user.errors.full_messages.each do |error|
-            %li
-              = error
-
     .card
       .card-block
         %h3.card-title
@@ -20,62 +10,4 @@
               %i.fa.fa-chevron-left
               Back to Profile
 
-        = form_for @user do |f|
-          .form-group
-            = f.label :email
-            = f.email_field :email, class: "form-control"
-
-          .form-group
-            = f.label :first_name
-            = f.text_field :first_name, class: "form-control"
-
-          .form-group
-            = f.label :last_name
-            = f.text_field :last_name, class: "form-control"
-
-          .form-group
-            = f.label :position_name
-            = f.text_field :position_name, class: "form-control"
-
-          .form-group
-            = f.label :biography
-            = f.text_area :biography, class: "form-control"
-
-          .form-group
-            = f.label :slack_username
-            .input-group
-              .input-group-addon
-                %i.fa.fa-slack
-              = f.text_field :slack_username, class: "form-control"
-
-          .form-group
-            = f.label :twitter_username
-            .input-group
-              .input-group-addon
-                %i.fa.fa-twitter
-              = f.text_field :twitter_username, class: "form-control"
-
-          .form-group
-            = f.label :facebook_username
-            .input-group
-              .input-group-addon
-                %i.fa.fa-facebook
-              = f.text_field :facebook_username, class: "form-control"
-
-          .form-group
-            = f.label :github_username
-            .input-group
-              .input-group-addon
-                %i.fa.fa-github
-              = f.text_field :github_username, class: "form-control"
-
-          .form-group
-            = f.label :profile_image_url
-            .input-group
-              .input-group-addon
-                %i.fa.fa-file-image-o
-              = f.text_field :profile_image_url, class: "form-control"
-            %small.form-text.text-muted
-              Direct link to an image to use as your profile image
-
-          = f.submit "Save", class: "btn btn-primary"
+        = render 'form'

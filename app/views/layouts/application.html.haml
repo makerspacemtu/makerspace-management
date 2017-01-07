@@ -18,6 +18,11 @@
             = link_to users_path, class: "nav-link" do
               %i.fa.fa-group
               Users
+          - if can? :create, User
+            %li.nav-item
+              = link_to new_user_path, class: "nav-link" do
+                %i.fa.fa-user-plus
+                New User
           %li.nav-item
             = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
               %i.fa.fa-sign-out

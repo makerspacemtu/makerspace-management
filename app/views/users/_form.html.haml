@@ -1,0 +1,90 @@
+- unless @user.errors.empty?
+  .alert.alert-danger
+    %strong
+      #{pluralize(@user.errors.size, 'error')} occurred
+
+    %ul
+      - @user.errors.full_messages.each do |error|
+        %li
+          = error
+
+= form_for @user do |f|
+  .form-group
+    = f.label :email
+    = f.email_field :email, class: "form-control"
+
+  .form-group
+    = f.label :first_name
+    = f.text_field :first_name, class: "form-control"
+
+  .form-group
+    = f.label :last_name
+    = f.text_field :last_name, class: "form-control"
+
+  .form-group
+    = f.label :position_name
+    = f.text_field :position_name, class: "form-control"
+
+  .form-group
+    = f.label :biography
+    = f.text_area :biography, class: "form-control"
+
+  .form-group
+    = f.label :slack_username
+    .input-group
+      .input-group-addon
+        %i.fa.fa-slack
+      = f.text_field :slack_username, class: "form-control"
+
+  .form-group
+    = f.label :twitter_username
+    .input-group
+      .input-group-addon
+        %i.fa.fa-twitter
+      = f.text_field :twitter_username, class: "form-control"
+
+  .form-group
+    = f.label :facebook_username
+    .input-group
+      .input-group-addon
+        %i.fa.fa-facebook
+      = f.text_field :facebook_username, class: "form-control"
+
+  .form-group
+    = f.label :github_username
+    .input-group
+      .input-group-addon
+        %i.fa.fa-github
+      = f.text_field :github_username, class: "form-control"
+
+  .form-group
+    = f.label :profile_image_url
+    .input-group
+      .input-group-addon
+        %i.fa.fa-file-image-o
+      = f.text_field :profile_image_url, class: "form-control"
+    %small.form-text.text-muted
+      Direct link to an image to use as your profile image
+
+  - if current_user.admin?
+    %h5.mb-1
+      Admin only options
+
+    .form-group.form-inline
+      = f.label :member_since
+      = f.date_select :member_since, {}, class: "form-control"
+
+    .form-group
+      = f.label :user_type
+      = f.select :user_type, options_for_select(User::USER_TYPES, f.object.user_type || 'Staff'), {}, class: "form-control"
+
+    - if @user.new_record?
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: "form-control"
+
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: "form-control"
+
+  = f.submit "Save", class: "btn btn-primary"
