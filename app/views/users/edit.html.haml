@@ -1,5 +1,5 @@
 .row
-  .col-md-6.offset-md-3
+  .col-lg-6.offset-lg-3.col-md-12
     .card
       .card-block
         %h3.card-title
@@ -22,6 +22,10 @@
           .form-group
             = f.label :last_name
             = f.text_field :last_name, class: "form-control"
+
+          .form-group
+            = f.label :position_name
+            = f.text_field :position_name, class: "form-control"
 
           .form-group
             = f.label :biography
