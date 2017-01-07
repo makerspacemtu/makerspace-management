@@ -24,21 +24,35 @@
 #  profile_image_url      :string
 #  position_name          :string
 #  member_since           :datetime         not null
-#  is_admin               :boolean          default(FALSE), not null
 #  biography              :text
 #  card_id                :string
+#  user_type              :string           not null
 #
 
 class User < ApplicationRecord
+  USER_TYPES = ['Admin', 'Staff', 'Member']
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :member_since, presence: true
-  validates :is_admin, inclusion: { in: [ true, false ] }
+  validates :user_type, inclusion: { in: USER_TYPES }
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def is_admin?
+    user_type == 'Admin'
+  end
+
+  def is_staff?
+    user_type == 'Staff'
+  end
+
+  def is_member?
+    user_type == 'Member'
   end
 end
