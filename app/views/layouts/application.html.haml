@@ -11,9 +11,18 @@
       %ul.nav.navbar-nav.float-xs-right
         - if user_signed_in?
           %li.nav-item
-            = link_to user_path(@user), class: "nav-link" do
+            = link_to user_path(current_user), class: "nav-link" do
               %i.fa.fa-user
-              #{@user.full_name}
+              #{current_user.full_name}
+          %li.nav-item
+            = link_to users_path, class: "nav-link" do
+              %i.fa.fa-group
+              Users
+          - if can? :create, User
+            %li.nav-item
+              = link_to new_user_path, class: "nav-link" do
+                %i.fa.fa-user-plus
+                New User
           %li.nav-item
             = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
               %i.fa.fa-sign-out
@@ -30,6 +39,7 @@
           - if notice.present?
             .alert.alert-info
               = notice
+
           - if alert.present?
             .alert.alert-info
               = alert

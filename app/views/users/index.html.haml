@@ -1,0 +1,16 @@
+%h1
+  Users
+  %small
+    (#{@users.count})
+
+- @users.each do |user|
+  .user-list__user.mb-1
+    .user-list__user-avatar.mr-1
+      = link_to user_path(user) do
+        - if user.profile_image_url.present?
+          .user-list__user-image{style: "background-image: url('#{user.profile_image_url}')"}
+        - else
+          %i.fa.fa-user
+    .user-list__user-details
+      %h5
+        = link_to user.full_name, user_path(user)
