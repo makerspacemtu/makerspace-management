@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
 
+  def index
+    @users = User.order(:first_name, :last_name)
+  end
+
   def show
     @user = User.find(params[:id])
   end
@@ -11,8 +15,12 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update!(user_params)
-    render 'edit'
+
+    if @user.update(user_params)
+      redirect_to @user, notice: 'Profile updated.'
+    else
+      render 'edit', error: @user.errors
+    end
   end
 
 private

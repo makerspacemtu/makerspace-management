@@ -15,6 +15,10 @@
               %i.fa.fa-user
               #{current_user.full_name}
           %li.nav-item
+            = link_to users_path, class: "nav-link" do
+              %i.fa.fa-group
+              Users
+          %li.nav-item
             = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
               %i.fa.fa-sign-out
               Sign Out
@@ -30,6 +34,7 @@
           - if notice.present?
             .alert.alert-info
               = notice
+
           - if alert.present?
             .alert.alert-info
               = alert

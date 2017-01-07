@@ -14,8 +14,6 @@
  *= require_self
  */
 
- $brand-primary: #76bf43;
-
 @import "bootstrap";
 @import "font-awesome";
 
@@ -30,10 +28,17 @@ img {
 
 small {
   font-size: 0.6em;
-  display: block;
   margin-top: 4px;
+
+  &.block {
+    display: block;
+  }
 }
 
 .container--main {
   padding-top: 70px;
+}
+
+.alert ul {
+  margin-bottom: 0;
 }

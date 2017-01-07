@@ -7,7 +7,7 @@
         %h4.card-title
           = @user.full_name
           - if @user.position_name.present?
-            %small
+            %small.block
               = @user.position_name
         %p.card-text
           - if @user.biography.present?
@@ -37,8 +37,10 @@
               %i.fa.fa-slack
               @#{@user.slack_username}
 
-      .card-block
-        = link_to edit_user_path(@user), class: "card-link" do
-          Edit Profile
+      - if can? :edit, @user
+        .card-block
+          = link_to edit_user_path(@user), class: "card-link" do
+            %i.fa.fa-pencil
+            Edit Profile
 
   .col-md-8

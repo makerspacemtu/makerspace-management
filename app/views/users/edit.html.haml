@@ -1,5 +1,15 @@
 .row
   .col-lg-6.offset-lg-3.col-md-12
+    - unless @user.errors.empty?
+      .alert.alert-danger
+        %strong
+          #{pluralize(@user.errors.size, 'error')} occurred
+
+        %ul
+          - @user.errors.full_messages.each do |error|
+            %li
+              = error
+
     .card
       .card-block
         %h3.card-title
