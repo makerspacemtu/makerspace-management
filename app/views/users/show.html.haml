@@ -51,24 +51,27 @@
 
   .col-md-8
     - if can? :read, Punch
-      %h5.mb-2
-        %i.fa.fa-check-square-o
-        Check In's & Out's
+      .card
+        .card-block
+          %h4.card-title.mb-0
+            %i.fa.fa-check-square-o
+            Check In's & Out's
 
-      - if @user.punches.count > 0
-        %ul.list-group
-          - @user.punches.each do |punch|
-            %li.list-group-item.justify-content-between
-              %h5
-                = punch.created_at.strftime("%r on %B %-d, %Y")
-                %small
-                  - if punch.in?
-                    %i.fa.fa-sign-in
-                    In
-                  - else
-                    %i.fa.fa-sign-out
-                    Out
-      - else
-        %p.text-muted
-          #{@user.first_name} has no check in's or out's
+          - unless @user.punches.count > 0
+            %p.card-text.text-muted
+              #{@user.first_name} has not checked in or out
+
+        - if @user.punches.count > 0
+          %ul.list-group.list-group-flush
+            - @user.punches.each do |punch|
+              %li.list-group-item.justify-content-between
+                %h6.mb-0
+                  = punch.created_at.strftime("%r on %B %-d, %Y")
+                  %small
+                    - if punch.in?
+                      %i.fa.fa-sign-in
+                      In
+                    - else
+                      %i.fa.fa-sign-out
+                      Out
 
