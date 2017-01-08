@@ -64,8 +64,14 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
     ffi (1.9.14)
     font-awesome-rails (4.7.0.1)
       railties (>= 3.2, < 5.1)
@@ -136,6 +142,23 @@ GEM
       ffi (>= 0.5.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rspec-core (3.5.4)
+      rspec-support (~> 3.5.0)
+    rspec-expectations (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-mocks (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-rails (3.5.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
+      rspec-support (~> 3.5.0)
+    rspec-support (3.5.0)
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -185,6 +208,7 @@ DEPENDENCIES
   cancancan
   coffee-rails (~> 4.2)
   devise
+  factory_girl_rails
   font-awesome-rails
   foreman
   haml
@@ -195,6 +219,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-assets-tether (>= 1.1.0)!
+  rspec-rails
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)
