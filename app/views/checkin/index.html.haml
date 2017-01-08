@@ -1,0 +1,15 @@
+.row
+  .col-lg-6.offset-lg-3.col-md-12
+    .jumbotron
+      %h1.display-6.mb-2
+        %i.fa.fa-check-square-o
+        Check In & Out
+
+      = form_tag checkin_path do
+        .form-group
+          .input-group.input-group-lg
+            = text_field_tag :email, '', class: 'form-control', placeholder: 'Email'
+            %span.input-group-btn
+              = submit_tag 'Go!', class: 'btn btn-primary'
+          %small.form-text.text-muted
+            Please use your @mtu.edu email address.
