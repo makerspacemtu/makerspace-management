@@ -10,4 +10,17 @@
 #
 
 class Punch < ApplicationRecord
+  belongs_to :user
+
+  validates :user_id, presence: true
+  # true is a check in, false is a check out
+  validates :in, inclusion: { in: [ false, true ] }
+
+  def in?
+    self.in
+  end
+
+  def out?
+    !in?
+  end
 end

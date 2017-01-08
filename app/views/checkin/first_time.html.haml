@@ -1,0 +1,25 @@
+.row
+  .col-lg-6.offset-lg-3.col-md-12
+    .jumbotron
+      %h2.mb-2
+        Looks like your first time here!
+
+      %p.lead
+        If you could quickly fill out your first and last name just this one time,
+        that would be fantastic!
+
+      = form_tag checkin_path do
+        = hidden_field_tag :email, params[:email]
+        .form-group
+          = label_tag :first_name
+          = text_field_tag :first_name, '', class: 'form-control form-control-lg', placeholder: 'First name'
+          %small.form-text.text-muted
+            Please use your preferred first name.
+
+        .form-group
+          = label_tag :last_name
+          = text_field_tag :last_name, '', class: 'form-control form-control-lg', placeholder: 'Last name'
+
+        = submit_tag 'Done!', class: 'btn btn-primary'
+
+      = link_to 'Oops, I entered the wrong email.', checkin_path, class: 'text-muted'

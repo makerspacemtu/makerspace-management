@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     patch :update_password, on: :member
   end
   get '/checkin', to: 'checkin#index'
+  get '/checkin/first_time', to: 'checkin#first_time'
   post '/checkin', to: 'checkin#checkin'
 end

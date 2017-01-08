@@ -35,6 +35,8 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :punches
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :member_since, presence: true
@@ -54,5 +56,17 @@ class User < ApplicationRecord
 
   def member?
     user_type == 'Member'
+  end
+
+  def most_recent_punch
+    self.punches.order(created_at: :desc).first
+  end
+
+  def punch_in
+    self.punches.create(in: true)
+  end
+
+  def punch_out
+    self.punches.create(in: false)
   end
 end
