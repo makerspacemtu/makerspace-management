@@ -15,8 +15,11 @@ class Ability
       can :update, User
       # admins can create new users
       can :create, User
-      can :update_password, User, id: user.id
-      can :password, User, id: user.id
+      # admins can change anyones password (might want to change in the future)
+      can :password, User
+      can :update_password, User
+      # only admins can see punches
+      can :read, Punch
     elsif user.staff?
       # staff can see any user
       can :read, User

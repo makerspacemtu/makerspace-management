@@ -50,3 +50,25 @@
                 Change Password
 
   .col-md-8
+    - if can? :read, Punch
+      %h5.mb-2
+        %i.fa.fa-check-square-o
+        Check In's & Out's
+
+      - if @user.punches.count > 0
+        %ul.list-group
+          - @user.punches.each do |punch|
+            %li.list-group-item.justify-content-between
+              %h5
+                = punch.created_at.strftime("%r on %B %-d, %Y")
+                %small
+                  - if punch.in?
+                    %i.fa.fa-sign-in
+                    In
+                  - else
+                    %i.fa.fa-sign-out
+                    Out
+      - else
+        %p.text-muted
+          #{@user.first_name} has no check in's or out's
+
