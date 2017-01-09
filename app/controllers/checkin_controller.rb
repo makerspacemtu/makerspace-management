@@ -3,7 +3,7 @@ class CheckinController < ApplicationController
   end
 
   def checkin
-    email = checkin_params[:email]
+    email = checkin_params[:email].downcase + "@mtu.edu"
 
     unless email.present? && valid_email?(email)
       # we currently only allow checking in and out with school emails
@@ -38,9 +38,9 @@ class CheckinController < ApplicationController
         # we're missing information, request the information from the user
         if (!first_name.nil? && first_name.empty?) || (!last_name.nil? && last_name.empty?)
           # the user left at least one of the name fields blank, provide a bit of help
-          redirect_to checkin_first_time_path(email: email), notice: "Both first and last name are required fields."
+          redirect_to checkin_first_time_path(email: checkin_params[:email]), notice: "Both first and last name are required fields."
         else
-          redirect_to checkin_first_time_path(email: email)
+          redirect_to checkin_first_time_path(email: checkin_params[:email])
         end
         return
       end
