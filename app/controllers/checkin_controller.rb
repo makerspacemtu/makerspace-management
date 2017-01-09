@@ -5,7 +5,7 @@ class CheckinController < ApplicationController
   def checkin
     email = checkin_params[:email].downcase + "@mtu.edu"
 
-    unless email.present?
+    unless email.present? && valid_email?(email)
       # we currently only allow checking in and out with school emails
       redirect_to checkin_path, notice: "Invalid email. You must use a @mtu.edu email."
       return
