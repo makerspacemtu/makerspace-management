@@ -9,6 +9,8 @@
         .form-group
           .input-group.input-group-lg
             = text_field_tag :email, '', class: 'form-control', placeholder: 'Email'
+            %span.input-group-addon
+              @mtu.edu
             %span.input-group-btn
               = submit_tag 'Go!', class: 'btn btn-primary'
           %small.form-text.text-muted
