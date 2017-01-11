@@ -1,0 +1,17 @@
+%h4
+  Trainings
+  %small
+    (#{@trainings.count})
+
+    - if can? :create, Training
+      = link_to new_training_path do
+        %i.fa.fa-plus
+        Add a Training
+
+- if @trainings.count > 0
+  - @trainings.each do |training|
+    = training.name
+- else
+  %p.text-muted
+    No trainings available.
+

@@ -23,6 +23,11 @@
               = link_to new_user_path, class: "nav-link" do
                 %i.fa.fa-user-plus
                 New User
+          - if can? :read, Training
+            %li.nav-item
+              = link_to trainings_path, class: "nav-link" do
+                %i.fa.fa-clipboard
+                Trainings
           %li.nav-item
             = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
               %i.fa.fa-sign-out

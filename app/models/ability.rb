@@ -23,6 +23,7 @@ class Ability
       # only admins can modify trainings themselves
       can :read, Training
       can :edit, Training
+      can :create, Training
     elsif user.staff?
       # staff can see any user
       can :read, User
