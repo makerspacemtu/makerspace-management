@@ -42,6 +42,15 @@ class User < ApplicationRecord
   validates :member_since, presence: true
   validates :user_type, inclusion: { in: USER_TYPES }
 
+  scope :checked_in_users, -> { joins(:punches)
+    .where('punches.created_at = (SELECT MAX(punches.created_at) FROM punches WHERE punches.user_id = users.id)')
+    .where('punches.in = false')
+    .group('users.id')
+  }
+
+  scope :checked_in_users_count, -> { checked_in_users.to_a.count }
+
+
   def full_name
     "#{first_name} #{last_name}"
   end

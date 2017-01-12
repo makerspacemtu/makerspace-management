@@ -3,6 +3,9 @@
   %small
     (#{@users.count})
 
+%h4
+  (#{pluralize(User.checked_in_users_count, "user")} checked in)
+
 - @users.each do |user|
   .user-list__user.mb-1
     .user-list__user-avatar.mr-1
