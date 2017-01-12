@@ -8,7 +8,7 @@
       = form_tag checkin_path do
         .form-group
           .input-group.input-group-lg
-            = text_field_tag :email, '', class: 'form-control', placeholder: 'Email'
+            = text_field_tag :email, '', class: 'form-control', placeholder: 'Email', autofocus: true
             %span.input-group-addon
               @mtu.edu
             %span.input-group-btn
