@@ -13,7 +13,7 @@
           - if @user.biography.present?
             = @user.biography
           %small.text-muted
-            Member since #{@user.member_since.strftime('%B %-d, %Y')}
+            Member since #{@user.member_since_fancy}
 
       %ul.list-group.list-group-flush
         - if @user.twitter_username.present?
