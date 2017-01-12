@@ -44,7 +44,7 @@ class User < ApplicationRecord
 
   scope :checked_in_users, -> { joins(:punches)
     .where('punches.created_at = (SELECT MAX(punches.created_at) FROM punches WHERE punches.user_id = users.id)')
-    .where('punches.in = false')
+    .where('punches.in = true')
     .group('users.id')
   }
 
@@ -77,5 +77,17 @@ class User < ApplicationRecord
 
   def punch_out
     self.punches.create(in: false)
+  end
+
+  def checked_in?
+    if most_recent_punch.present?
+      most_recent_punch.in?
+    else
+      false
+    end
+  end
+
+  def member_since_fancy
+    self.member_since.strftime('%B %-d, %Y')
   end
 end

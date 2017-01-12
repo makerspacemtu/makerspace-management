@@ -17,3 +17,19 @@
     .user-list__user-details
       %h5
         = link_to user.full_name, user_path(user)
+
+        - if can? :edit, user
+          %small.text-muted
+            Currently Checked
+            - if user.checked_in?
+              In
+              - message = "Out"
+            - else
+              Out
+              - message = "In"
+            = form_tag checkin_path do
+              = hidden_field_tag :email, user.email.chomp("@mtu.edu")
+              = submit_tag "Check #{message}", class: 'btn btn-sm btn-primary'
+
+      %small.text-muted
+        Member since #{user.member_since_fancy}

@@ -47,15 +47,22 @@ class CheckinController < ApplicationController
     end
 
     last_punch = user.most_recent_punch
+    message = ""
     if last_punch.present? && last_punch.in?
       # the user was checked in, we need to check them out
       user.punch_out
-      redirect_to checkin_path, notice:"Thanks #{user.first_name}! You've been checked out."
-      return
+      message = "been checked out."
     else
       # this is the user's first time, or they were checked out last, check them in
       user.punch_in
-      redirect_to checkin_path, notice: "Thanks #{user.first_name}! You've been checked in."
+      message = "been checked in."
+    end
+
+    if current_user.present?
+      redirect_to users_path, notice: "#{user.first_name} has #{message}"
+      return
+    else
+      redirect_to checkin_path, notice: "Thanks #{user.first_name}! You've #{message}"
       return
     end
   end
