@@ -28,6 +28,6 @@ class TrainingsController < ApplicationController
 private
 
   def training_params
-    params.require(:training).permit(:name, :icon)
+    params.require(:training).permit(:name, :icon, :type)
   end
 end
