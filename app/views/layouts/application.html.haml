@@ -3,40 +3,44 @@
   %head
     %title Makerspace
     = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body{ class: "#{yield(:body_class)}"}
-    %nav.navbar.navbar-fixed-top.navbar-dark.bg-inverse
+    %nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
+      %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbar", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
       = link_to 'The Alley', root_path, class: 'navbar-brand'
-      %ul.nav.navbar-nav.float-xs-right
-        - if user_signed_in?
-          %li.nav-item
-            = link_to user_path(current_user), class: "nav-link" do
-              %i.fa.fa-user
-              #{current_user.full_name}
-          %li.nav-item
-            = link_to users_path, class: "nav-link" do
-              %i.fa.fa-group
-              Users
-          - if can? :create, User
+      #navbar.collapse.navbar-collapse
+        %ul.navbar-nav.ml-auto
+          - if user_signed_in?
             %li.nav-item
-              = link_to new_user_path, class: "nav-link" do
-                %i.fa.fa-user-plus
-                New User
-          - if can? :read, Training
+              = link_to user_path(current_user), class: "nav-link" do
+                %i.fa.fa-user
+                #{current_user.full_name}
             %li.nav-item
-              = link_to trainings_path, class: "nav-link" do
-                %i.fa.fa-clipboard
-                Trainings
-          %li.nav-item
-            = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
-              %i.fa.fa-sign-out
-              Sign Out
-        - else
-          %li.nav-item
-            = link_to new_user_session_path, class: "nav-link" do
-              %i.fa.fa-sign-in
-              Sign In
+              = link_to users_path, class: "nav-link" do
+                %i.fa.fa-group
+                Users
+            - if can? :create, User
+              %li.nav-item
+                = link_to new_user_path, class: "nav-link" do
+                  %i.fa.fa-user-plus
+                  New User
+            - if can? :read, Training
+              %li.nav-item
+                = link_to trainings_path, class: "nav-link" do
+                  %i.fa.fa-clipboard
+                  Trainings
+            %li.nav-item
+              = link_to destroy_user_session_path, method: :delete, class: "nav-link" do
+                %i.fa.fa-sign-out
+                Sign Out
+          - else
+            %li.nav-item
+              = link_to new_user_session_path, class: "nav-link" do
+                %i.fa.fa-sign-in
+                Sign In
 
     .container.container--main
       .row

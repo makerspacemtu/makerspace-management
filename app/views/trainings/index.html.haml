@@ -10,7 +10,9 @@
 
 - if @trainings.count > 0
   - @trainings.each do |training|
-    = training.name
+    %div
+      %span{ class: "badge badge-#{training.training_type_format}" }
+        = training.name
 - else
   %p.text-muted
     No trainings available.
