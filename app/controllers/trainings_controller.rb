@@ -13,9 +13,9 @@ class TrainingsController < ApplicationController
   end
 
   def create
-    training = Training.new(training_params)
+    @training = Training.new(training_params)
 
-    if training.save
+    if @training.save
       redirect_to trainings_path, notice: 'Training created.'
     else
       render 'new'
@@ -23,6 +23,13 @@ class TrainingsController < ApplicationController
   end
 
   def update
+    @training = Training.find(params[:id])
+
+    if @training.update(training_params)
+      redirect_to trainings_path, notice: 'Training updated.'
+    else
+      render 'edit'
+    end
   end
 
 private

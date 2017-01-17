@@ -13,7 +13,8 @@
 class Training < ApplicationRecord
   TRAINING_TYPES = ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5']
 
-  has_and_belongs_to_many :users
+  has_many :user_trainings
+  has_many :users, :through => :user_trainings
 
   validates :name, presence: true
   validates :training_type, inclusion: { in: TRAINING_TYPES }

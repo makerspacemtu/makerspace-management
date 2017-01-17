@@ -32,11 +32,14 @@ ActiveRecord::Schema.define(version: 20170111133313) do
   end
 
   create_table "user_trainings", id: false, force: :cascade do |t|
-    t.integer "user_id",       null: false
-    t.integer "trainings_id",  null: false
-    t.integer "created_by_id", null: false
+    t.integer  "user_id",       null: false
+    t.integer  "training_id",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "created_by_id", null: false
     t.index ["created_by_id"], name: "index_user_trainings_on_created_by_id", using: :btree
-    t.index ["trainings_id"], name: "index_user_trainings_on_trainings_id", using: :btree
+    t.index ["training_id"], name: "index_user_trainings_on_training_id", using: :btree
+    t.index ["user_id", "training_id"], name: "index_user_trainings_on_user_id_and_training_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_user_trainings_on_user_id", using: :btree
   end
 

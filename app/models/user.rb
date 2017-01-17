@@ -36,7 +36,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :punches
-  has_and_belongs_to_many :trainings
+  has_many :user_trainings
+  has_many :trainings, :through => :user_trainings
 
   validates :first_name, presence: true
   validates :last_name, presence: true

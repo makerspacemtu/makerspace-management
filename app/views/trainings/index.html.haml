@@ -1,4 +1,4 @@
-%h4
+%h2
   Trainings
   %small
     (#{@trainings.count})
@@ -11,9 +11,17 @@
 - if @trainings.count > 0
   - @trainings.each do |training|
     %div
-      %span{ class: "badge badge-#{training.training_type_format}" }
-        = training.name
+      %h4
+        %span{ class: "badge badge-#{training.training_type_format}" }
+          - if training.icon.present? && !training.icon.blank?
+            %i{ class: "fa fa-#{training.icon}" }
+          - else
+            %i{ class: "fa fa-trophy"}
+          = training.name
+        %small
+          = link_to edit_training_path(training) do
+            %i.fa.fa-pencil
+            Edit
 - else
   %p.text-muted
     No trainings available.
-
