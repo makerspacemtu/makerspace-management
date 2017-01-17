@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users do
     get :password, on: :member
     patch :update_password, on: :member
+    resources :user_trainings, only: [:new, :create, :destroy]
   end
 
   resources :trainings

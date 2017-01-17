@@ -1,0 +1,15 @@
+- unless @user_training.errors.empty?
+  .alert.alert-danger
+    %strong
+      #{pluralize(@user_training.errors.size, 'error')} occurred
+
+    %ul
+      - @user_training.errors.full_messages.each do |error|
+        %li
+          = error
+
+= form_for [@user, @user_training] do |f|
+  .form-group
+    = f.label :training
+    = f.collection_select :training_id, Training.all, :id, :name, {}, class: "form-control"
+  = f.submit class: "btn btn-primary"

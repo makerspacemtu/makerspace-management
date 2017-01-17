@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20170111133313) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "user_trainings", id: false, force: :cascade do |t|
+  create_table "user_trainings", force: :cascade do |t|
     t.integer  "user_id",       null: false
     t.integer  "training_id",   null: false
     t.datetime "created_at",    null: false

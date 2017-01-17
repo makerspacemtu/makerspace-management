@@ -8,7 +8,7 @@ class CreateTrainings < ActiveRecord::Migration[5.0]
     end
 
     # the many to many relationship for users and trainings
-    create_table :user_trainings, id: false do |t|
+    create_table :user_trainings do |t|
       t.belongs_to :user, index: true, null: false
       t.belongs_to :training, index: true, null: false
       t.timestamps

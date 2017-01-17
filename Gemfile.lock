@@ -56,8 +56,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    composite_primary_keys (9.0.6)
-      activerecord (~> 5.0.0)
     concurrent-ruby (1.0.4)
     debug_inspector (0.0.2)
     devise (4.2.0)
@@ -209,7 +207,6 @@ DEPENDENCIES
   byebug
   cancancan
   coffee-rails (~> 4.2)
-  composite_primary_keys
   devise
   factory_girl_rails
   font-awesome-rails
