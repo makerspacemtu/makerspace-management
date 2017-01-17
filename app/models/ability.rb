@@ -20,6 +20,15 @@ class Ability
       can :update_password, User
       # only admins can see punches
       can :read, Punch
+      # only admins can modify the actual trainings themselves
+      can :read, Training
+      can :edit, Training
+      can :create, Training
+      can :update, Training
+      # admins can see, create and remove user trainings
+      can :read, UserTraining
+      can :create, UserTraining
+      can :destroy, UserTraining
     elsif user.staff?
       # staff can see any user
       can :read, User
@@ -28,6 +37,9 @@ class Ability
       can :update, User, id: user.id
       can :update_password, User, id: user.id
       can :password, User, id: user.id
+      # staff can see, create and remove user trainings for everyone
+      can :read, UserTraining
+      can :create, UserTraining
     end
     # members cannot currently do anything
   end
