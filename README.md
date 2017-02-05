@@ -1,24 +1,36 @@
-# README
+# Makerspace Management App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple app to assist in [The Alley](makerspace.mtu.edu) Makerspace.
+It is designed to handle maker and coach (staff volunteers) check in/out and
+trainings.
 
-Things you may want to cover:
+## Local Setup
 
-* Ruby version
+1. Clone the repo: `git clone git@github.com:makerspacemtu/makerspace-management.git`
+1. Install dependencies: `bundle install`
+1. Setup the database: `rake db:migrate`
+1. Setup the seeds: `rake db:seed`
+1. Start the server `rails s` or `foreman start -p 3000`
+1. Open in your browser: [localhost:3000](http://localhost:3000)
 
-* System dependencies
+## Users
 
-* Configuration
+There are three user types, `Admin`, `Staff` and `Member`.
+- Admins have global access to everything within the system. They can create and
+edit users, check in/out any user, add trainings, change user types, etc.
+- Staff have the ability to login and edit their own account information as
+well as add trainings to any user. These are coaches in the space.
+- Members are only user entities, they cannot login. These are makers in the space.
 
-* Database creation
+## Trainings
 
-* Database initialization
+Admins can create training entities, these are the official trainings available
+in the space. Both Admins and Staff can associate (or add) these trainings to any
+individual user.
 
-* How to run the test suite
+## Contributing
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Follow the **Local Setup** above and get the app running locally.
+1. Create a branch and open a pull request.
+1. Add tests/specs that tests your additions.
+1. After it's reviewed, merge your pull request.
