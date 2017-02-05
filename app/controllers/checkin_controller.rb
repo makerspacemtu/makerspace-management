@@ -3,7 +3,7 @@ class CheckinController < ApplicationController
   end
 
   def checkin
-    email = checkin_params[:email].downcase + "@mtu.edu"
+    email = checkin_params[:email].downcase.strip + "@mtu.edu"
 
     unless email.present? && valid_email?(email)
       # we currently only allow checking in and out with school emails
