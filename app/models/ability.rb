@@ -40,6 +40,7 @@ class Ability
       # staff can see, create and remove user trainings for everyone
       can :read, UserTraining
       can :create, UserTraining
+      can :destroy, UserTraining
     end
     # members cannot currently do anything
   end

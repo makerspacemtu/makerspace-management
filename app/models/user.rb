@@ -92,4 +92,9 @@ class User < ApplicationRecord
   def member_since_fancy
     self.member_since.strftime('%B %-d, %Y')
   end
+
+  def last_sign_in_fancy
+    return "Never" if self.last_sign_in_at.nil?
+    self.last_sign_in_at.strftime('%B %-d, %Y')
+  end
 end

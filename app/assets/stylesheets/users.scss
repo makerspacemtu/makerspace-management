@@ -27,5 +27,11 @@
   &-details h5 {
     margin: 0;
     padding: 0;
+    vertical-align: middle;
   }
+}
+
+.user-list__check-button {
+  display: inline-block;
+  vertical-align: middle;
 }
