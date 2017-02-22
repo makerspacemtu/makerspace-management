@@ -1,59 +1,97 @@
 .row
   .col-md-4
-    .card
+    .card.mb-2
       - if @user.profile_image_url.present?
         = image_tag @user.profile_image_url, class: 'card-img-top'
       .card-block
-        %h4.card-title
+        %h5.card-title.mb-0
           = @user.full_name
           - if @user.position_name.present?
             %small.block
               = @user.position_name
-        %p.card-text
-          - if @user.biography.present?
-            = @user.biography
-          %small.text-muted
-            Member since #{@user.member_since_fancy}
 
       %ul.list-group.list-group-flush
-        - if @user.twitter_username.present?
-          %li.list-group-item
-            = link_to "https://twitter.com/#{@user.twitter_username}" do
-              %i.fa.fa-twitter
-              @#{@user.twitter_username}
-        - if @user.facebook_username.present?
-          %li.list-group-item
-            = link_to "https://facebook.com/#{@user.facebook_username}" do
-              %i.fa.fa-facebook
-              \/#{@user.facebook_username}
-        - if @user.github_username.present?
-          %li.list-group-item
-            = link_to "https://github.com/#{@user.github_username}" do
-              %i.fa.fa-github
-              \/#{@user.github_username}
-        - if @user.slack_username.present?
-          %li.list-group-item
-            = link_to "slack://user?team=T20T77H1T" do
-              %i.fa.fa-slack
-              @#{@user.slack_username}
+        %li.list-group-item
+          Member since #{@user.member_since_fancy}
 
-      - if can? :edit, @user
+        %li.list-group-item
+          Last logged in #{@user.last_sign_in_fancy}
+
+    - if @user.any_social_media?
+      .card.mb-2
         .card-block
-          = link_to edit_user_path(@user), class: "card-link" do
-            %i.fa.fa-pencil
-            Edit Profile
+          %h5.card-title.mb-0
+            Social Media
+
+        %ul.list-group.list-group-flush
+          - if @user.twitter_username.present?
+            %li.list-group-item
+              = link_to "https://twitter.com/#{@user.twitter_username}" do
+                %i.fa.fa-twitter
+                @#{@user.twitter_username}
+          - if @user.facebook_username.present?
+            %li.list-group-item
+              = link_to "https://facebook.com/#{@user.facebook_username}" do
+                %i.fa.fa-facebook
+                \/#{@user.facebook_username}
+          - if @user.github_username.present?
+            %li.list-group-item
+              = link_to "https://github.com/#{@user.github_username}" do
+                %i.fa.fa-github
+                \/#{@user.github_username}
+          - if @user.slack_username.present?
+            %li.list-group-item
+              = link_to "slack://user?team=T20T77H1T" do
+                %i.fa.fa-slack
+                @#{@user.slack_username}
+
+    - if can? :edit, @user
+      .card
+        .card-block
+          %h5.card-title.mb-0
+            User Settings
+
+        %ul.list-group.list-group-flush
+          %li.list-group-item
+            = link_to edit_user_path(@user), class: "card-link" do
+              %i.fa.fa-pencil
+              Edit Profile
 
           - if can? :password, @user
-            %div
+            %li.list-group-item
               = link_to password_user_path(@user), class: "card-link" do
                 %i.fa.fa-lock
                 Change Password
 
   .col-md-8
+    - if @user.biography.present? || @user.interests.present? || @user.specialties.present?
+      .card.mb-2
+        .card-block
+          %h5.card-title.mb-0
+            About #{@user.first_name}
+
+          - if @user.biography.present?
+            %p.card-text
+              = @user.biography
+
+          - if @user.interests.present?
+            %h6.card-title.mb-0
+              Interests
+
+            %p.card-text
+              = @user.interests
+
+          - if @user.specialties.present?
+            %h6.card-title.mb-0
+              Specialties
+
+            %p.card-text
+              = @user.specialties
+
     - if can? :read, UserTraining
       .card.mb-2
         .card-block
-          %h4.card-title.mb-2
+          %h5.card-title.mb-0
             %i.fa.fa-trophy
             User Trainings
             - if can? :create, UserTraining
@@ -67,7 +105,7 @@
               #{@user.first_name} has no trainings
 
           - if @user.trainings.count > 0
-            - @user.trainings.each do |training|
+            - @user.trainings.order(created_at: :desc).each do |training|
               %span{ class: "badge badge-#{training.training_type_format}" }
                 - if training.icon.present? && !training.icon.blank?
                   %i{ class: "fa fa-#{training.icon}" }
@@ -80,9 +118,9 @@
     - if can? :read, Punch
       .card
         .card-block
-          %h4.card-title.mb-2
+          %h5.card-title.mb-0
             %i.fa.fa-check-square-o
-            Check In's & Out's
+            Check In and Out Punches
 
           - unless @user.punches.count > 0
             %p.card-text.text-muted
