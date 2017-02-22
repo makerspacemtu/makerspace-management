@@ -70,7 +70,9 @@ private
       :profile_image_url,
       :position_name,
       :password,
-      :password_confirmation
+      :password_confirmation,
+      :specialties,
+      :interests
     ]
 
     if current_user && current_user.admin?
