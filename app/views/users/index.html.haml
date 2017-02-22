@@ -1,18 +1,18 @@
 .row
-  .col-md-6
-    %h4
-      All Users
-      %small
-        (#{@users.count} total)
-
-    - @users.each do |user|
-      = render 'user_result', user: user
-
-  .col-md-6
+  .col-md-6.push-md-6.mb-4
     %h4
       Checked In Users
       %small
         (#{User.checked_in_users_count} total)
 
     - User.checked_in_users.each do |user|
+      = render 'user_result', user: user
+
+  .col-md-6.pull-md-6
+    %h4
+      All Users
+      %small
+        (#{@users.count} total)
+
+    - @users.each do |user|
       = render 'user_result', user: user
