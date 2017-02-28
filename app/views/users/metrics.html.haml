@@ -18,9 +18,9 @@
 
   .col-md-4.text-center
     %h1
-      #{User.where(created_at: 7.days.ago).count}
+      #{User.where("created_at > ?", 7.days.ago).count}
     %h5
-      New #{'User'.pluralize(User.where(created_at: 7.days.ago).count)} in Last 7 Days
+      New #{'User'.pluralize(User.where("created_at > ?", 7.days.ago).count)} in Last 7 Days
 
   .col-md-4.text-center
     %h1
