@@ -30,6 +30,7 @@ class Ability
       can :create, UserTraining
       can :destroy, UserTraining
       can :coaches, User
+      can :metrics, User
     elsif user.staff?
       # staff can see any user
       can :read, User
@@ -42,6 +43,7 @@ class Ability
       can :read, UserTraining
       can :create, UserTraining
       can :destroy, UserTraining
+      can :metrics, User
     end
     # members cannot currently do anything
   end
