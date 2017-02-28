@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :users do
+    get :coaches, on: :collection
     get :password, on: :member
     patch :update_password, on: :member
     resources :user_trainings, only: [:new, :create, :destroy]
