@@ -5,7 +5,7 @@
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %script{src: "https://cdn.plot.ly/plotly-latest.min.js"}
   %body{ class: "#{yield(:body_class)}"}
     %nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse.fixed-top
       %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbar", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
@@ -28,6 +28,11 @@
                 = link_to coaches_users_path, class: "nav-link" do
                   %i.fa.fa-group
                   Coaches
+            - if can? :metrics, User
+              %li.nav-item
+                = link_to metrics_users_path, class: "nav-link" do
+                  %i.fa.fa-bar-chart
+                  Metrics
             - if can? :create, User
               %li.nav-item
                 = link_to new_user_path, class: "nav-link" do
@@ -60,3 +65,5 @@
               = alert
 
           = yield
+
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'

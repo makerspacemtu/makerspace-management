@@ -23,4 +23,20 @@ class Punch < ApplicationRecord
   def out?
     !in?
   end
+
+  def self.punches_created_by_week
+    punches = self.where(in: true).group("DATE_TRUNC('week', created_at)").count
+
+    current_week = punches.keys[0]
+    while current_week < Time.now
+      unless punches.key?(current_week)
+        # add the missing weeks
+        punches[current_week] = 0
+      end
+
+      current_week += 7.days
+    end
+
+    punches.sort.to_h
+  end
 end

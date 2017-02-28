@@ -30,6 +30,7 @@ class Ability
       can :create, UserTraining
       can :destroy, UserTraining
       can :coaches, User
+      can :metrics, User
     elsif user.staff?
       # staff can see any user
       can :read, User
