@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     @users = User.order(:first_name, :last_name)
   end
 
+  def coaches
+    @users = User.where(user_type: ['Admin', 'Staff']).order(:first_name, :last_name)
+  end
+
   def show
     @user = User.find(params[:id])
   end

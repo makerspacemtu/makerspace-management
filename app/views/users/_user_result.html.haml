@@ -10,6 +10,7 @@
       = link_to user.full_name, user_path(user)
       %small
         = user.user_type
+        (#{pluralize(user.user_trainings.count, 'training')})
 
     - if user.checked_in?
       - message = "Out"

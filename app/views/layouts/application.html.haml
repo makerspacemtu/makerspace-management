@@ -22,6 +22,12 @@
               = link_to users_path, class: "nav-link" do
                 %i.fa.fa-group
                 Users
+
+            - if can? :coaches, User
+              %li.nav-item
+                = link_to coaches_users_path, class: "nav-link" do
+                  %i.fa.fa-group
+                  Coaches
             - if can? :create, User
               %li.nav-item
                 = link_to new_user_path, class: "nav-link" do
