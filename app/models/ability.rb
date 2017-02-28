@@ -43,6 +43,7 @@ class Ability
       can :read, UserTraining
       can :create, UserTraining
       can :destroy, UserTraining
+      can :metrics, User
     end
     # members cannot currently do anything
   end
