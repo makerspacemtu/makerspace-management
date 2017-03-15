@@ -33,9 +33,9 @@
               \/#{@user.github_username}
         - if @user.slack_user_id.present?
           %li.list-group-item
-            = link_to "slack://user?team=T20T77H1T" do
+            = link_to "slack://user?team=T20T77H1T&id=#{@user.slack_user_id}" do
               %i.fa.fa-slack
-              @#{@user.slack_user_id}
+              @#{@slack_username}
 
       - if can? :edit, @user
         .card-block

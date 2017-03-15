@@ -1,16 +1,24 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
 
+  @@slack = Slack::Web::Client.new
+
   def index
     @users = User.order(:first_name, :last_name)
   end
 
   def show
     @user = User.find(params[:id])
+
+    if @user.slack_user_id.present?
+      @slack_username = @@slack.users_info(user: @user.slack_user_id)[:user][:name]
+    end
   end
 
   def edit
     @user = User.find(params[:id])
+
+    @slack_usernames = @@slack.users_list()[:members].map { |u| [u[:name], u[:id]] }
   end
 
   def update
