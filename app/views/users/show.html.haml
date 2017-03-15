@@ -31,11 +31,11 @@
             = link_to "https://github.com/#{@user.github_username}" do
               %i.fa.fa-github
               \/#{@user.github_username}
-        - if @user.slack_username.present?
+        - if @user.slack_user_id.present?
           %li.list-group-item
             = link_to "slack://user?team=T20T77H1T" do
               %i.fa.fa-slack
-              @#{@user.slack_username}
+              @#{@user.slack_user_id}
 
       - if can? :edit, @user
         .card-block
@@ -101,4 +101,3 @@
                     - else
                       %i.fa.fa-sign-out
                       Out
-

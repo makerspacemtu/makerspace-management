@@ -63,7 +63,7 @@ private
       :biography,
       :first_name,
       :last_name,
-      :slack_username,
+      :slack_user_id,
       :facebook_username,
       :twitter_username,
       :github_username,
