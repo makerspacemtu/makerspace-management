@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   get '/checkin', to: 'checkin#index'
   get '/checkin/first_time', to: 'checkin#first_time'
   post '/checkin', to: 'checkin#checkin'
-  post '/slack/checkin', to: 'slack#slack_checkin'
-  post '/slack/checkout', to: 'slack#slack_checkout'
+  post '/slack/checkin', to: 'slack#checkin'
+  post '/slack/checkout', to: 'slack#checkout'
 
   # misc. static slack routes
   get '/slack/auth', to: 'slack#auth'
