@@ -1,35 +1,18 @@
-%h4
-  Users
-  %small
-    (#{@users.count})
+.row
+  .col-md-6.push-md-6.mb-4
+    %h4
+      Checked In Users
+      %small
+        (#{User.checked_in_users_count} total)
 
-%h4
-  (#{pluralize(User.checked_in_users_count, "user")} checked in)
+    - User.checked_in_users.each do |user|
+      = render 'user_result', user: user
 
-- @users.each do |user|
-  .user-list__user.mb-1
-    .user-list__user-avatar.mr-1
-      = link_to user_path(user) do
-        - if user.profile_image_url.present?
-          .user-list__user-image{style: "background-image: url('#{user.profile_image_url}')"}
-        - else
-          %i.fa.fa-user
-    .user-list__user-details
-      %h5
-        = link_to user.full_name, user_path(user)
+  .col-md-6.pull-md-6
+    %h4
+      All Users
+      %small
+        (#{@users.count} total)
 
-        - if can? :edit, user
-          %small.text-muted
-            Currently Checked
-            - if user.checked_in?
-              In
-              - message = "Out"
-            - else
-              Out
-              - message = "In"
-            = form_tag checkin_path do
-              = hidden_field_tag :email, user.email.chomp("@mtu.edu")
-              = submit_tag "Check #{message}", class: 'btn btn-sm btn-primary'
-
-      %small.text-muted
-        Member since #{user.member_since_fancy}
+    - @users.each do |user|
+      = render 'user_result', user: user

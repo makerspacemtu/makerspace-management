@@ -89,7 +89,35 @@ class User < ApplicationRecord
     end
   end
 
+  def any_social_media?
+    self.twitter_username.present? ||
+    self.facebook_username.present? ||
+    self.github_username.present? ||
+    self.slack_username.present?
+  end
+
   def member_since_fancy
     self.member_since.strftime('%B %-d, %Y')
+  end
+
+  def last_sign_in_fancy
+    return "never" if self.last_sign_in_at.nil?
+    self.last_sign_in_at.strftime('%B %-d, %Y')
+  end
+
+  def self.users_created_by_week
+    users = self.group("DATE_TRUNC('week', created_at)").count
+
+    current_week = users.keys[0]
+    while current_week < Time.now
+      unless users.key?(current_week)
+        # add the missing weeks
+        users[current_week] = 0
+      end
+
+      current_week += 7.days
+    end
+
+    users.sort.to_h
   end
 end

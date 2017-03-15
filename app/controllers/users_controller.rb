@@ -7,6 +7,15 @@ class UsersController < ApplicationController
     @users = User.order(:first_name, :last_name)
   end
 
+  def coaches
+    @users = User.where(user_type: ['Admin', 'Staff']).order(:first_name, :last_name)
+  end
+
+  def metrics
+    @users_created_by_week = User.users_created_by_week
+    @punches_created_by_week = Punch.punches_created_by_week
+  end
+
   def show
     @user = User.find(params[:id])
 
@@ -79,7 +88,9 @@ private
       :profile_image_url,
       :position_name,
       :password,
-      :password_confirmation
+      :password_confirmation,
+      :specialties,
+      :interests
     ]
 
     if current_user && current_user.admin?
