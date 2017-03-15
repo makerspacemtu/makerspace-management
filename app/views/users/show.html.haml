@@ -16,26 +16,39 @@
             Member since #{@user.member_since_fancy}
 
       %ul.list-group.list-group-flush
-        - if @user.twitter_username.present?
-          %li.list-group-item
-            = link_to "https://twitter.com/#{@user.twitter_username}" do
-              %i.fa.fa-twitter
-              @#{@user.twitter_username}
-        - if @user.facebook_username.present?
-          %li.list-group-item
-            = link_to "https://facebook.com/#{@user.facebook_username}" do
-              %i.fa.fa-facebook
-              \/#{@user.facebook_username}
-        - if @user.github_username.present?
-          %li.list-group-item
-            = link_to "https://github.com/#{@user.github_username}" do
-              %i.fa.fa-github
-              \/#{@user.github_username}
-        - if @user.slack_user_id.present?
-          %li.list-group-item
-            = link_to "slack://user?team=T20T77H1T&id=#{@user.slack_user_id}" do
-              %i.fa.fa-slack
-              @#{@slack_username}
+        %li.list-group-item
+          Member since #{@user.member_since_fancy}
+
+        %li.list-group-item
+          Last logged in #{@user.last_sign_in_fancy}
+
+    - if @user.any_social_media?
+      .card.mb-2
+        .card-block
+          %h5.card-title.mb-0
+            Social Media
+
+        %ul.list-group.list-group-flush
+          - if @user.twitter_username.present?
+            %li.list-group-item
+              = link_to "https://twitter.com/#{@user.twitter_username}" do
+                %i.fa.fa-twitter
+                @#{@user.twitter_username}
+          - if @user.facebook_username.present?
+            %li.list-group-item
+              = link_to "https://facebook.com/#{@user.facebook_username}" do
+                %i.fa.fa-facebook
+                \/#{@user.facebook_username}
+          - if @user.github_username.present?
+            %li.list-group-item
+              = link_to "https://github.com/#{@user.github_username}" do
+                %i.fa.fa-github
+                \/#{@user.github_username}
+          - if @user.slack_user_id.present?
+            %li.list-group-item
+              = link_to "slack://user?team=T20T77H1T&id=#{@user.slack_user_id}" do
+                %i.fa.fa-slack
+                @#{@slack_username}
 
       - if can? :edit, @user
         .card-block
