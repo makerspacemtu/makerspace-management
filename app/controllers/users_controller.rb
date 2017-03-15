@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     @slack_usernames = @@slack.users_list()[:members].map { |u| [u[:name], u[:id]] }
+    @slack_usernames.insert(0, ["None", ""])
   end
 
   def update
