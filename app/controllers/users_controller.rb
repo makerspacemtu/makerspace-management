@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
 
-  @@slack = Slack::Web::Client.new
-
   def index
     @users = User.order(:first_name, :last_name)
   end
@@ -19,16 +17,19 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
-    if @user.slack_user_id.present?
-      @slack_username = @@slack.users_info(user: @user.slack_user_id)[:user][:name]
+    if @user.slack_user_id.present? && valid_slack_client?
+      @slack_username = slack_client.users_info(user: @user.slack_user_id)[:user][:name]
     end
   end
 
   def edit
     @user = User.find(params[:id])
+    @slack_usernames = [] # default to empty array of slack usernames
 
-    @slack_usernames = @@slack.users_list()[:members].map { |u| [u[:name], u[:id]] }
-    @slack_usernames.insert(0, ["None", ""])
+    if valid_slack_client?
+      @slack_usernames = slack_client.users_list()[:members].map { |u| [u[:name], u[:id]] }
+      @slack_usernames.insert(0, ["None", ""])
+    end
   end
 
   def update
@@ -70,6 +71,14 @@ class UsersController < ApplicationController
   end
 
 private
+
+  def slack_client
+    @slack ||= Slack::Web::Client.new
+  end
+
+  def valid_slack_client?
+    slack_client.token.present? && slack_client.auth_test
+  end
 
   def user_params
     params.require(:user).permit(permit_params)
