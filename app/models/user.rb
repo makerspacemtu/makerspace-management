@@ -8,7 +8,7 @@
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0), not null
+#  sign_in_count          :integer          default("0"), not null
 #  current_sign_in_at     :datetime
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string
@@ -17,7 +17,6 @@
 #  updated_at             :datetime         not null
 #  first_name             :string           not null
 #  last_name              :string           not null
-#  slack_username         :string
 #  facebook_username      :string
 #  twitter_username       :string
 #  github_username        :string
@@ -27,6 +26,7 @@
 #  biography              :text
 #  card_id                :string
 #  user_type              :string           not null
+#  slack_user_id          :string
 #
 
 class User < ApplicationRecord
