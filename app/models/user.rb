@@ -93,7 +93,7 @@ class User < ApplicationRecord
     self.twitter_username.present? ||
     self.facebook_username.present? ||
     self.github_username.present? ||
-    self.slack_username.present?
+    self.slack_user_id.present?
   end
 
   def member_since_fancy
