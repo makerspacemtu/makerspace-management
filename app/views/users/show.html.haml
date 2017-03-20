@@ -39,7 +39,7 @@
               = link_to "https://github.com/#{@user.github_username}" do
                 %i.fa.fa-github
                 \/#{@user.github_username}
-          - if @user.slack_user_id.present?
+          - if @slack_username.present?
             %li.list-group-item
               = link_to "slack://user?team=T20T77H1T&id=#{@user.slack_user_id}" do
                 %i.fa.fa-slack
