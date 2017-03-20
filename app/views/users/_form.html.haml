@@ -39,10 +39,7 @@
 
   .form-group
     = f.label :slack_user_id
-    .input-group
-      .input-group-addon
-        %i.fa.fa-slack
-      = f.select :slack_user_id, options_for_select(@slack_usernames, f.object.slack_user_id), {}, class: "form-control"
+    = f.select :slack_user_id, options_for_select(@slack_usernames, f.object.slack_user_id), {}, class: "form-control"
 
   .form-group
     = f.label :twitter_username
