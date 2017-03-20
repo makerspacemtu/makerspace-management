@@ -45,34 +45,6 @@
                 %i.fa.fa-slack
                 @#{@slack_username}
 
-    - if @user.any_social_media?
-      .card.mb-2
-        .card-block
-          %h5.card-title.mb-0
-            Social Media
-
-        %ul.list-group.list-group-flush
-          - if @user.twitter_username.present?
-            %li.list-group-item
-              = link_to "https://twitter.com/#{@user.twitter_username}" do
-                %i.fa.fa-twitter
-                @#{@user.twitter_username}
-          - if @user.facebook_username.present?
-            %li.list-group-item
-              = link_to "https://facebook.com/#{@user.facebook_username}" do
-                %i.fa.fa-facebook
-                \/#{@user.facebook_username}
-          - if @user.github_username.present?
-            %li.list-group-item
-              = link_to "https://github.com/#{@user.github_username}" do
-                %i.fa.fa-github
-                \/#{@user.github_username}
-          - if @user.slack_username.present?
-            %li.list-group-item
-              = link_to "slack://user?team=T20T77H1T" do
-                %i.fa.fa-slack
-                @#{@user.slack_username}
-
     - if can? :edit, @user
       .card
         .card-block
