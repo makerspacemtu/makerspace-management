@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   post '/slack/checkin', to: 'slack#checkin'
   post '/slack/checkout', to: 'slack#checkout'
 
+  # training related routes
+  post '/slack/training', to: 'slack#training'
+
   # misc. static slack routes
   get '/slack/auth', to: 'slack#auth'
   post '/slack/buttons', to: 'slack#buttons'
