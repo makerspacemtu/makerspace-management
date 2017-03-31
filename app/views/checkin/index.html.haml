@@ -1,9 +1,12 @@
 .row
   .col-lg-6.offset-lg-3.col-md-12
     .jumbotron
-      %h1.display-6.mb-2
-        %i.fa.fa-check-square-o
-        Check In & Out
+      %h2.mb-2
+        %i.fa.fa-sign-in
+        Please check in
+      %p
+        %small
+          Using your @mtu.edu email address
 
       = form_tag checkin_path do
         .form-group
@@ -13,5 +16,28 @@
               @mtu.edu
             %span.input-group-btn
               = submit_tag 'Go!', class: 'btn btn-primary'
-          %small.form-text.text-muted
-            Please use your @mtu.edu email address.
+
+- if User.checked_in_users_count > 0
+  .row
+    .col-lg-6.offset-lg-3.col-md-12
+      .jumbotron
+        %h2.mb-2
+          %i.fa.fa-sign-in
+          All done? Please check out
+
+        .list-group
+          - @currently_checked_in.each do |user|
+            %div.list-group-item.list-group-item-action.flex-column.align-items-start
+              .d-flex.w-100.justify-content-between
+                %h5.mb-1
+                  #{user.first_name} #{user.last_name[0]}.
+                %small
+                  #{user.obfuscated_email}
+
+              .d-flex.w-100.mb-2.mt-2.justify-content-end
+                = form_tag checkin_path do
+                  = hidden_field_tag :user_id, user.id
+                  = submit_tag "Check Out", class: 'btn btn-sm btn-outline-primary'
+
+              %small
+                Checked in #{user.most_recent_punch.fancy_punch_datetime}
