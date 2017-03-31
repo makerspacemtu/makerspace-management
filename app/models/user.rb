@@ -110,6 +110,15 @@ class User < ApplicationRecord
     self.last_sign_in_at.strftime('%B %-d, %Y')
   end
 
+  def obfuscated_email
+    # obfuscate the entire email except for the first two characters
+    obfuscation_length = self.email.split("@").first.length - 2
+    # generate the necessary string of stars
+    sub_string = '*' * (obfuscation_length)
+    # replace the characters we want to hide
+    self.email.gsub(/.{0,#{obfuscation_length}}@/, sub_string + "@")
+  end
+
   def self.users_created_by_week
     users = self.group("DATE_TRUNC('week', created_at)").count
 
