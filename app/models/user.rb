@@ -89,6 +89,11 @@ class User < ApplicationRecord
     end
   end
 
+  def has_visited?
+    # check if they've visited the space at least once
+    most_recent_punch.present?
+  end
+
   def any_social_media?
     self.twitter_username.present? ||
     self.facebook_username.present? ||

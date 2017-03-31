@@ -1,3 +1,10 @@
+- if user.checked_in?
+  - current = "In"
+  - action = "Out"
+- else
+  - current = "Out"
+  - action = "In"
+
 .user-list__user.mb-2
   .user-list__user-avatar.mr-2
     = link_to user_path(user) do
@@ -12,11 +19,11 @@
         = user.user_type
         (#{pluralize(user.user_trainings.count, 'training')})
 
-    - if user.checked_in?
-      - message = "Out"
-    - else
-      - message = "In"
+    - if user.has_visited?
+      %p.no-margin
+        %small
+          Checked #{current} #{user.most_recent_punch.fancy_punch_datetime}
+
     = form_tag checkin_path, class: "user-list__check-button mt-2" do
       = hidden_field_tag :email, user.email.chomp("@mtu.edu")
-      = submit_tag "Check #{message}", class: 'btn btn-sm btn-primary'
-    #{user.most_recent_punch.fancy_punch_datetime}
+      = submit_tag "Check #{action}", class: 'btn btn-sm btn-primary'
