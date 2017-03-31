@@ -30,6 +30,7 @@
 #
 
 class User < ApplicationRecord
+  PAGE_SIZE = 20
   USER_TYPES = ['Admin', 'Staff', 'Member']
 
   devise :database_authenticatable,
