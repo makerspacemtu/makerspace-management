@@ -31,6 +31,7 @@ class Ability
       can :destroy, UserTraining
       can :coaches, User
       can :metrics, User
+      can :destroy, User
     elsif user.staff?
       # staff can see any user
       can :read, User

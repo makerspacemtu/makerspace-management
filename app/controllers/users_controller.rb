@@ -76,6 +76,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def destroy
+    @user = User.find(params[:id])
+
+    if @user.destroy
+      redirect_to users_path, notice: 'User deleted.'
+    else
+      render 'edit', error: @user.errors
+    end
+  end
+
 private
 
   def slack_client
