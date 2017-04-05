@@ -92,4 +92,7 @@
         = f.label :password_confirmation
         = f.password_field :password_confirmation, class: "form-control"
 
+    - if can? :destroy, @user
+      = link_to 'Destroy', @user, method: :delete, class: "btn btn-outline-danger btn-sm pull-right", data: { confirm: 'Are you sure? This is irreversible.' }
+
   = f.submit "Save", class: "btn btn-primary"

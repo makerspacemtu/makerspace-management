@@ -31,6 +31,7 @@ class Ability
       can :destroy, UserTraining
       can :coaches, User
       can :metrics, User
+      can :destroy, User
       # admins have full access to daily reports
       can :read, DailyReport
       can :edit, DailyReport

@@ -38,8 +38,8 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :punches
-  has_many :user_trainings
+  has_many :punches, dependent: :destroy
+  has_many :user_trainings, dependent: :destroy
   has_many :trainings, :through => :user_trainings
   has_many :daily_reports
 
