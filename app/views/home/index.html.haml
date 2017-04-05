@@ -1,13 +1,25 @@
-.jumbotron
-  %h1.display-6
-    Welcome to The Alley
+.row
+  .col-lg-8.offset-lg-2.col-md-12
+    .jumbotron
+      %h1.display-6
+        Welcome to The Alley
 
-  %p.lead
-    This is our coach management app. You can check in/out of the space,
-    connect with other coaches and schedule your hours.
+      %p.lead
+        This is the Alley application for tracking makers and coaches in the space,
+        trainings and other related information.
 
-  %hr.my-2
+      %hr.my-2
+      %p
+        If you're a coach and need access, you're interested in reserving the space
+        or any other questions, please email us
+        = mail_to 'makerspace@mtu.edu'
 
-  %p
-    If you need an account, please contact
-    = mail_to 'makerspace@mtu.edu'
+      = link_to checkin_path, class: "btn btn-primary" do
+        %i.fa.fa-sign-in
+        Check In
+
+      = link_to new_user_session_path, class: "btn btn-primary" do
+        %i.fa.fa-sign-in
+        Sign In
+
+
