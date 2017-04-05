@@ -26,7 +26,15 @@ class DailyReportsController < ApplicationController
   end
 
   def update
+    @daily_report = DailyReport.find(params[:id])
+    @daily_report.update(daily_report_params)
+    @users = User.where(user_type: ['Admin', 'Staff']).order(first_name: :asc)
 
+    if @daily_report.save
+      redirect_to daily_reports_path, notice: 'Daily report updated.'
+    else
+      render 'edit'
+    end
   end
 
 private
