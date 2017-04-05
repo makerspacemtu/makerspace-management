@@ -26,6 +26,8 @@
 #  biography              :text
 #  card_id                :string
 #  user_type              :string           not null
+#  specialties            :text
+#  interests              :text
 #  slack_user_id          :string
 #
 
@@ -39,6 +41,7 @@ class User < ApplicationRecord
   has_many :punches, dependent: :destroy
   has_many :user_trainings, dependent: :destroy
   has_many :trainings, :through => :user_trainings
+  has_many :daily_reports
 
   validates :first_name, presence: true
   validates :last_name, presence: true

@@ -13,7 +13,10 @@ if usersCreatedByWeek?
   trace = {
     x: xAxis,
     y: yAxis,
-    type: 'scatter'
+    type: 'scatter',
+    marker: {
+      color: '#76bf43'
+    }
   };
 
   data = [trace];
@@ -31,7 +34,10 @@ if punchesCreatedByWeek?
   trace = {
     x: xAxis,
     y: yAxis,
-    type: 'scatter'
+    type: 'scatter',
+    marker: {
+      color: '#76bf43'
+    }
   };
 
   data = [trace];

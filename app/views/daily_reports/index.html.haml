@@ -1,0 +1,42 @@
+.row
+  .col-md-12
+    %h4
+      %i.fa.fa-sticky-note
+      Daily Reports
+
+      %small.pull-right
+        - if can? :create, DailyReport
+          = link_to new_daily_report_path do
+            %i.fa.fa-plus
+            New Daily Report
+
+    - if @daily_reports.size > 0
+      .list-group.mt-4
+        - @daily_reports.each do |daily_report|
+          - if can? :edit, daily_report
+            %a.list-group-item.list-group-item-action.flex-column.align-items-start{href: edit_daily_report_path(daily_report)}
+              .d-flex.w-100.justify-content-between
+                %h5.mb-1
+                  Daily Report by #{daily_report.user.full_name}
+                %small
+                  = daily_report.shift_start.strftime('%B %-d, %Y')
+                  %i.fa.fa-pencil
+              %p.mb-1
+                = daily_report.notes.truncate(50, separator: ' ', omission: '...')
+              %small
+                Shift #{daily_report.shift_start.strftime('%B %-d, %Y at %H:%M %p')} - #{daily_report.shift_end.strftime('%B %-d, %Y at %H:%M %p')}
+          - else
+            %div.list-group-item.flex-column.align-items-start
+              .d-flex.w-100.justify-content-between
+                %h5.mb-1
+                  Daily Report by #{daily_report.user.full_name}
+                %small
+                  = daily_report.shift_start.strftime('%B %-d, %Y')
+              %p.mb-1
+                = daily_report.notes.truncate(50, separator: ' ', omission: '...')
+              %small
+                Shift #{daily_report.shift_start.strftime('%B %-d, %Y at %H:%M %p')} - #{daily_report.shift_end.strftime('%B %-d, %Y at %H:%M %p')}
+
+    - else
+      %p.text-muted
+        No daily reports

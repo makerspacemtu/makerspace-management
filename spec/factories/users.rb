@@ -26,6 +26,8 @@
 #  biography              :text
 #  card_id                :string
 #  user_type              :string           not null
+#  specialties            :text
+#  interests              :text
 #  slack_user_id          :string
 #
 
