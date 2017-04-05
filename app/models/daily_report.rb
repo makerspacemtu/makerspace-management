@@ -15,5 +15,5 @@ class DailyReport < ApplicationRecord
   validates :shift_end, presence: true
   validates :notes, presence: true
 
-  has_and_belongs_to_many :users
+  belongs_to :user
 end

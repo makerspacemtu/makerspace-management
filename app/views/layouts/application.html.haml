@@ -25,6 +25,11 @@
               = link_to users_path, class: "nav-link" do
                 %i.fa.fa-group
                 Users
+            - if can? :read, DailyReport
+              %li.nav-item
+                = link_to daily_reports_path, class: "nav-link" do
+                  %i.fa.fa-sticky-note
+                  Daily Reports
 
             - if can? :coaches, User
               %li.nav-item
