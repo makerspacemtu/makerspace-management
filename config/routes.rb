@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   # misc. static slack routes
   get '/slack/auth', to: 'slack#auth'
-  post '/slack/buttons', to: 'slack#buttons'
+  post '/slack/actions', to: 'slack#actions'
+  post '/slack/actions/external', to: 'slack#external'
   post '/slack/events', to: 'slack#events'
 end

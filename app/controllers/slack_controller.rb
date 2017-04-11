@@ -1,5 +1,5 @@
 class SlackController < ApplicationController
-  skip_before_action :verify_authenticity_token, :only => [:checkout, :checkin]
+  skip_before_action :verify_authenticity_token, :only => [:checkout, :checkin, :training]
 
   def checkin
       user = User.find_by(slack_user_id: params[:user_id])
@@ -60,11 +60,70 @@ class SlackController < ApplicationController
     render json: msg, status: :ok
   end
 
+  def training
+    user = User.find_by(slack_user_id: params[:user_id])
+    text = params[:text].split()
+
+    emails = params[:text].scan(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i)
+    usertags = params[:text].scan(/<[@#](U\w+)\|\w+>/)
+
+    effected_users = User.where(slack_user_id: usertags) + User.where(email: emails)
+
+    # If the user who ran the command has slack tied to their account
+    if user.present?
+      # refer to self if no other user is passed
+      if effected_users.empty?
+        effected_users = [user]
+      end
+
+      if text.blank? || text[0] == "list"
+        attachments = []
+
+        effected_users.each do |euser|
+          fields = []
+
+          euser.trainings.each do |training|
+            fields << { "title":training.name, "short":"true" }
+          end
+
+          actions = [ {
+             "name":"training add",
+             "text":"Add training...",
+             "type":"select",
+             "data_source":"external"
+            }, {
+             "name":"taining remove",
+             "text":"Remove training...",
+             "type":"select",
+             "data_source":"external"
+            } ]
+
+          if !user.member?
+            attachments << { "title":euser.full_name, "fields":fields, "callback_id":euser.id.to_s, "actions":actions}
+          else
+            attachments << { "title":euser.full_name, "fields":fields}
+          end
+        end
+
+        msg = {"text":"These are all the training that they have:", "attachments":attachments}
+      else
+        msg = {"text":"I'm not really sure what you were trying to do there."}
+      end
+    else
+      msg = {"text":"Sorry, you don't seem to have your Slack profile in our system."}
+    end
+    render json: msg, status: :ok
+  end
+
   def auth
 
   end
 
-  def buttons
+  def actions
+
+  end
+
+  def external
 
   end
 
