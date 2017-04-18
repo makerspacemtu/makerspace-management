@@ -1,5 +1,5 @@
 class SlackController < ApplicationController
-  skip_before_action :verify_authenticity_token, :only => [:checkout, :checkin, :training]
+  skip_before_action :verify_authenticity_token, :only => [:checkout, :checkin, :training, :external]
 
   def checkin
       user = User.find_by(slack_user_id: params[:user_id])
@@ -99,7 +99,7 @@ class SlackController < ApplicationController
             } ]
 
           if !user.member?
-            attachments << { "title":euser.full_name, "fields":fields, "callback_id":euser.id.to_s, "actions":actions}
+            attachments << { "title":euser.full_name, "fields":fields, "callback_id":euser.id, "actions":actions}
           else
             attachments << { "title":euser.full_name, "fields":fields}
           end
@@ -124,7 +124,24 @@ class SlackController < ApplicationController
   end
 
   def external
+    action = params[:name].split()
+    callback_id = params[:callback_id]
+    user = User.where(id: callback_id).first
+    options = []
 
+    if action[0] == "training"
+      if action[1] == "add"
+        training = Training.all.where.not(id: user.trainings.pluck(:id))
+      elsif action[1] == "remove"
+        training = Training.all.where(id: user.trainings.pluck(:id))
+      end
+
+      training.each do |training|
+        options << { "text": training.name, "value":training.id}
+      end
+    end
+
+    render json: {"options":options}, status: :ok
   end
 
   def events
