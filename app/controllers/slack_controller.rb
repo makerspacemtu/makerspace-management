@@ -1,5 +1,5 @@
 class SlackController < ApplicationController
-  skip_before_action :verify_authenticity_token, :only => [:checkout, :checkin, :training, :external]
+  skip_before_action :verify_authenticity_token, :only => [:checkout, :checkin, :training, :actions, :external]
 
   def checkin
       user = User.find_by(slack_user_id: params[:user_id])
@@ -90,12 +90,14 @@ class SlackController < ApplicationController
              "name":"training add",
              "text":"Add training...",
              "type":"select",
-             "data_source":"external"
+             "data_source":"external",
+             "style":"primary"
             }, {
-             "name":"taining remove",
+             "name":"training remove",
              "text":"Remove training...",
              "type":"select",
-             "data_source":"external"
+             "data_source":"external",
+             "style":"danger"
             } ]
 
           if !user.member?
@@ -120,16 +122,74 @@ class SlackController < ApplicationController
   end
 
   def actions
+    payload = params[:payload]
+    actions = payload[:actions]
+    org_msg = payload[:original_message]
+    effected_user = User.find_by_id(payload[:callback_id])
+    clicker = User.find_by(slack_user_id: payload[:user][:id])
 
+    puts actions.inspect
+    puts payload.inspect
+
+    actions.each do |action|
+      name = action[:name]
+      msg = {}
+
+      action[:selected_options].each do |selected_option|
+
+        if name == "training add"
+          training = Training.find_by_id(selected_option[:value])
+
+          if UserTraining.exists?(user: effected_user, training: training)
+            msg = {"replace_original":false, "text":"Not sure how that happened, but that user already has that training."}
+          else
+            new_training = UserTraining.new
+            new_training.training = training
+            new_training.user = effected_user
+            new_training.created_by = clicker
+            new_training.save
+
+            org_msg[:attachments].each do |attach|
+              if attach[:callback_id] == payload[:callback_id]
+                attach[:fields] << { "title":training.name, "short":true }
+              end
+            end
+
+            msg = org_msg
+          end
+        elsif name == "training remove"
+          training = Training.find_by_id(selected_option[:value])
+
+          if UserTraining.exists?(user: effected_user, training: training)
+            delete_training = UserTraining.find_by(user: effected_user, training: training)
+            delete_training.destroy
+
+            org_msg[:attachments].each do |attach|
+              if attach[:callback_id] == payload[:callback_id]
+                attach[:fields].delete_if { |h| h["title"] == training.name }
+              end
+            end
+
+            msg = org_msg
+          else
+            msg = {"replace_original":false, "text":"Not sure how that happened, but that user doesn't have that training."}
+          end
+        else
+          msg = {"text":"I'm not really sure what happened there, but it wasn't good...", "replace_original":false}
+        end
+      end
+      render json: msg, status: :ok
+    end
   end
 
   def external
     action = params[:name].split()
     callback_id = params[:callback_id]
-    user = User.where(id: callback_id).first
+    user = User.find_by_id(callback_id)
+    clicker = User.find_by(slack_user_id: params[:user][:id])
     options = []
 
-    if action[0] == "training"
+    if action[0] == "training" && !clicker.member?
       if action[1] == "add"
         training = Training.all.where.not(id: user.trainings.pluck(:id))
       elsif action[1] == "remove"
