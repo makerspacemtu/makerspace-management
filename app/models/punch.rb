@@ -24,6 +24,11 @@ class Punch < ApplicationRecord
     !in?
   end
 
+  def fancy_punch_datetime
+    return "never" if self.created_at.nil?
+    self.created_at.strftime('%B %-d, %Y at %l:%M%P')
+  end
+
   def self.punches_created_by_week
     punches = self.where(in: true).group("DATE_TRUNC('week', created_at)").count
 

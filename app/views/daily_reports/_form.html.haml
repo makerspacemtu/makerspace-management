@@ -1,0 +1,31 @@
+- unless @daily_report.errors.empty?
+  .alert.alert-danger
+    %strong
+      #{pluralize(@daily_report.errors.size, 'error')} occurred
+
+    %ul
+      - @daily_report.errors.full_messages.each do |error|
+        %li
+          = error
+
+= form_for @daily_report do |f|
+  .form-group
+    = f.label :user
+    = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name', f.object.user.id), {}, class: "form-control"
+
+  .form-group
+    = f.label :shift_start
+    .form-inline
+      = f.datetime_select :shift_start, {}, class: "form-control mr-2 ml-2"
+
+    .form-group
+      = f.label :shift_end
+      .form-inline
+        = f.datetime_select :shift_end, {}, class: "form-control mr-2 ml-2"
+
+  .form-group
+    = f.label :notes
+    = f.text_area :notes, class: "form-control"
+
+  = f.submit "Save", class: "btn btn-primary"
+  = link_to "Cancel", daily_reports_path, class: "btn btn-default"

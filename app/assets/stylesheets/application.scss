@@ -14,6 +14,8 @@
  *= require_self
  */
 
+$brand-primary: #76bf43;
+
 @import "bootstrap";
 @import "font-awesome";
 
@@ -39,4 +41,22 @@ small {
 
 .alert ul {
   margin-bottom: 0;
+}
+
+.no-margin  {
+  margin: 0;
+}
+
+.navbar-custom {
+  background-color: $brand-primary;
+
+  .navbar-nav .nav-link {
+    color: #fff;
+  }
+}
+
+.logo {
+  display: block;
+  height: 40px;
+  width: auto;
 }

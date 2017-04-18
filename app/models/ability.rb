@@ -31,6 +31,13 @@ class Ability
       can :destroy, UserTraining
       can :coaches, User
       can :metrics, User
+      can :destroy, User
+      # admins have full access to daily reports
+      can :read, DailyReport
+      can :edit, DailyReport
+      can :update, DailyReport
+      can :create, DailyReport
+      can :destroy, DailyReport
     elsif user.staff?
       # staff can see any user
       can :read, User
@@ -44,6 +51,12 @@ class Ability
       can :create, UserTraining
       can :destroy, UserTraining
       can :metrics, User
+      # staff can see and create daily reports
+      can :read, DailyReport
+      can :create, DailyReport
+      # staff can edit their own daily reports
+      can :edit, DailyReport, user_id: user.id
+      can :update, DailyReport, user_id: user.id
     end
     # members cannot currently do anything
   end

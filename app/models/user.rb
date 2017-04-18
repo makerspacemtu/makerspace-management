@@ -26,18 +26,22 @@
 #  biography              :text
 #  card_id                :string
 #  user_type              :string           not null
+#  specialties            :text
+#  interests              :text
 #  slack_user_id          :string
 #
 
 class User < ApplicationRecord
+  PAGE_SIZE = 20
   USER_TYPES = ['Admin', 'Staff', 'Member']
 
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :punches
-  has_many :user_trainings
+  has_many :punches, dependent: :destroy
+  has_many :user_trainings, dependent: :destroy
   has_many :trainings, :through => :user_trainings
+  has_many :daily_reports
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -89,6 +93,11 @@ class User < ApplicationRecord
     end
   end
 
+  def has_visited?
+    # check if they've visited the space at least once
+    most_recent_punch.present?
+  end
+
   def any_social_media?
     self.twitter_username.present? ||
     self.facebook_username.present? ||
@@ -103,6 +112,15 @@ class User < ApplicationRecord
   def last_sign_in_fancy
     return "never" if self.last_sign_in_at.nil?
     self.last_sign_in_at.strftime('%B %-d, %Y')
+  end
+
+  def obfuscated_email
+    # obfuscate the entire email except for the first two characters
+    obfuscation_length = self.email.split("@").first.length - 2
+    # generate the necessary string of stars
+    sub_string = '*' * (obfuscation_length)
+    # replace the characters we want to hide
+    self.email.gsub(/.{0,#{obfuscation_length}}@/, sub_string + "@")
   end
 
   def self.users_created_by_week

@@ -2,7 +2,13 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @users = User.order(:first_name, :last_name)
+    @page = if user_search_params[:page].present?
+      user_search_params[:page].to_i
+    else
+      0
+    end
+
+    @users = User.order(:first_name, :last_name).limit(User::PAGE_SIZE).offset(@page * User::PAGE_SIZE)
   end
 
   def coaches
@@ -70,6 +76,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def destroy
+    @user = User.find(params[:id])
+
+    if @user.destroy
+      redirect_to users_path, notice: 'User deleted.'
+    else
+      render 'edit', error: @user.errors
+    end
+  end
+
 private
 
   def slack_client
@@ -82,6 +98,10 @@ private
 
   def user_params
     params.require(:user).permit(permit_params)
+  end
+
+  def user_search_params
+    params.permit(:page)
   end
 
   def permit_params

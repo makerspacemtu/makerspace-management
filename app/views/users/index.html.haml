@@ -1,6 +1,7 @@
 .row
   .col-md-6.push-md-6.mb-4
     %h4
+      %i.fa.fa-users
       Checked In Users
       %small
         (#{User.checked_in_users_count} total)
@@ -10,9 +11,22 @@
 
   .col-md-6.pull-md-6
     %h4
-      All Users
+      %i.fa.fa-users
+      Users
       %small
-        (#{@users.count} total)
+        (#{User.count} total)
+
+    - if total_page_count > 1
+      %nav{"aria-label" => "Page navigation example"}
+        %ul.pagination
+          %li.page-item{ class: previous_class }
+            = link_to "Previous", users_path(page: @page - 1), class: "page-link"
+          %li.page-item.disabled
+            %a.page-link{:href => "#"}
+              #{@page + 1} of #{total_page_count}
+          %li.page-item{ class: next_class }
+            = link_to "Next", users_path(page: @page + 1), class: "page-link"
 
     - @users.each do |user|
       = render 'user_result', user: user
+
