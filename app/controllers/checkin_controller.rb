@@ -47,9 +47,9 @@ class CheckinController < ApplicationController
         # we're missing information, request the information from the user
         if (!first_name.nil? && first_name.empty?) || (!last_name.nil? && last_name.empty?)
           # the user left at least one of the name fields blank, provide a bit of help
-          redirect_to checkin_first_time_path(email: checkin_params[:email]), notice: "Both first and last name are required fields."
+          redirect_to checkin_first_time_path(email: checkin_params[:email], reason: checkin_params[:reason]), notice: "Both first and last name are required fields."
         else
-          redirect_to checkin_first_time_path(email: checkin_params[:email])
+          redirect_to checkin_first_time_path(email: checkin_params[:email], reason: checkin_params[:reason])
         end
         return
       end
@@ -63,7 +63,7 @@ class CheckinController < ApplicationController
       message = "been checked out."
     else
       # this is the user's first time, or they were checked out last, check them in
-      user.punch_in
+      user.punch_in(checkin_params[:reason])
       message = "been checked in."
     end
 
@@ -79,7 +79,7 @@ class CheckinController < ApplicationController
 private
 
   def checkin_params
-    params.permit(:email, :first_name, :last_name, :user_id)
+    params.permit(:email, :reason, :first_name, :last_name, :user_id)
   end
 
   def valid_email?(email)

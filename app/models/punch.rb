@@ -5,6 +5,7 @@
 #  id         :integer          not null, primary key
 #  in         :boolean          not null
 #  user_id    :integer          not null
+#  reason     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
