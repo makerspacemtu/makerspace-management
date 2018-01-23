@@ -38,7 +38,7 @@ class SlackController < ApplicationController
         last_punch = user.most_recent_punch
         if last_punch.present? && last_punch.in?
           # the user was checked in, we need to check them out
-          user.punch_out
+          user.punch_out!
           msg = {"text":"You have been punched out of the space."}
         else
           msg = {"text":"You were never punched in to the space."}
@@ -46,7 +46,7 @@ class SlackController < ApplicationController
       elsif text == "all"
         if user.admin?
           # admins can K-O anyone
-          User.checked_in_users.each { |u| u.punch_out }
+          User.checked_in_users.each { |u| u.punch_out! }
           msg = {"text":"All staff members and makers have been punched out. :punch:"}
         else
           msg = {"text":"Sorry, you don't have the ability to punch everyone out."}

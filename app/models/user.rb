@@ -81,8 +81,8 @@ class User < ApplicationRecord
     self.punches.create!(in: true, reason: reason)
   end
 
-  def punch_out
-    self.punches.create(in: false)
+  def punch_out!
+    self.punches.create!(in: false)
   end
 
   def checked_in?

@@ -17,7 +17,7 @@ class Punch < ApplicationRecord
   # true is a check in, false is a check out
   validates :in, inclusion: { in: [ false, true ] }
   # all options for checking in
-  validates :reason, inclusion: { in: %w[personal_project class_project event class_session other] }
+  validates :reason, inclusion: { in: %w[personal_project class_project event class_session other] }, allow_blank: true
 
   def in?
     self.in

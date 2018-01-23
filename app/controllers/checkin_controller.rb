@@ -59,7 +59,7 @@ class CheckinController < ApplicationController
     message = ""
     if last_punch.present? && last_punch.in?
       # the user was checked in, we need to check them out
-      user.punch_out
+      user.punch_out!
       message = "been checked out."
     else
       # this is the user's first time, or they were checked out last, check them in
