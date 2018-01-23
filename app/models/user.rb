@@ -77,12 +77,12 @@ class User < ApplicationRecord
     self.punches.order(created_at: :desc).first
   end
 
-  def punch_in
-    self.punches.create(in: true)
+  def punch_in!(reason)
+    self.punches.create!(in: true, reason: reason)
   end
 
-  def punch_out
-    self.punches.create(in: false)
+  def punch_out!
+    self.punches.create!(in: false)
   end
 
   def checked_in?
