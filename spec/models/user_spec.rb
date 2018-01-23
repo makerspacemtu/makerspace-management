@@ -38,7 +38,7 @@ RSpec.describe User, :type => :model do
 
   it "creates punch in record" do
     expect(user.punches.count).to eq 0
-    user.punch_in('reason')
+    user.punch_in!('personal_project')
     expect(user.punches.count).to eq 1
     expect(user.punches.first.in?).to be true
   end

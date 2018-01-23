@@ -63,7 +63,7 @@ class CheckinController < ApplicationController
       message = "been checked out."
     else
       # this is the user's first time, or they were checked out last, check them in
-      user.punch_in(checkin_params[:reason])
+      user.punch_in!(checkin_params[:reason])
       message = "been checked in."
     end
 

@@ -12,7 +12,7 @@ class SlackController < ApplicationController
           last_punch = user.most_recent_punch
           if !last_punch.present? || last_punch.out?
             # the user was checked out, we need to check them in
-            user.punch_in
+            user.punch_in!
             msg = {"text":"Welcome to the space."}
           else
             msg = {"text":"You were already here!"}
