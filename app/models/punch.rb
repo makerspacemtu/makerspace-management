@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  in         :boolean          not null
 #  user_id    :integer          not null
-#  reason     :string
+#  reason     :string           
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -16,6 +16,8 @@ class Punch < ApplicationRecord
   validates :user_id, presence: true
   # true is a check in, false is a check out
   validates :in, inclusion: { in: [ false, true ] }
+  # all options for checking in
+  validates :size, inclusion: { in: %w[personal_project class_project event class_session other] }
 
   def in?
     self.in
