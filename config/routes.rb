@@ -10,9 +10,12 @@ Rails.application.routes.draw do
     get :password, on: :member
     patch :update_password, on: :member
     resources :user_trainings, only: [:new, :create, :destroy]
+    resources :user_signups, only: [:new, :create, :destroy]
   end
 
   resources :trainings
+
+  resources :signups
 
   resources :daily_reports
 
@@ -22,6 +25,10 @@ Rails.application.routes.draw do
   post '/checkin', to: 'checkin#checkin'
   post '/slack/checkin', to: 'slack#checkin'
   post '/slack/checkout', to: 'slack#checkout'
+  post '/checkin/checkout_all', to: 'checkin#checkout_all'
+
+  # signup related routes
+  #post '/signup/signup', to: 'signup#signup'
 
   # misc. static slack routes
   get '/slack/auth', to: 'slack#auth'
