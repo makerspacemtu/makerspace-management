@@ -62,11 +62,10 @@
                   %div
                     .d-flex.justify-content-between
                       %h5.align-self-end{ :style => "margin-bottom:0px"}
-                        =user.user_type
+                        = user.user_type
                       = form_tag checkin_path do
                         = hidden_field_tag :user_id, user.id
                         = submit_tag "Check Out", class: 'btn btn-light btn-outline-primary'
-
 
                     %hr
                       - if can? :create, UserTraining
@@ -89,8 +88,18 @@
                           = training.name
                           = link_to user_user_training_path(user, training), method: :delete, data: {confirm: "Are you sure you want to remove this training?"} do
                             %i.fa.fa-times
-                %small
-                  Checked in #{user.most_recent_punch.fancy_punch_datetime} for #{user.most_recent_punch.reason}
+              - else
+                .w-100
+                  %div
+                    .d-flex.justify-content-between
+                      %h5.align-self-end{ :style => "margin-bottom:0px"}
+                      = form_tag checkin_path do
+                        = hidden_field_tag :user_id, user.id
+                        = submit_tag "Check Out", class: 'btn btn-light btn-outline-primary'
+
+
+
+        - if can? :read, UserTraining
           .d-flex.justify-content-center
             = form_tag '/checkin/checkout_all' do
               = submit_tag "Check Everyone Out", class: 'btn btn-primary'
