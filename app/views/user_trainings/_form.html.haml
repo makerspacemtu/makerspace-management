@@ -12,4 +12,8 @@
   .form-group
     = f.label :training
     = f.collection_select :training_id, Training.all, :id, :name, {}, class: "form-control"
+
   = f.submit class: "btn btn-primary"
+
+  = link_to checkin_path, class: "btn btn-primary" do
+    Back to Checkin

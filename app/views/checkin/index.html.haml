@@ -18,9 +18,9 @@
           What are you here for?
         .radio
           = label_tag 'personal_project' do
-            = radio_button_tag :reason, 'personal_project', true
+            = radio_button_tag :reason, 'personal_project', false
             Personal Project
-        .radio
+        .radio-inline
           = label_tag 'class_project' do
             = radio_button_tag :reason, 'class_project', false
             Class Project
@@ -48,18 +48,50 @@
           All done? Please check out
 
         .list-group
-          - @currently_checked_in.each do |user|
-            %div.list-group-item.list-group-item-action.flex-column.align-items-start
+          - @currently_checked_in.each do |user, training|
+            %div.list-group-item.list-group-item-action.flex-column.align-items-start.mb-10
               .d-flex.w-100.justify-content-between
-                %h5.mb-1
-                  #{user.first_name} #{user.last_name[0]}.
+                %h3.p.1.mb-1
+                  = link_to user.full_name, user_path(user)
                 %small
                   #{user.obfuscated_email}
 
-              .d-flex.w-100.mb-2.mt-2.justify-content-end
-                = form_tag checkin_path do
-                  = hidden_field_tag :user_id, user.id
-                  = submit_tag "Check Out", class: 'btn btn-sm btn-outline-primary'
 
-              %small
-                Checked in #{user.most_recent_punch.fancy_punch_datetime} for #{user.most_recent_punch.reason}
+              - if can? :read, UserTraining
+                .w-100
+                  %div
+
+                    .d-flex.justify-content-between
+                      %h5.align-self-end{ :style => "margin-bottom:0px"}
+                        User Trainings
+                      = form_tag checkin_path do
+                        = hidden_field_tag :user_id, user.id
+                        = submit_tag "Check Out", class: 'btn btn-light btn-outline-primary'
+
+
+                    %hr
+                      - if can? :create, UserTraining
+                        %h5
+                          = link_to new_user_user_training_path(user) do
+                            %i.fa.fa-plus
+                            Add Training
+
+                    - unless user.trainings.count > 0
+                      %p.card-text.text-muted
+                        #{user.first_name} has no trainings
+
+                    - if user.trainings.count > 0
+                      - user.trainings.order(created_at: :desc).each do |training|
+                        %span{ class: "badge badge-#{training.training_type_format}" }
+                          - if training.icon.present? && !training.icon.blank?
+                            %i{ class: "fa fa-#{training.icon}" }
+                          - else
+                            %i{ class: "fa fa-trophy"}
+                          = training.name
+                          = link_to user_user_training_path(user, training), method: :delete, data: {confirm: "Are you sure you want to remove this training?"} do
+                            %i.fa.fa-times
+                %small
+                  Checked in #{user.most_recent_punch.fancy_punch_datetime} for #{user.most_recent_punch.reason}
+          .d-flex.justify-content-center
+            = form_tag '/checkin/checkout_all' do
+              = submit_tag "Check Everyone Out", class: 'btn btn-primary'
