@@ -20,7 +20,7 @@
           = label_tag 'personal_project' do
             = radio_button_tag :reason, 'personal_project', false
             Personal Project
-        .radio-inline
+        .radio
           = label_tag 'class_project' do
             = radio_button_tag :reason, 'class_project', false
             Class Project
@@ -60,10 +60,9 @@
               - if can? :read, UserTraining
                 .w-100
                   %div
-
                     .d-flex.justify-content-between
                       %h5.align-self-end{ :style => "margin-bottom:0px"}
-                        User Trainings
+                        =user.user_type
                       = form_tag checkin_path do
                         = hidden_field_tag :user_id, user.id
                         = submit_tag "Check Out", class: 'btn btn-light btn-outline-primary'
