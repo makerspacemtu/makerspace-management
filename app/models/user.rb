@@ -29,7 +29,7 @@
 #  specialties            :text
 #  interests              :text
 #  slack_user_id          :string
-
+#
 
 class User < ApplicationRecord
   PAGE_SIZE = 20

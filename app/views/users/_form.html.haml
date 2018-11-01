@@ -38,8 +38,8 @@
     = f.text_area :interests, class: "form-control"
 
   .form-group
-    = #f.label :slack_user_id
-    = #f.select :slack_user_id, options_for_select(@slack_usernames, f.object.slack_user_id), {}, class: "form-control"
+    = f.label :slack_user_id
+    = f.select :slack_user_id, options_for_select(@slack_usernames, f.object.slack_user_id), {}, class: "form-control"
 
   .form-group
     = f.label :twitter_username

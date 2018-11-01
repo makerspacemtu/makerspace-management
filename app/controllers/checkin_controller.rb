@@ -68,22 +68,13 @@ class CheckinController < ApplicationController
     end
 
     if current_user.present?
-      redirect_to checkin_path, notice: "#{user.first_name} has #{message}"
+      redirect_to users_path, notice: "#{user.first_name} has #{message}"
       return
     else
       redirect_to checkin_path, notice: "Thanks #{user.first_name}! You've #{message}"
       return
     end
   end
-
-  def checkout_all
-    User.checked_in_users.each do |user|
-      user.punch_out!
-    end
-    redirect_to checkin_path, notice: "Everyone has been checked out."
-  end
-
-
 
 private
 
