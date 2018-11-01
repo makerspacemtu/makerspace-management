@@ -1,6 +1,7 @@
 class CheckinController < ApplicationController
   def index
     @currently_checked_in = User.checked_in_users
+    @currently_checked_in_alph = User.checked_in_users.order(:first_name, :last_name)
   end
 
   def checkin
