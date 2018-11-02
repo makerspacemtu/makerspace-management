@@ -1,5 +1,5 @@
 .row
-  .col-lg-6.offset-lg-3.col-md-12
+  .col-lg-6.col-md-12
     .jumbotron
       %h2.mb-2
         %i.fa.fa-sign-in
@@ -39,9 +39,8 @@
         .input-group-btn
           = submit_tag 'Submit', class: 'btn btn-primary'
 
-- if User.checked_in_users_count > 0
-  .row
-    .col-lg-6.offset-lg-3.col-md-12
+  - if User.checked_in_users_count > 0
+    .col-lg-6.col-md-12
       .jumbotron
         %h2.mb-2
           %i.fa.fa-sign-in
