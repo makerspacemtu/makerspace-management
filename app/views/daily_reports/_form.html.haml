@@ -14,16 +14,6 @@
     = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name', f.object.user.id), {}, class: "form-control"
 
   .form-group
-    = f.label :shift_start
-    .form-inline
-      = f.datetime_select :shift_start, {}, class: "form-control mr-2 ml-2"
-
-    .form-group
-      = f.label :shift_end
-      .form-inline
-        = f.datetime_select :shift_end, {}, class: "form-control mr-2 ml-2"
-
-  .form-group
     = f.label :notes
     = f.text_area :notes, class: "form-control"
 
