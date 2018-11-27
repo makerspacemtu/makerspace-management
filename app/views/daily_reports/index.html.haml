@@ -24,7 +24,7 @@
               %p.mb-1
                 = daily_report.notes.truncate(50, separator: ' ', omission: '...')
               %small
-                Shift #{daily_report.shift_start.strftime('%B %-d, %Y at %H:%M %p')} - #{daily_report.shift_end.strftime('%B %-d, %Y at %H:%M %p')}
+                #{daily_report.shift_start.strftime('%B %-d, %Y at %H:%M %p')}
           - else
             %div.list-group-item.flex-column.align-items-start
               .d-flex.w-100.justify-content-between
@@ -35,7 +35,7 @@
               %p.mb-1
                 = daily_report.notes.truncate(50, separator: ' ', omission: '...')
               %small
-                Shift #{daily_report.shift_start.strftime('%B %-d, %Y at %H:%M %p')} - #{daily_report.shift_end.strftime('%B %-d, %Y at %H:%M %p')}
+                #{daily_report.shift_start.strftime('%B %-d, %Y at %H:%M %p')}
 
     - else
       %p.text-muted

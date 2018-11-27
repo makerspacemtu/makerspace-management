@@ -2,6 +2,7 @@ class SignupsController < ApplicationController
   load_and_authorize_resource
 
   def index
+
   end
 
   def edit
@@ -35,6 +36,6 @@ class SignupsController < ApplicationController
 private
 
   def signup_params
-    params.require(:signup).permit(:name, :signup_day, :signup_time)
+    params.require(:signup).permit(:signup_day, :signup_start, :signup_end, :signup_qty)
   end
 end

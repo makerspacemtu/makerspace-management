@@ -16,28 +16,29 @@
               @mtu.edu
         %h4.mb-2
           What are you here for?
-        .radio
-          = label_tag 'personal_project' do
-            = radio_button_tag :reason, 'personal_project', false
-            Personal Project
-        .radio
-          = label_tag 'class_project' do
-            = radio_button_tag :reason, 'class_project', false
-            Class Project
-        .radio
-          = label_tag 'event' do
-            = radio_button_tag :reason, 'event', false
-            Event
-        .radio
-          = label_tag 'class_session' do
-            = radio_button_tag :reason, 'class_session', false
-            Class Session
-        .radio
-          = label_tag 'other' do
-            = radio_button_tag :reason, 'other', false
-            Other
-        .input-group-btn
-          = submit_tag 'Submit', class: 'btn btn-primary'
+        .select
+          .option
+            = label_tag 'personal_project' do
+              = radio_button_tag :reason, 'personal_project', false
+              Personal Project
+          .option
+            = label_tag 'class_project' do
+              = radio_button_tag :reason, 'class_project', false
+              Class Project
+          .option
+            = label_tag 'event' do
+              = radio_button_tag :reason, 'event', false
+              Event
+          .option
+            = label_tag 'class_session' do
+              = radio_button_tag :reason, 'class_session', false
+              Class Session
+          .option
+            = label_tag 'other' do
+              = radio_button_tag :reason, 'other', false
+              Other
+          .input-group-btn
+            = submit_tag 'Submit', class: 'btn btn-primary'
 
   - if User.checked_in_users_count > 0
     .col-lg-6.col-md-12
@@ -48,10 +49,11 @@
 
         .list-group
           - @currently_checked_in_alph.each do |user, training|
-            %div.list-group-item.list-group-item-action.flex-column.align-items-start.mb-10
+            %div.list-group-item.list-group-item-action.flex-column.align-items-start.mb-10{ :style => "border:2px solid rgba(118, 191, 67, 0.75)"}
+
               .d-flex.w-100.justify-content-between
                 %h3.p.1.mb-1
-                  = link_to user.full_name, user_path(user)
+                  = link_to user.full_name, user_path(user), { :style => "color: rgba(70, 74, 76, 1)"}
                 %small
                   #{user.obfuscated_email}
 

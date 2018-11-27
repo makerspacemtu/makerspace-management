@@ -4,3 +4,21 @@
     = link_to new_signup_path do
       %i.fa.fa-plus
       Shift Signup
+%row
+  %table
+    %thead
+      %tr
+        %th Signup Day
+        %th Signup Time
+  %tbody
+    - @signups.order(:signup_day).each do |id, signup_day|
+      %tr
+        %td
+          = id.signup_day
+        %td
+          = id.signup_start
+        %td
+          = id.signup_end
+        %td
+          = id.signup_qty
+      .tr
