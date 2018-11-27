@@ -43,12 +43,6 @@ gem 'haml'
 
 gem 'cancancan'
 
-gem 'rails-assets-jquery', source: 'https://rails-assets.org'
-gem 'rails-assets-datatables', source: 'https://rails-assets.org'
-gem 'rails-ujs'
-gem 'kaminari'
-gem 'tree'
-
 # Slack controller. Read more: https://github.com/slack-ruby/slack-ruby-client
 gem 'slack-ruby-client'
 
