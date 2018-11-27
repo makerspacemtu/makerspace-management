@@ -44,6 +44,6 @@ class UserSignupsController < ApplicationController
 private
 
   def user_signup_params
-    params.require(:user_signup).permit(:signup_day, :signup_time)
+    params.require(:user_signup).permit(:name, :signup_day, :signup_time)
   end
 end

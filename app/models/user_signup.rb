@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  user_id       :integer          not null
-#  signup_day   :integer          not null
+#  signup_type   :integer          not null
 #  signup_time   :datetime         not null
 #  updated_at    :datetime         not null
 #  created_by_id :integer          not null
