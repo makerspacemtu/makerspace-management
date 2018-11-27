@@ -30,11 +30,6 @@
                 = link_to daily_reports_path, class: "nav-link" do
                   %i.fa.fa-sticky-note
                   Daily Reports
-            - if can? :read, Signup
-              %li.nav-item
-                = link_to signups_path, class: "nav-link" do
-                  %i.fa.fa-group
-                  Shift Signup
             - if can? :coaches, User
               %li.nav-item
                 = link_to coaches_users_path, class: "nav-link" do
