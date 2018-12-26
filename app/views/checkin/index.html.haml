@@ -101,6 +101,6 @@
 
 
         - if can? :read, UserTraining
-          .d-flex.justify-content-center
+          .d-flex.justify-content-center{ :style => "margin-top:20px"}
             = form_tag '/checkin/checkout_all' do
               = submit_tag "Check Everyone Out", class: 'btn btn-primary'
