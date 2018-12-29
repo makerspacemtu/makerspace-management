@@ -13,7 +13,7 @@ class UsersDatatable < ApplicationDatatable
         links = []
         links << link_to('Show', user)
         links << link_to('Edit', edit_user_path(user))
-        links << link_to('Destroy', user, method: :delete, data: { confirm: 'Are you sure?' })
+        #links << link_to('Destroy', user, method: :delete, data: { confirm: 'Are you sure?' })
         column << links.join(' | ')
       end
     end
