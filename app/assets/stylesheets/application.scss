@@ -10,13 +10,10 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require datatables
- *
- * For bootstrap support
  *= require datatables/dataTables.bootstrap
+ *= require_tree .
  *= require_self
-
+ *
  */
 
 $brand-primary: #76bf43;
