@@ -2,8 +2,13 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
+    respond_to do |format|
+      format.html
+      format.json { render json: UsersDatatable.new(view_context) }
+    end
     @page = if user_search_params[:page].present?
       user_search_params[:page].to_i
+
     else
       0
     end
