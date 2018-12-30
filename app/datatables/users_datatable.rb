@@ -6,9 +6,12 @@ class UsersDatatable < ApplicationDatatable
   def data
     users.map do |user|
       [].tap do |column|
+
         column << user.first_name
         column << user.last_name
         column << user.email
+        column << user.user_type
+
 
         links = []
         links << link_to('Show', user)
@@ -18,6 +21,8 @@ class UsersDatatable < ApplicationDatatable
       end
     end
   end
+
+
 
   def count
     User.count
@@ -47,6 +52,6 @@ class UsersDatatable < ApplicationDatatable
   end
 
   def columns
-    %w(first_name last_name email)
+    %w(first_name last_name email user_type)
   end
 end
