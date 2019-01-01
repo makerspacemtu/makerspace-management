@@ -24,7 +24,10 @@ $(document).on('turbolinks:load', function(){
       serverSide: true,
       ajax: $(this).data('url'),
       scrollX: true,
-      bJQueryUI: true
+      bJQueryUI: true,
+      responsive: true,
+      dom: 'Bfrtip',
+      buttons: [  'copy', 'excel', 'pdf']
     });
   });
 })
