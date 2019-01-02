@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.3.3"
 #Datatables gems
 gem 'rails-assets-jquery', source: 'https://rails-assets.org'
 gem 'rails-assets-datatables', source: 'https://rails-assets.org'
