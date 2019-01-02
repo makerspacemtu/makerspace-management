@@ -34,6 +34,10 @@
               = radio_button_tag :reason, 'class_session', false
               Class Session
           .option
+            = label_tag 'coaching' do
+              = radio_button_tag :reason, 'coaching', false
+              Coaching
+          .option
             = label_tag 'other' do
               = radio_button_tag :reason, 'other', false
               Other
