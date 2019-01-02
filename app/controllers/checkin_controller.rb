@@ -8,13 +8,13 @@ class CheckinController < ApplicationController
     # if the user id param is passed, find the user's email address by their user id
     if checkin_params[:user_id].present?
       email = User.find(checkin_params[:user_id]).email
+
     else
       email = checkin_params[:email].downcase.strip
       # append @mtu.edu if the email already doesn't contain the domain
       # this allows users to enter only their username and username@mtu.edu
       email += "@mtu.edu" unless email.include?("@mtu.edu")
     end
-
     unless email.present? && valid_email?(email)
       # we currently only allow checking in and out with mtu emails
       redirect_to checkin_path, notice: "Invalid email. You must use a @mtu.edu email."
@@ -58,6 +58,11 @@ class CheckinController < ApplicationController
 
     last_punch = user.most_recent_punch
     message = ""
+    if checkin_params[:reason].nil?
+      redirect_to checkin_path, notice: "Please provide a checkin reason."
+      return
+    else
+    end
     if last_punch.present? && last_punch.in?
       # the user was checked in, we need to check them out
       user.punch_out!
@@ -75,6 +80,7 @@ class CheckinController < ApplicationController
       redirect_to checkin_path, notice: "Thanks #{user.first_name}! You've #{message}"
       return
     end
+
   end
 
   def checkout_all
