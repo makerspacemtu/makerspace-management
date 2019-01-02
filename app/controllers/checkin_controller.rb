@@ -58,7 +58,8 @@ class CheckinController < ApplicationController
 
     last_punch = user.most_recent_punch
     message = ""
-    if checkin_params[:reason].nil?
+    if last_punch.present? && last_punch.in?
+    elsif checkin_params[:reason].nil?
       redirect_to checkin_path, notice: "Please provide a checkin reason."
       return
     else
