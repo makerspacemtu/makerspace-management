@@ -32,11 +32,6 @@
           %label.btn.btn-secondary
             %input#coaching{autocomplete: "off", name: :reason, type: "radio", value: 'coaching'}/
             Coaching
-          %label.btn.btn-secondary
-            .input-group
-              .input-group-prepend
-                %span.input-group-text.align-left.p-3 Other:
-              %textarea.w-100#coaching{rows:"1",autocomplete: "off", name: :reason}
 
         .input-group-btn
           = submit_tag 'Submit', class: 'btn btn-primary'
