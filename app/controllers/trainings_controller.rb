@@ -22,6 +22,16 @@ class TrainingsController < ApplicationController
     end
   end
 
+  def destroy
+    @training = Training.find(params[:id])
+
+    if @training.destroy
+      redirect_to trainings_path, notice: 'Training deleted.'
+    else
+      render 'edit', error: @training.errors
+    end
+  end
+
   def update
     @training = Training.find(params[:id])
 

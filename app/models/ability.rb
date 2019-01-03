@@ -25,6 +25,7 @@ class Ability
       can :edit, Training
       can :create, Training
       can :update, Training
+      can :destroy, Training
       # admins can see, create and remove user trainings
       can :read, UserTraining
       can :create, UserTraining
