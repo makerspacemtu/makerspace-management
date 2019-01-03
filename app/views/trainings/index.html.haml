@@ -9,6 +9,7 @@
         Add a Training
 
 - if @trainings.count > 0
+  %hr{:style => "margin-top:5px; margin-bottom:5px"}
   - @trainings.each do |training|
     %div
       %h4
@@ -22,6 +23,12 @@
           = link_to edit_training_path(training) do
             %i.fa.fa-pencil
             Edit
+        %small.tab{:style => "margin-left:10px",:class => "btn btn-outline-danger btn-sm pull-right"}
+          %i.fa.fa-trash
+          = link_to 'Delete',{:controller => 'trainings', :action => 'destroy', :id => training.id }, |
+            data:  {:method => :delete, :remote => true}
+        %hr{:style => "margin-top:5px; margin-bottom:5px"}
+
 - else
   %p.text-muted
     No trainings available.
