@@ -12,6 +12,9 @@
 
 FactoryGirl.define do
   factory :training do
-    
+
+  end
+  factory :signup do
+
   end
 end
