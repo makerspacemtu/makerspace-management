@@ -16,7 +16,7 @@ class SignupsController < ApplicationController
     @signup = Signup.new(signup_params)
 
     if @signup.save
-      redirect_to signups_path, notice: 'Signed up for shift.'
+      redirect_to signups_path, notice: 'Shift Slot Created.'
     else
       render 'new'
     end
@@ -35,6 +35,6 @@ class SignupsController < ApplicationController
 private
 
   def signup_params
-    params.require(:signup).permit(:name, :signup_day, :signup_time)
+    params.require(:signup).permit(:signup_day, :signup_start, :signup_end, :signup_qty)
   end
 end

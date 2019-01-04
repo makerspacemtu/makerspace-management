@@ -19,7 +19,7 @@ class Signup < ApplicationRecord
   has_many :user_signups
   has_many :users, :through => :user_signups
 
-  validates :name, presence: true
+  #validates :name, presence: true
   validates :signup_day, inclusion: { in: SIGNUP_DAYS }
-  
+
 end

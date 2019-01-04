@@ -4,22 +4,35 @@
   - if can? :create, Signup
     = link_to new_signup_path do
       %i.fa.fa-plus
-      Shift Signup
+      Shift Signup Slot
+  - if can? :create, UserSignup
+    = link_to new_user_user_signup_path(:user_id => current_user.id) do
+      Sign up for slot
+
 %row
-  %table
+  %table.table
     %thead
       %tr
-        %th Signup Day
-        %th Signup Time
-  %tbody
-    - @signups.order(:signup_day).each do |id, signup_day|
-      %tr
-        %td
-          = id.signup_day
-        %td
-          = id.signup_start
-        %td
-          = id.signup_end
-        %td
-          = id.signup_qty
-      .tr
+        %th{scope: "col"} Day
+        %th{scope: "col"} Start
+        %th{scope: "col"} End
+
+    %tbody
+      - @signups.order(:signup_start).each do |id|
+        - i = 0
+        - loop do
+
+          %tr
+            %td
+              = id.signup_day
+            %td
+              = id.signup_start.strftime("%I") + " " + id.signup_start.strftime("%p")
+            %td
+              = id.signup_end.strftime("%I") + " " + id.signup_end.strftime("%p")
+
+          .tr
+
+          - if id.signup_qty == i
+            - break
+          - else
+          - i += 1

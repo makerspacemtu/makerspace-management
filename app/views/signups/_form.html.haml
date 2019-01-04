@@ -1,7 +1,7 @@
 - unless @signup.errors.empty?
   .alert.alert-danger
     %strong
-      #{pluralize(@training.errors.size, 'error')} occurred
+      #{pluralize(@signup.errors.size, 'error')} occurred
 
     %ul
       - @signup.errors.full_messages.each do |error|
@@ -9,6 +9,22 @@
           = error
 
 = form_for @signup do |f|
-  .form-group
-    = f.label :user
-  
+  %hr
+    %h5
+      .form-group
+        = f.label :signup_day
+        = f.select :signup_day, options_for_select(Signup::SIGNUP_DAYS, f.object.signup_day || 'Monday'), {}, class: "form-control"
+    %h5
+      .form-group
+        = f.label :signup_start
+        = f.time_select( :signup_start, default: {minute: 0, hour: 15 }, ampm: true)
+    %h5
+      .form-group
+        = f.label :signup_end
+        = f.time_select( :signup_end,  ampm: true, default: {minute: 0, hour: 16 })
+    %h5
+      .form-group
+        = f.label :signup_qty
+        = f.select :signup_qty, options_for_select(Signup::SIGNUP_QTYS, f.object.signup_qty || '3'), {}, class: "form-control"
+
+  = f.submit class: "btn btn-primary"
