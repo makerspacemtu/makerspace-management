@@ -41,9 +41,14 @@ class Ability
       can :destroy, DailyReport
       # admins can edit and see their own shifts
       can :read, Signup
-      can :new, Signup
       can :destroy, Signup
       can :create, Signup
+      can :edit, Signup
+      can :update, Signup
+
+      can :read, UserSignup
+      can :destroy, UserSignup
+      can :create, UserSignup
 
     elsif user.staff?
       # staff can see any user
@@ -65,6 +70,10 @@ class Ability
       can :edit, DailyReport, user_id: user.id
       can :update, DailyReport, user_id: user.id
       # staff can edit and see their own shifts
+      can :read, Signup
+      can :read, UserSignup
+      can :destroy, UserSignup
+      can :create, UserSignup
 
     end
     # members cannot currently do anything

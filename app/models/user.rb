@@ -40,6 +40,8 @@ class User < ApplicationRecord
 
   has_many :punches, dependent: :destroy
   has_many :user_trainings, dependent: :destroy
+  has_many :user_signups, dependent: :destroy
+  has_many :signups, :through => :user_signups
   has_many :trainings, :through => :user_trainings
   has_many :daily_reports
 

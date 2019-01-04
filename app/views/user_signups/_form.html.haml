@@ -1,0 +1,16 @@
+- unless @user_signup.errors.empty?
+  .alert.alert-danger
+    %strong
+      #{pluralize(@user_signup.errors.size, 'error')} occurred
+
+    %ul
+      - @user_signup.errors.full_messages.each do |error|
+        %li
+          = error
+
+= form_for [@user, @user_signup] do |f|
+  .form-group
+    = f.label :signup
+    = f.collection_select :signup_id, Signup.all, :id, :signup_start, {}, class: "form-control"
+
+  = f.submit class: "btn btn-primary"
