@@ -22,7 +22,7 @@ class UserTrainingsController < ApplicationController
     @user_training.created_by = current_user
 
     if @user_training.save
-      redirect_to new_user_user_training_path(user), notice: 'User training created.'
+      redirect_to new_user_user_training_path(user), notice: "User trained on #{training.name}."
     else
       render 'new'
     end
@@ -40,6 +40,7 @@ class UserTrainingsController < ApplicationController
       return
     end
   end
+
 
 private
 
