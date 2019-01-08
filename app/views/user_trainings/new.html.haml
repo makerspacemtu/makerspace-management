@@ -4,5 +4,18 @@
       .card-block
         %h4.card-title
           New Training
+        - unless @user.trainings.count > 0
+          %p.card-text.text-muted
+            #{@user.first_name} has no trainings
 
+        - if @user.trainings.count > 0
+          - @user.trainings.order(created_at: :desc).each do |training|
+            %span{ class: "badge badge-#{training.training_type_format}" }
+              - if training.icon.present? && !training.icon.blank?
+                %i{ class: "fa fa-#{training.icon}" }
+              - else
+                %i{ class: "fa fa-trophy"}
+              = training.name
+              = link_to user_user_training_path(@user, training), method: :delete, data: {confirm: "Are you sure you want to remove this training?"} do
+                %i.fa.fa-times
         = render 'form'
