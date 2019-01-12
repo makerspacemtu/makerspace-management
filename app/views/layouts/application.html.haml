@@ -6,6 +6,7 @@
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
     %script{:src => "https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = yield :css
     %script{src: "https://cdn.plot.ly/plotly-latest.min.js"}
   %body{ class: "#{yield(:body_class)}"}
     %nav.navbar.navbar-toggleable-md.navbar-inverse.navbar-custom.fixed-top
@@ -74,3 +75,4 @@
           = yield
 
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = yield :javascript

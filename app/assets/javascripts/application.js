@@ -24,7 +24,7 @@ $(document).on('turbolinks:load', function(){
       serverSide: true,
       ajax: $(this).data('url'),
       scrollX: true,
-      responsive: true,
+      responsive: true
     });
   });
 })
