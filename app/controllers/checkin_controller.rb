@@ -60,7 +60,7 @@ class CheckinController < ApplicationController
     message = ""
     if last_punch.present? && last_punch.in?
     elsif checkin_params[:reason].nil?
-      redirect_to checkin_path, notice: "Please provide a checkin reason."
+      redirect_to checkin_path, alert: "Not checked in! Please provide a checkin reason."
       return
     else
     end

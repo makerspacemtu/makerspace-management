@@ -1,6 +1,6 @@
 .row
-  .col-lg-6.col-md-12
-    .jumbotron
+  .col-lg-4.col-md-12
+    .jumbotron{:style => "padding-top: 32px; padding-bottom: 32px"}
       %h2.mb-2
         %i.fa.fa-sign-in
         Please check in
@@ -12,7 +12,7 @@
         .form-group
           .input-group.input-group-lg
             = text_field_tag :email, '', class: 'form-control', placeholder: 'Email', autofocus: true
-            %span.input-group-addon
+            %span.input-group-addon.p-2
               @mtu.edu
         %h4.mb-2
           What are you here for?
@@ -37,65 +37,13 @@
           = submit_tag 'Submit', class: 'btn btn-primary'
 
   - if User.checked_in_users_count > 0
-    .col-lg-6.col-md-12
-      .jumbotron
-        %h2.mb-2
-          %i.fa.fa-sign-in
+    .col-lg-8.col-md-12
+      .jumbotron{:style => "padding-top: 32px; padding-bottom: 32px"}
+        %h2.mb-2{:style => "padding-bottom: 12px"}
+          %i.fa.fa-sign-out
           All done? Please check out
 
-        .list-group
-          - @currently_checked_in_alph.each do |user, training|
-            %div.list-group-item.list-group-item-action.flex-column.align-items-start.mb-10{ :style => "border:2px solid rgba(118, 191, 67, 0.75)"}
-
-              .d-flex.w-100.justify-content-between
-                %h3.p.1.mb-1
-                  = link_to user.full_name, user_path(user), { :style => "color: rgba(70, 74, 76, 1)"}
-                %small
-                  #{user.obfuscated_email}
-
-
-              - if can? :read, UserTraining
-                .w-100
-                  %div
-                    .d-flex.justify-content-between
-                      %h5.align-self-end{ :style => "margin-bottom:0px"}
-                        = user.user_type
-                      = form_tag checkin_path do
-                        = hidden_field_tag :user_id, user.id
-                        = submit_tag "Check Out", class: 'btn btn-light btn-outline-primary'
-
-                    %hr
-                      - if can? :create, UserTraining
-                        %h5
-                          = link_to new_user_user_training_path(user) do
-                            %i.fa.fa-plus
-                            Add Training
-
-                    - unless user.trainings.count > 0
-                      %p.card-text.text-muted
-                        #{user.first_name} has no trainings
-
-                    - if user.trainings.count > 0
-                      - user.trainings.order(created_at: :desc).each do |training|
-                        %span{ class: "badge badge-#{training.training_type_format}" }
-                          - if training.icon.present? && !training.icon.blank?
-                            %i{ class: "fa fa-#{training.icon}" }
-                          - else
-                            %i{ class: "fa fa-trophy"}
-                          = training.name
-                          = link_to user_user_training_path(user, training), method: :delete, data: {confirm: "Are you sure you want to remove this training?"} do
-                            %i.fa.fa-times
-              - else
-                .w-100
-                  %div
-                    .d-flex.justify-content-between
-                      %h5.align-self-end{ :style => "margin-bottom:0px"}
-                      = form_tag checkin_path do
-                        = hidden_field_tag :user_id, user.id
-                        = submit_tag "Check Out", class: 'btn btn-light btn-outline-primary'
-
-
-
+        = render 'cards'
         - if can? :read, UserTraining
           .d-flex.justify-content-center{ :style => "margin-top:20px"}
             = form_tag '/checkin/checkout_all' do

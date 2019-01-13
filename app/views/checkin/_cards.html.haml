@@ -1,0 +1,36 @@
+.row.m-auto
+  - @currently_checked_in.each do |user, training|
+    .col-lg-6.col-xl-3.d-flex.align-items-stretch.p-1
+      .card.mb-10.w-100.d-flex{:style=>"padding: 10px 10px 4px 10px; border: 1px solid #76bf43"}
+        .card-body.mb-10
+          .card-title{ :style=>"border-bottom: 1px solid #aaa"}
+            %h5.p.1.mb-1
+              = link_to user.full_name, user_path(user), { :style => "color: rgba(70, 74, 76, 1)"}
+            %h6{ :style => "color: rgba(70, 74, 76, 0.8)"}
+              = user.user_type
+          .card-text.mb-10
+            - if can? :read, UserTraining
+              - if can? :create, UserTraining
+                %h6
+                  = link_to new_user_user_training_path(user) do
+                    %i.fa.fa-plus
+                    Add Training
+
+              - unless user.trainings.count > 0
+                %p.card-text.text-muted{:style => "padding-bottom: 10px"}
+                  #{user.first_name} has no trainings
+
+              - if user.trainings.count > 0
+                - user.trainings.order(created_at: :desc).each do |training|
+                  %span{ class: "badge badge-#{training.training_type_format}" }
+                    - if training.icon.present? && !training.icon.blank?
+                      %i{ class: "fa fa-#{training.icon}" }
+                    - else
+                      %i{ class: "fa fa-trophy"}
+                    = training.name
+                    = link_to user_user_training_path(user, training), method: :delete, data: {confirm: "Are you sure you want to remove this training?"} do
+                      %i.fa.fa-times
+        .mt-auto
+          = form_tag checkin_path do
+            = hidden_field_tag :user_id, user.id
+            = submit_tag "Check Out", class: 'btn btn-light btn-outline-primary w-100 mb-1'
