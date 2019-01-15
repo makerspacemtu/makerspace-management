@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190101214623) do
+ActiveRecord::Schema.define(version: 20190115153426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 20190101214623) do
     t.index ["user_id"], name: "index_daily_reports_on_user_id", using: :btree
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string   "name",             null: false
+    t.string   "audience",         null: false
+    t.string   "org_name",         null: false
+    t.string   "org_contact_name", null: false
+    t.text     "desc",             null: false
+    t.datetime "event_start",      null: false
+    t.datetime "event_end",        null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "punches", force: :cascade do |t|
     t.boolean  "in",         null: false
     t.integer  "user_id",    null: false
@@ -35,9 +47,9 @@ ActiveRecord::Schema.define(version: 20190101214623) do
   end
 
   create_table "signups", force: :cascade do |t|
-    t.string   "signup_day",   null: false
-    t.datetime "signup_start"
-    t.datetime "signup_end"
+    t.integer  "signup_day",   null: false
+    t.time     "signup_start"
+    t.time     "signup_end"
     t.integer  "signup_qty",   null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false

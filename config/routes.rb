@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :daily_reports
 
+  resources :events
+
   # checkin related routes
   get '/checkin', to: 'checkin#index'
   get '/checkin/first_time', to: 'checkin#first_time'

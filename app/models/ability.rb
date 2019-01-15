@@ -50,6 +50,13 @@ class Ability
       can :destroy, UserSignup
       can :create, UserSignup
 
+      #admins can edit and create and destroy events
+      can :read, Event
+      can :destroy, Event
+      can :create, Event
+      can :edit, Event
+      can :update, Event
+
     elsif user.staff?
       # staff can see any user
       can :read, User
@@ -75,6 +82,12 @@ class Ability
       can :destroy, UserSignup
       can :create, UserSignup
 
+      #staff can edit and create events
+      can :read, Event
+      can :create, Event
+      can :edit, Event
+
+      can :update, Event
     end
     # members cannot currently do anything
   end
