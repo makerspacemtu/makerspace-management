@@ -64,3 +64,25 @@ if totalUsersCreatedByWeek?
   data = [trace];
 
   Plotly.newPlot('total-users-created-by-week', data);
+
+if reasonCounts?
+  yData = Object.values(reasonCounts);
+
+  xData = Object.keys(reasonCounts);
+
+  # for week in Object.keys(reasonCounts)
+  #   d = new Date(week)
+  #   xAxis.push((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear())
+
+  trace = {
+    x: xData,
+    y: yData,
+    type: 'bar',
+    marker: {
+      color: '#76bf43'
+    }
+  };
+
+  data = [trace];
+
+  Plotly.newPlot('reason-counts', data);

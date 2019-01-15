@@ -47,4 +47,16 @@ class Punch < ApplicationRecord
 
     punches.sort.to_h
   end
+
+  def self.reason_counts
+    personal_project_count = self.all.where(reason: "personal_project").count
+    class_project_count = self.all.where(reason: "class_project").count
+    event_count = self.all.where(reason: "event").count
+    class_session_count = self.all.where(reason: "class_session").count
+    coaching_count = self.all.where(reason: "coaching").count
+    reasoncounts = Hash["Personal Project",personal_project_count,"Class Project",class_project_count, "Event",event_count,"Class Session",class_session_count,"Coaching",coaching_count]
+    reasoncounts.sort.to_h
+    #puts reasoncounts.values
+    #puts reasoncounts.keys
+  end
 end
