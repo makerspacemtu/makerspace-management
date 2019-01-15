@@ -1,9 +1,12 @@
-.row
-  .col-md-12
-    %h4
-      All Coaches
-      %small
-        (#{@users.count} total)
 
-    - @users.each do |user|
-      = render 'user_result', user: user
+.row
+  .col-lg-8.col-md-12
+    .jumbotron{:style => "padding-top: 32px; padding-bottom: 32px"}
+      .d-flex.justify-content-between
+        %h4.mb-2{:style => "padding-bottom: 12px"}
+          All Coaches
+          %small
+            (#{@users.count} total)
+
+
+      = render 'cards'
