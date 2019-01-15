@@ -142,27 +142,14 @@ class User < ApplicationRecord
   end
 
   def self.total_users_created_by_week
-    users = self.group("DATE_TRUNC('week', created_at)").count
-
-    current_week = users.keys[0]
-    while current_week < Time.now
-      unless users.key?(current_week)
-        # add the missing weeks
-        users[current_week] = 0
-      end
-
-      current_week += 7.days
+    date_counts = self.group("DATE_TRUNC('week', created_at)").count.sort.to_h
+    count = 0;
+    user_count = {}
+    date_counts.each do |date_count|
+      count += date_count[1]
+      user_count[date_count[0]] = count
     end
 
-    prevnum = 0
-    current_week2 = users.keys[0]
-    last_week = users.keys[0]
-    while current_week2 < Time.now
-
-      users[current_week2] += users[last_week] + users[current_week2]
-      last_week = current_week2
-      current_week2 += 7.days
-    end
-    users.sort.to_h
+    user_count.sort.to_h
   end
 end
