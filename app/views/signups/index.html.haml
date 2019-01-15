@@ -1,4 +1,3 @@
-
 %h2
   Shifts
   - if can? :create, Signup
@@ -8,31 +7,57 @@
   - if can? :create, UserSignup
     = link_to new_user_user_signup_path(:user_id => current_user.id) do
       Sign up for slot
-
 %row
-  %table.table
+  %table.table.table-bordered.table-striped
     %thead
       %tr
-        %th{scope: "col"} Day
-        %th{scope: "col"} Start
-        %th{scope: "col"} End
-
+        %th{scope: "col"} Time
+        - j = 1
+        -  uniquedays = {}
+        - prev_signup_day = -1
+        - Signup.all.order(:signup_day).each do |id|
+          - if id.signup_day != prev_signup_day
+            %th{scope: "col"}
+              - uniquedays[j] = id.signup_day
+              - j += 1
+              = Signup::SIGNUP_DAYS_R[id.signup_day]
+          - else
+          - prev_signup_day = id.signup_day
+        - puts uniquedays
+        - prev_signup_print_val = ""
     %tbody
-      - @signups.order(:signup_start).each do |id|
-        - i = 0
+      - @signups.order(:signup_start).each do |timerow|
+        - prev_user = ""
+        - i = 1
         - loop do
+          - signup_print_val = timerow.signup_start.strftime("%I") + " " + timerow.signup_start.strftime("%p")+ " - " +  timerow.signup_end.strftime("%I") + " " + timerow.signup_end.strftime("%p")
+          - if signup_print_val == prev_signup_print_val
+            - break
+          - else
+            %tr
+              %th
+                = signup_print_val
+              - uniquedays.each_with_index do |day,index|
+                - success = false
+                - daycol = uniquedays[index + 1]
+                %td
+                  - signup_link = Signup.where(signup_day: daycol, signup_start: timerow.signup_start).take!
+                  =# link_to new_user_user_signup_path(:user_id => current_user.id, @user_signup => signup_link) do
+                  = #Add
 
-          %tr
-            %td
-              = id.signup_day
-            %td
-              = id.signup_start.strftime("%I") + " " + id.signup_start.strftime("%p")
-            %td
-              = id.signup_end.strftime("%I") + " " + id.signup_end.strftime("%p")
+                  - k = 1
+                  - UserSignup.all.each do |usersignup|
+                    - begin
+                      - ind_signup = Signup.all.find(usersignup.signup_id)
+                      - if ind_signup.signup_start == timerow.signup_start && daycol == ind_signup.signup_day
+                        - user = User.all.find(usersignup.user_id)
+                        = user.email
+                        .row
+                    - rescue
 
           .tr
-
-          - if id.signup_qty == i
+          - if 1 == i
+            - prev_signup_print_val = signup_print_val
             - break
           - else
           - i += 1

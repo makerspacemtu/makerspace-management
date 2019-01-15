@@ -11,6 +11,6 @@
 = form_for [@user, @user_signup] do |f|
   .form-group
     = f.label :signup
-    = f.collection_select :signup_id, Signup.all, :id, :signup_start, {}, class: "form-control"
+    = f.collection_select :signup_id, Signup.all, :id, :selection_format, {}, class: "form-control"
 
   = f.submit class: "btn btn-primary"
