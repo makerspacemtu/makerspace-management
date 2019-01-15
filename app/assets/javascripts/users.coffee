@@ -43,3 +43,24 @@ if punchesCreatedByWeek?
   data = [trace];
 
   Plotly.newPlot('punches-created-by-week', data);
+
+if totalUsersCreatedByWeek?
+  yAxis = Object.values(totalUsersCreatedByWeek);
+
+  xAxis = [];
+  for week in Object.keys(totalUsersCreatedByWeek)
+    d = new Date(week)
+    xAxis.push((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear())
+
+  trace = {
+    x: xAxis,
+    y: yAxis,
+    type: 'scatter',
+    marker: {
+      color: '#76bf43'
+    }
+  };
+
+  data = [trace];
+
+  Plotly.newPlot('total-users-created-by-week', data);
