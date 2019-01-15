@@ -1,0 +1,13 @@
+.row
+  .col-md-12
+    %h4
+      %i.fa.fa-bullhorn
+      Events
+
+      %small.pull-right
+        - if can? :create, Event
+          = link_to new_event_path do
+            %i.fa.fa-plus
+            New Event
+    - if @events.size > 0
+      = render 'cards'

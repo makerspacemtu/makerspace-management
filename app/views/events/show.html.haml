@@ -1,0 +1,42 @@
+.row
+  .col-lg-8.col-md-12
+    .jumbotron.d-flex.justify-content-center{:style => "padding-top: 32px; padding-bottom: 32px"}
+      .card{:style => "padding:4px"}
+        .card-block
+          %h3.card-title.d-flex.justify-content-center
+            = @event.name
+          %ul.list-group.list-group-flush
+            %li.list-group-item.d-flex.justify-content-between
+              %h5{:style => "padding-right: 30px"}
+                Event Type:
+              %h5
+                = @event.audience
+            %li.list-group-item.d-flex.justify-content-between
+              %h5{:style => "padding-right: 30px"}
+                Hosted by:
+              %h5
+                = @event.org_name
+            %li.list-group-item.d-flex.justify-content-between
+              %h5{:style => "padding-right: 30px"}
+                Organization Contact:
+              %h5
+                = @event.org_contact_name
+            %li.list-group-item.d-flex.justify-content-center
+              %h5{:style => "padding-right: 30px"}
+                Timing:
+              .list-group-item.d-flex.justify-content-between
+                %h6{:style => "padding-right: 30px"}
+                  Starts:
+                %h6
+                  =@event.event_start
+              .list-group-item.d-flex.justify-content-between
+                %h6{:style => "padding-right: 30px"}
+                  Ends:
+                %h6
+                  =@event.event_end
+            %li.list-group-item.d-flex.justify-content-center
+              %h5{:style => "padding-right: 30px"}
+                Description:
+              .d-flex.justify-content-center
+                %h5
+                  =@event.desc

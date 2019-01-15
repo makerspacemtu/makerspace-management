@@ -1,0 +1,42 @@
+- unless @event.errors.empty?
+  .alert.alert-danger
+    %strong
+      #{pluralize(@event.errors.size, 'error')} occurred
+
+    %ul
+      - @event.errors.full_messages.each do |error|
+        %li
+          = error
+
+= form_for @event do |f|
+  %hr
+    %h5
+      .form-group
+        = f.label :name, "Event Name:"
+        = f.text_area :name, class: "form-control"
+    %h5
+      .form-group
+        = f.label :desc, "Event Description:"
+        = f.text_area :desc, class: "form-control"
+    %h5
+      .form-group
+        = f.label :event_start, "Event Start Time:"
+        = f.datetime_select( :event_start, default: {hour: "#{Time.now.strftime("%H")}" }, ampm: true)
+    %h5
+      .form-group
+        = f.label :event_end, "Event End Time:"
+        = f.datetime_select( :event_end,  default: {hour: "#{Time.now.strftime("%H")}" }, ampm: true)
+    %h5
+      .form-group
+        = f.label :org_name, "Organization Name:"
+        = f.text_area :org_name, class: "form-control"
+    %h5
+      .form-group
+        = f.label :org_contact_name, "Contact Name:"
+        = f.text_area :org_contact_name, class: "form-control"
+    %h5
+      .form-group
+        = f.label :audience, "Event Type:"
+        = f.select :audience, options_for_select(Event::AUDIENCES), {}, class: "form-control"
+
+  = f.submit "Submit", class: "btn btn-primary"
