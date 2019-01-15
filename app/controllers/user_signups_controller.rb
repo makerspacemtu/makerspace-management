@@ -5,6 +5,7 @@ class UserSignupsController < ApplicationController
     @user_signups = Signup.all
     @user_signup = UserSignup.new
     @user = User.find(params[:user_id])
+
   end
 
   def create
@@ -22,7 +23,7 @@ class UserSignupsController < ApplicationController
     @user_signup.created_by = current_user
 
     if @user_signup.save
-      redirect_to new_user_user_signup_path(user), notice: 'Signed up for shift.'
+      redirect_to signups_path, notice: 'Signed up for shift.'
     else
       render 'new'
     end
@@ -44,6 +45,6 @@ class UserSignupsController < ApplicationController
 private
 
   def user_signup_params
-    params.require(:user_signup).permit(:signup_id, :signup_day, :signup_start)
+    params.require(:user_signup).permit(:signup_id, :signup_day, :signup_start,:signup_qty)
   end
 end
