@@ -105,14 +105,15 @@
               #{@user.first_name} has no trainings
 
           - if @user.trainings.count > 0
-            - @user.trainings.order(created_at: :desc).each do |training|
+            - @user.trainings.order(created_at: :desc).each_with_index do |training, id|
               %span{ class: "badge badge-#{training.training_type_format}" }
                 - if training.icon.present? && !training.icon.blank?
                   %i{ class: "fa fa-#{training.icon}" }
                 - else
                   %i{ class: "fa fa-trophy"}
                 = training.name
-                = link_to user_user_training_path(@user, training), method: :delete, data: {confirm: "Are you sure you want to remove this training?"} do
+                =# puts "TRAINING SEQUENTIAL ID: #{id}"
+                = link_to user_user_training_path(@user, training_id: training), method: :delete do
                   %i.fa.fa-times
 
     - if can? :read, Punch

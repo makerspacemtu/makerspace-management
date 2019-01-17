@@ -16,6 +16,6 @@
               - else
                 %i{ class: "fa fa-trophy"}
               = training.name
-              = link_to user_user_training_path(@user, training), method: :delete, data: {confirm: "Are you sure you want to remove this training?"} do
-                %i.fa.fa-times
+              = #link_to user_user_training_path(@user, training_id: training), method: :delete do
+              = #  %i.fa.fa-times
         = render 'form'

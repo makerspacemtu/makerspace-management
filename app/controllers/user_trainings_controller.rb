@@ -2,9 +2,11 @@ class UserTrainingsController < ApplicationController
   load_and_authorize_resource
 
   def new
+
     @user_trainings = Training.all
     @user_training = UserTraining.new
     @user = User.find(params[:user_id])
+
   end
 
   def create
@@ -29,14 +31,15 @@ class UserTrainingsController < ApplicationController
   end
 
   def destroy
-    @user_training = UserTraining.find(params[:id])
-    user = User.find(params[:user_id])
-
-    if @user_training.destroy
-      redirect_to user_path(user), notice: 'User training removed.'
+    @user = User.find(params[:user_id])
+    @user_training = @user.trainings.find(params[:training_id])
+    @user_training.destroy
+    
+    if @user_training.destroyed?
+      redirect_to user_path(@user), notice: 'User training removed.'
       return
     else
-      redirect_to user_path(user), notice: 'An error occurred trying to remove the user training.'
+      redirect_to user_path(@user), notice: 'An error occurred trying to remove the user training.'
       return
     end
   end

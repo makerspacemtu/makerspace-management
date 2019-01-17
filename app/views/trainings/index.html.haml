@@ -1,34 +1,35 @@
-%h2
-  Trainings
-  %small
-    (#{@trainings.count})
+.jumbotron
+  %h2
+    Trainings
+    %small
+      (#{@trainings.count})
 
-    - if can? :create, Training
-      = link_to new_training_path do
-        %i.fa.fa-plus
-        Add a Training
+      - if can? :create, Training
+        = link_to new_training_path do
+          %i.fa.fa-plus
+          Add a Training
 
-- if @trainings.count > 0
-  %hr{:style => "margin-top:5px; margin-bottom:5px"}
-  - @trainings.each do |training|
-    %div
-      %h4
-        %span{ class: "badge badge-#{training.training_type_format}" }
-          - if training.icon.present? && !training.icon.blank?
-            %i{ class: "fa fa-#{training.icon}" }
-          - else
-            %i{ class: "fa fa-trophy"}
-          = training.name
-        %small
-          = link_to edit_training_path(training) do
-            %i.fa.fa-pencil
-            Edit
-        %small.tab{:style => "margin-left:10px",:class => "btn btn-outline-danger btn-sm pull-right"}
-          %i.fa.fa-trash
-          = link_to 'Delete',{:controller => 'trainings', :action => 'destroy', :id => training.id }, |
-            data:  {:method => :delete, :remote => true}
-        %hr{:style => "margin-top:5px; margin-bottom:5px"}
+  - if @trainings.count > 0
+    %hr{:style => "margin-top:5px; margin-bottom:5px"}
+    - @trainings.each do |training|
+      %div
+        %h4
+          %span{ class: "badge badge-#{training.training_type_format}" }
+            - if training.icon.present? && !training.icon.blank?
+              %i{ class: "fa fa-#{training.icon}" }
+            - else
+              %i{ class: "fa fa-trophy"}
+            = training.name
+          %small
+            = link_to edit_training_path(training) do
+              %i.fa.fa-pencil
+              Edit
+          %small.tab{:style => "margin-left:10px",:class => "btn btn-outline-danger btn-sm pull-right"}
+            %i.fa.fa-trash
+            = link_to 'Delete',{:controller => 'trainings', :action => 'destroy', :id => training.id }, |
+              data:  {:method => :delete, :remote => true}
+          %hr{:style => "margin-top:5px; margin-bottom:5px"}
 
-- else
-  %p.text-muted
-    No trainings available.
+  - else
+    %p.text-muted
+      No trainings available.
