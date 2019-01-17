@@ -1,6 +1,6 @@
 .row.m-auto
   - @users.each do |user, training|
-    .col-lg-6.col-xl-3.d-flex.align-items-stretch.p-1{:style=>"max-width: 270px"}
+    .col-lg-8.col-xl-4.d-flex.align-items-stretch.p-1{:style=>"max-width: 270px"}
       .card.mb-10.w-100.d-flex{:style=>"padding: 10px 10px 4px 10px; border: 1px solid #76bf43"}
         .card-body.mb-10
           .card-title{ :style=>"border-bottom: 1px solid #aaa"}
@@ -8,7 +8,7 @@
               = link_to user.full_name, user_path(user), { :style => "color: rgba(70, 74, 76, 1)"}
             %h6{ :style => "color: rgba(70, 74, 76, 0.8)"}
               = user.user_type
-              = puts "USERSSSSSSS: #{@users}"
+              = #puts "USERSSSSSSS: #{@users}"
           .card-text.mb-10
             - if can? :read, UserTraining
               %h6

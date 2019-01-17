@@ -1,38 +1,37 @@
 %script{src: "https://cdn.plot.ly/plotly-latest.min.js"}
-.row
-  .col-md-12
-    %h4
-      Reasons for Checkin (Last 6 months)
+.row.d-flex.justify-content-center
+  .col-11.card.mb-2
+    .card-header.d-flex.justify-content-center
+      %h4 Reasons for Checkin (Last 6 months)
     #reason-counts{:style => "width: 100%; height: 400px;"}
-
-    %h4
-      Total Users over Time
-
+  .col-11.card.mb-2
+    .card-header.d-flex.justify-content-center
+      %h4 Total Users over Time
     #total-users-created-by-week{:style => "width: 100%; height: 400px;"}
-
-    %h4
-      Users Created by Week
+  .col-11.card.mb-2
+    .card-header.d-flex.justify-content-center
+      %h4 Users Created by Week
 
     #users-created-by-week{:style => "width: 100%; height: 400px;"}
-
-    %h4
-      Check Ins Created by Week
+  .col-11.card.mb-2
+    .card-header.d-flex.justify-content-center
+      %h4 Check Ins Created by Week
     #punches-created-by-week{:style => "width: 100%; height: 400px;"}
 
-.row
-  .col-md-4.text-center
+.row.d-flex.justify-content-center
+  .col-3.text-center.card.mr-2.mb-2
     %h1
       #{User.count}
     %h5
       Total Users
 
-  .col-md-4.text-center
+  .col-3.text-center.card.mb-2
     %h1
       #{User.where("created_at > ?", 7.days.ago).count}
     %h5
       New #{'User'.pluralize(User.where("created_at > ?", 7.days.ago).count)} in Last 7 Days
 
-  .col-md-4.text-center
+  .col-3.text-center.card.ml-2.mb-2
     %h1
       #{Punch.where(in: true).count}
     %h5
