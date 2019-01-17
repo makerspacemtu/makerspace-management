@@ -5,7 +5,7 @@ class CheckinController < ApplicationController
     i = 1
     @active_events = {}
     Event.all.each do |event|
-      if event.event_start.to_i < Time.now.to_i && event.event_end.to_i > Time.now.to_i
+      if event.event_start.to_i-30.minutes < Time.now.to_i && event.event_end.to_i > Time.now.to_i
         @active_events[i] = event
         i += 1
       else
