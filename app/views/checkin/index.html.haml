@@ -1,50 +1,12 @@
 .row
-  .col-lg-4.col-md-12
-    .jumbotron{:style => "padding-top: 32px; padding-bottom: 32px"}
-      %h2.mb-2
-        %i.fa.fa-sign-in
-        Please check in
-      %p
-        %small
-          Using your @mtu.edu email address
+  - if @active_events.count >= 1
+    =# puts @active_events
+    = render 'event_checkin'
 
-      = form_tag checkin_path do
-        .form-group
-          .input-group.input-group-lg
-            = text_field_tag :email, '', class: 'form-control', placeholder: 'Email', autofocus: true
-            %span.input-group-addon.p-2
-              @mtu.edu
-        %h4.mb-2
-          What are you here for?
-        .btn-group-vertical.btn-group-toggle.btn-block{"data-toggle" => "buttons"}
-          %label.btn.btn-secondary
-            %input#personal_project{autocomplete: "off", name: :reason, type: "radio", value: 'personal_project'}/
-            Personal Project
-          %label.btn.btn-secondary
-            %input#class_project{autocomplete: "off", name: :reason, type: "radio", value: 'class_project'}/
-            Class Project
-          %label.btn.btn-secondary
-            %input#event{autocomplete: "off", name: :reason, type: "radio", value: 'event'}/
-            Event
-          %label.btn.btn-secondary
-            %input#class_session{autocomplete: "off", name: :reason, type: "radio", value: 'class_session'}/
-            Class Session
-          %label.btn.btn-secondary
-            %input#coaching{autocomplete: "off", name: :reason, type: "radio", value: 'coaching'}/
-            Coaching
+  - else
 
-        .input-group-btn
-          = submit_tag 'Submit', class: 'btn btn-primary'
-
+.row
+  = render 'normal-checkin'
   - if User.checked_in_users_count > 0
-    .col-lg-8.col-md-12
-      .jumbotron{:style => "padding-top: 32px; padding-bottom: 32px"}
-        .d-flex.justify-content-between
-          %h2.mb-2{:style => "padding-bottom: 12px"}
-            %i.fa.fa-sign-out
-            All done? Please check out
-          = form_tag '/checkin/checkout_all' do
-            = submit_tag "Check Everyone Out (#{User.checked_in_users_count} Users)", class: 'btn btn-primary', data: {:confirm => 'Are you sure you want to check everyone out?'}
-
-
-        = render 'cards'
+    = render 'checked_in_now'
+  - else

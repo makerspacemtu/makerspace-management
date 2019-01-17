@@ -1,0 +1,40 @@
+.col-lg-4.col-md-12
+  .jumbotron
+    %h3.mb-2
+      %i.fa.fa-sign-in
+      - if @active_events.count >= 1
+        Not here for an event?
+        Check in here
+      - else
+        Check in Here
+    %p
+      %small
+        Using your @mtu.edu email address
+
+    = form_tag checkin_path do
+      .form-group
+        .input-group.input-group-lg
+          = text_field_tag :email, '', class: 'form-control', placeholder: 'Email', autofocus: true
+          %span.input-group-addon.p-2
+            @mtu.edu
+      %h4.mb-2
+        What are you here for?
+      .btn-group-vertical.btn-group-toggle.btn-block{"data-toggle" => "buttons"}
+        %label.btn.btn-secondary
+          %input#personal_project{autocomplete: "off", name: :reason, type: "radio", value: 'personal_project'}/
+          Personal Project
+        %label.btn.btn-secondary
+          %input#class_project{autocomplete: "off", name: :reason, type: "radio", value: 'class_project'}/
+          Class Project
+        %label.btn.btn-secondary
+          %input#event{autocomplete: "off", name: :reason, type: "radio", value: 'event'}/
+          Event
+        %label.btn.btn-secondary
+          %input#class_session{autocomplete: "off", name: :reason, type: "radio", value: 'class_session'}/
+          Class Session
+        %label.btn.btn-secondary
+          %input#coaching{autocomplete: "off", name: :reason, type: "radio", value: 'coaching'}/
+          Coaching
+
+      .input-group-btn
+        = submit_tag 'Submit', class: 'btn btn-primary'
