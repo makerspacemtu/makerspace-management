@@ -16,6 +16,9 @@
             - if can? :read, Event
               %p.card-text.text-muted.mb-0
                 = event[1].event_start.strftime("%A, %B %-d")
-              %p.card-text.text-muted
+              %p.card-text.text-muted.mb-1
                 = event[1].event_start.strftime("%-I:%M %p to")
                 = event[1].event_end.strftime("%-I:%M %p")
+            .card-footer.text-bold
+              = Punch.all.where(reason: event[1].id).count
+              Attendees
