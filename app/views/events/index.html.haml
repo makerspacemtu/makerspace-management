@@ -1,13 +1,24 @@
 .row
+.jumbotron.d-flex.justify-content-center
   .col-md-12
     %h4
       %i.fa.fa-bullhorn
-      Events
+      Current/Upcoming Events
 
       %small.pull-right
         - if can? :create, Event
           = link_to new_event_path do
             %i.fa.fa-plus
             New Event
-    - if @events.size > 0
-      = render 'cards'
+      %hr
+    - if @upcoming_events.size > 0
+      = render 'upcoming_cards'
+
+.jumbotron.d-flex.justify-content-center
+  .col-md-12
+    %h4
+      %i.fa.fa-bullhorn
+      Past Events
+      %hr
+    - if @past_events.size > 0
+      = render 'past_cards'

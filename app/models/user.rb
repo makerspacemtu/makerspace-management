@@ -44,7 +44,7 @@ class User < ApplicationRecord
   has_many :signups, :through => :user_signups
   has_many :trainings, :through => :user_trainings
   has_many :daily_reports
-
+  
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :member_since, presence: true

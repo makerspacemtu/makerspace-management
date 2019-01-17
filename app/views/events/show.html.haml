@@ -1,42 +1,53 @@
-.row
-  .col-lg-8.col-md-12
+.row.d-flex.justify-content-center
+  .col-lg-8.col-md-12.d-flex.justify-content-center
     .jumbotron.d-flex.justify-content-center{:style => "padding-top: 32px; padding-bottom: 32px"}
       .card{:style => "padding:4px"}
         .card-block
-          %h3.card-title.d-flex.justify-content-center
-            = @event.name
+          .d-flex.justify-content-between
+            %h3.card-title
+              = @event.name
+            %h3.card-title
+              = link_to "Edit Event", edit_event_path(@event)
           %ul.list-group.list-group-flush
             %li.list-group-item.d-flex.justify-content-between
               %h5{:style => "padding-right: 30px"}
                 Event Type:
-              %h5
+              %h5.text-muted
                 = @event.audience
             %li.list-group-item.d-flex.justify-content-between
               %h5{:style => "padding-right: 30px"}
                 Hosted by:
-              %h5
+              %h5.text-muted
                 = @event.org_name
             %li.list-group-item.d-flex.justify-content-between
               %h5{:style => "padding-right: 30px"}
                 Organization Contact:
-              %h5
+              %h5.text-muted
                 = @event.org_contact_name
             %li.list-group-item.d-flex.justify-content-center
               %h5{:style => "padding-right: 30px"}
                 Timing:
               .list-group-item.d-flex.justify-content-between
-                %h6{:style => "padding-right: 30px"}
+                %h6.text-muted{:style => "padding-right: 30px"}
                   Starts:
-                %h6
-                  =@event.event_start
+                %h6.text-muted
+                  = @event.event_start.strftime("%A, %B %-d,")
+                  = @event.event_start.strftime("%-I:%M %p to")
               .list-group-item.d-flex.justify-content-between
-                %h6{:style => "padding-right: 30px"}
+                %h6.text-muted{:style => "padding-right: 30px"}
                   Ends:
-                %h6
-                  =@event.event_end
+                %h6.text-muted
+                  = @event.event_end.strftime("%A, %B %-d,")
+                  = @event.event_end.strftime("%-I:%M %p")
             %li.list-group-item.d-flex.justify-content-center
               %h5{:style => "padding-right: 30px"}
                 Description:
-              .d-flex.justify-content-center
-                %h5
+              .row.d-flex.justify-content-center
+                %h5.text-muted
                   =@event.desc
+          -if can? :destroy, Event
+            .hr.d-flex.justify-content-center.pt-1
+              %small.tab{:style => "margin-left:10px",:class => "btn btn-outline-danger btn-sm pull-right"}
+                %i.fa.fa-trash
+                = link_to 'Delete',{:controller => 'events', :action => 'destroy', :id => @event.id }, |
+                  data:  {:method => :delete, :remote => true}

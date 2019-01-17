@@ -1,0 +1,9 @@
+.col-lg-8.col-md-12
+  .jumbotron{:style => "padding-top: 32px; padding-bottom: 32px"}
+    .d-flex.justify-content-between
+      %h2.mb-2{:style => "padding-bottom: 12px"}
+        %i.fa.fa-sign-out
+        All done? Please check out
+      = form_tag '/checkin/checkout_all' do
+        = submit_tag "Check Everyone Out (#{User.checked_in_users_count} Users)", class: 'btn btn-secondary', data: {:confirm => 'Are you sure you want to check everyone out?'}
+    = render 'cards'
