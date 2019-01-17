@@ -1,21 +1,21 @@
 .row.m-auto
-  - @events.each do |event|
+  - @past_events.each do |event|
     .col-lg-6.col-xl-3.d-flex.align-items-stretch.p-1{:style=>"max-width: 270px"}
       .card.mb-10.w-100.d-flex.text-center{:style=>" border: 1px solid #76bf43"}
         .card-header.text-white{:style => "background-color: #76bf43"}
           %h5.p.1.mb-1
-            = link_to event.name, event_path(event), class: "text-white",style: "color: rgba(70, 74, 76, 1)"
+            = link_to event[1].name, event_path(event[1]), class: "text-white",style: "color: rgba(70, 74, 76, 1)"
         .card-title
           %h6{ :style => "padding-top: 10px; color: rgba(70, 74, 76, 0.8)"}
-            = event.audience
+            = event[1].audience
             Event Hosted by
           %h6{:style => "font-bold:true"}
-            = event.org_name
+            = event[1].org_name
         .card-body.mb-10
-          .card-text.mb-10
+          .card-text
             - if can? :read, Event
+              %p.card-text.text-muted.mb-0
+                = event[1].event_start.strftime("%A, %B %-d")
               %p.card-text.text-muted
-                = event.event_start.strftime("%A, %B, %-d")
-              %p.card-text.text-muted
-                = event.event_start.strftime("%-I:%M %p to")
-                = event.event_end.strftime("%-I:%M %p")
+                = event[1].event_start.strftime("%-I:%M %p to")
+                = event[1].event_end.strftime("%-I:%M %p")

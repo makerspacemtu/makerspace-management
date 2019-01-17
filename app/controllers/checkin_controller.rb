@@ -2,6 +2,28 @@ class CheckinController < ApplicationController
   def index
     @currently_checked_in = User.checked_in_users
     @currently_checked_in_alph = User.checked_in_users.order(:first_name, :last_name)
+    i = 1
+    @active_events = {}
+    Event.all.each do |event|
+      if event.event_start.to_i < Time.now.to_i && event.event_end.to_i > Time.now.to_i
+        @active_events[i] = event
+        i += 1
+      else
+      end
+
+    end
+  end
+
+  def event_checkin
+    i = 0
+    @active_events = {}
+    Event.all.each do |event|
+      if event.event_start.to_i < Time.now.to_i && event.event_end.to_i < Time.now.to_i
+        @active_events[i] = event
+      else
+      end
+      i += 1
+    end
   end
 
   def checkin
