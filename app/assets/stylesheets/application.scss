@@ -25,8 +25,7 @@ html,
 body {
   height: 100%;
 
-
-  background-image: linear-gradient(285deg, rgba(62, 168, 245, 0.8), rgba(118, 191, 67, 0.9)), url('home-hero.jpg');
+  background-image: linear-gradient(285deg, rgba(62, 168, 245, 0.8), rgba(118, 191, 67, 0.9)), image-url('home-hero.jpg');
   background-size: cover;
   background-position: center;
 }
