@@ -56,7 +56,5 @@ class Punch < ApplicationRecord
     coaching_count = self.all.where(reason: "coaching").count
     reasoncounts = Hash["Personal Project",personal_project_count,"Class Project",class_project_count, "Event",event_count,"Class Session",class_session_count,"Coaching",coaching_count]
     reasoncounts.sort.to_h
-    #puts reasoncounts.values
-    #puts reasoncounts.keys
   end
 end
