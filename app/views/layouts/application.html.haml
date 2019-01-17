@@ -7,7 +7,7 @@
     %script{:src => "https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = yield :css
-    
+
   %body{ class: "#{yield(:body_class)}"}
     %nav.navbar.navbar-toggleable-md.navbar-inverse.navbar-custom.fixed-top
       %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbar", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
@@ -46,6 +46,11 @@
                 = link_to new_user_path, class: "nav-link" do
                   %i.fa.fa-user-plus
                   New User
+            - if can? :read, Event
+              %li.nav-item
+                = link_to events_path, class: "nav-link" do
+                  %i.fa.fa-bullhorn
+                  Events
             - if can? :read, Training
               %li.nav-item
                 = link_to trainings_path, class: "nav-link" do
