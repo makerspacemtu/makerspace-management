@@ -57,7 +57,11 @@
       .card-block
         %h5.card-title.mb-0
           %i.fa.fa-check-square-o
-          Users that attended the event:
+          Users that attended the event
+          (
+          = Punch.all.where(reason: @event.id).select("DISTINCT ON (user_id) *").size
+          Total )
+
 
       - unless Punch.all.where(reason: @event.id).count > 0
         %p.card-text.text-muted

@@ -22,5 +22,5 @@
           - if Punch.all.where(reason: event[1].id).count == 0
           - else
             .card-footer.text-bold
-              = Punch.all.where(reason: event[1].id).count
+              = Punch.all.where(reason: event[1].id).select("DISTINCT ON (user_id) *").size
               Attendees so Far
