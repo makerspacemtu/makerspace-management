@@ -48,6 +48,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @attendees = Punch.all.where(reason: @event.id).select("DISTINCT ON (user_id) *")
   end
 
   def update

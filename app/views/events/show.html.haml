@@ -51,3 +51,25 @@
                 %i.fa.fa-trash
                 = link_to 'Delete',{:controller => 'events', :action => 'destroy', :id => @event.id }, |
                   data:  {:method => :delete, :remote => true}
+.jumbotron
+  - if can? :read, Punch
+    .card
+      .card-block
+        %h5.card-title.mb-0
+          %i.fa.fa-check-square-o
+          Users that attended the event:
+
+      - unless Punch.all.where(reason: @event.id).count > 0
+        %p.card-text.text-muted
+          No one has attended this event.
+
+      - if Punch.all.where(reason: @event.id).count > 0
+        %ul.list-group.list-group-flush
+          - @attendees.each do |punch|
+            - if punch.in?
+              %li.list-group-item.d-flex.justify-content-between
+                %h6.mb-0
+                  - attendee = User.all.find(punch.user_id)
+                  = attendee.first_name
+                  = attendee.last_name
+                = punch.created_at.strftime("%r")
