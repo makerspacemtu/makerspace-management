@@ -27,8 +27,8 @@
                     - else
                       %i{ class: "fa fa-trophy"}
                     = training_i.name
-                    = link_to new_user_user_training_path(user, training_id: training_i), method: :delete do
-                      %i.fa.fa-times
+                    = #link_to new_user_user_training_path(user, training_id: training_i), method: :delete do
+                    =#  %i.fa.fa-times
               - if user.trainings.count > 6
                 .d-flex.justify-content-start
                   %h6
