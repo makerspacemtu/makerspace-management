@@ -26,7 +26,21 @@ $(document).on('turbolinks:load', function(){
       scrollX: true,
       responsive: true,
       dom: 'Blfrtip',
-      buttons: ['csv', 'pdf', 'print'],
+      pageLength: 10,
+      lengthMenu:  [[10, 50, 1000000],[10, 50, "All" ]],
+      buttons: [
+          {
+              extend: 'excel',
+              text: '<span class="fa fa-file-excel-o"></span> Excel Export',
+              exportOptions: {
+                  modifier: {
+                      search: 'applied',
+                      order: 'applied'
+                  }
+              }
+          }
+      ],
+
       "columnDefs": [
             { "targets": [0,1,2,3], "visible": true, "searchable": true},
             { "targets": '_all', "visible": false, "searchable": false}
