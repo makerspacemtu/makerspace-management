@@ -9,6 +9,10 @@
           - if @user.position_name.present?
             %small.block
               = @user.position_name
+          - if @user.user_type.present?
+            %small.block
+              = @user.user_type
+          
 
       %ul.list-group.list-group-flush
         %li.list-group-item
