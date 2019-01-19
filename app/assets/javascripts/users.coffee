@@ -70,10 +70,6 @@ if reasonCounts?
 
   xData = Object.keys(reasonCounts);
 
-  # for week in Object.keys(reasonCounts)
-  #   d = new Date(week)
-  #   xAxis.push((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear())
-
   trace = {
     x: xData,
     y: yData,
