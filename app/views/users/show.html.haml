@@ -12,9 +12,20 @@
           - if @user.user_type.present?
             %small.block
               = @user.user_type
-          
+
+
 
       %ul.list-group.list-group-flush
+        - if @user.user_type == 'Staff' || @user.user_type == "Admin"
+          - if @makeragree == true
+            %li.list-group-item{:style => "background-color: #d4edda; color:#155724"}
+              %i.fa.fa-check-square
+              Completed Maker Coach Agreement
+          - else
+            %li.list-group-item{:style => "background-color: #ebcccc; color:#a94442"}
+              %i.fa.fa-user-times
+              Has not Completed Maker Coach Agreement!
+        - else
         %li.list-group-item
           Member since #{@user.member_since_fancy}
 
@@ -116,7 +127,7 @@
                 - else
                   %i{ class: "fa fa-trophy"}
                 = training.name
-                =# puts "TRAINING SEQUENTIAL ID: #{id}"
+
                 = link_to user_user_training_path(@user, training_id: training), method: :delete do
                   %i.fa.fa-times
 

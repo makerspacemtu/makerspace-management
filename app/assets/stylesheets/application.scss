@@ -24,7 +24,6 @@ $brand-primary: #76bf43;
 html,
 body {
   height: 100%;
-
   background-image: linear-gradient(285deg, rgba(62, 168, 245, 0.8), rgba(118, 191, 67, 0.9)), image-url('home-hero.jpg');
   background-size: cover;
   background-position: center;
@@ -72,10 +71,21 @@ small {
 .jumbotron {
   padding-top: 32px;
   padding-bottom: 32px;
+  box-shadow: 2px 2px 20px #ccc;
 }
 
 .logo {
   display: block;
   height: 40px;
   width: auto;
+}
+.coach-card{
+  background-color: #ebcccc;
+}
+.coach-card.completed-agreement {
+  background-color: #d4edda;
+}
+
+.card {
+  box-shadow: 2px 2px 20px #ccc;
 }
