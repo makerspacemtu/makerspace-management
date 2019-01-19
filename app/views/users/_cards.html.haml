@@ -3,17 +3,15 @@
     .col-lg-8.col-xl-4.d-flex.align-items-stretch.p-1{:style=>"max-width: 270px"}
       .card.mb-10.w-100.d-flex
         .card-body
-          .card-title{ :style=>"border-bottom: 1px solid #aaa; padding: 10px 10px 4px 10px"}
+          .card-title{ :style=>"border-bottom: 1px solid #aaa; padding: 10px 0px 0px 10px"}
             %h5.p.1.mb-1
               = link_to user.full_name, user_path(user), { :style => "color: rgba(70, 74, 76, 1)"}
             %h6{ :style => "color: rgba(70, 74, 76, 0.8)"}
               = user.user_type
-          .card-text.mb-10{:style=>"padding: 10px 10px 4px 10px"}
+          .card-text.mb-10{:style=>"padding: 0px 10px 0px 10px"}
             - if can? :read, UserTraining
               %h6
-                = link_to new_user_user_training_path(user) do
-                  %i.fa.fa-plus
-                  Add Training
+
               - if user.trainings.count <= 0
                 %p.card-text.text-muted{:style => "padding-bottom: 10px"}
                   #{user.first_name} has no trainings
@@ -27,8 +25,6 @@
                     - else
                       %i{ class: "fa fa-trophy"}
                     = training.name
-                    = link_to user_user_training_path(user, training), method: :delete, data: {confirm: "Are you sure you want to remove this training?"} do
-                      %i.fa.fa-times
               - if user.trainings.count > 5
                 .d-flex.justify-content-start
                   %h6
