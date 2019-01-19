@@ -42,7 +42,8 @@ $(document).on('turbolinks:load', function(){
       ],
 
       "columnDefs": [
-            { "targets": [0,1,2,3], "visible": true, "searchable": true},
+            { "targets": [0,1,2,3], "visible": true, "searchable": true,},
+            { "targets": 7, "visible": true, "searchable": false,"orderable": false},
             { "targets": '_all', "visible": false, "searchable": false}
         ]
     });
