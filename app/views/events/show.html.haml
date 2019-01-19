@@ -47,10 +47,8 @@
                   =@event.desc
           -if can? :destroy, Event
             .hr.d-flex.justify-content-center.pt-1
-              %small.tab{:style => "margin-left:10px",:class => "btn btn-outline-danger btn-sm pull-right"}
-                %i.fa.fa-trash
-                = link_to 'Delete',{:controller => 'events', :action => 'destroy', :id => @event.id }, |
-                  data:  {:method => :delete, :remote => true}
+              = link_to 'Delete', @event, method: :delete, class: "btn btn-outline-danger", data: { confirm: 'Are you sure? This is irreversible.' }
+
 .jumbotron
   - if can? :read, Punch
     .card
