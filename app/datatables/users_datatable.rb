@@ -11,6 +11,9 @@ class UsersDatatable < ApplicationDatatable
         column << user.last_name
         column << user.email
         column << user.user_type
+        column << user.id
+        column << user.member_since
+        column << user.sign_in_count
 
 
         links = []
@@ -52,6 +55,8 @@ class UsersDatatable < ApplicationDatatable
   end
 
   def columns
+    #%w(first_name last_name email user_type id member_since sign_in_count)
     %w(first_name last_name email user_type)
+
   end
 end

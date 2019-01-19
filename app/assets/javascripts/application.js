@@ -24,7 +24,13 @@ $(document).on('turbolinks:load', function(){
       serverSide: true,
       ajax: $(this).data('url'),
       scrollX: true,
-      responsive: true
+      responsive: true,
+      dom: 'Blfrtip',
+      buttons: ['csv', 'pdf', 'print'],
+      "columnDefs": [
+            { "targets": [0,1,2,3], "visible": true, "searchable": true},
+            { "targets": '_all', "visible": false, "searchable": false}
+        ]
     });
   });
 })
