@@ -128,8 +128,8 @@
                   %i{ class: "fa fa-trophy"}
                 = training.name
 
-                = link_to user_user_training_path(@user, training_id: training), method: :delete do
-                  %i.fa.fa-times
+                -# = link_to user_user_training_path(@user, training_id: training), method: :delete do
+                -#   %i.fa.fa-times
 
     - if can? :read, Punch
       .card
