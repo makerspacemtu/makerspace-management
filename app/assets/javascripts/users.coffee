@@ -82,3 +82,21 @@ if reasonCounts?
   data = [trace];
 
   Plotly.newPlot('reason-counts', data);
+
+if trainingCounts?
+  yData = Object.values(trainingCounts);
+
+  xData = Object.keys(trainingCounts);
+
+  trace = {
+    x: xData,
+    y: yData,
+    type: 'bar',
+    marker: {
+      color: '#76bf43'
+    }
+  };
+
+  data = [trace];
+
+  Plotly.newPlot('training-counts', data);

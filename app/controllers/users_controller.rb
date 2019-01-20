@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     @users_created_by_week = User.users_created_by_week
     @punches_created_by_week = Punch.punches_created_by_week
     @reason_counts = Punch.reason_counts
+    @training_counts = UserTraining.training_counts
   end
 
   def show

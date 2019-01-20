@@ -34,7 +34,7 @@ class UserTrainingsController < ApplicationController
     @user = User.find(params[:user_id])
     @user_training = @user.trainings.find(params[:training_id])
     @user_training.destroy
-    
+
     if @user_training.destroyed?
       redirect_to user_path(@user), notice: 'User training removed.'
       return
@@ -43,6 +43,7 @@ class UserTrainingsController < ApplicationController
       return
     end
   end
+
 
 
 private

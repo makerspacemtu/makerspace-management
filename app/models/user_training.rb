@@ -14,4 +14,15 @@ class UserTraining < ApplicationRecord
   belongs_to :user
   belongs_to :training
   belongs_to :created_by, :class_name => "User", :foreign_key => "created_by_id"
+
+  def self.training_counts
+    usertrainings = self.group(:training_id).count
+    usertrainings = usertrainings.sort.to_h
+    usertrainings = usertrainings.reject{|i,j| !Training.exists?(id: i)}
+
+    usertrainings = usertrainings.transform_keys { |key| Training.find(key).name }
+    usertrainings
+    # puts "USERTRAININGSSSS: #{usertrainings}"
+  end
+
 end

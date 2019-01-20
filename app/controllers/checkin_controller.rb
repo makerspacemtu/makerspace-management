@@ -4,6 +4,7 @@ class CheckinController < ApplicationController
     @currently_checked_in_alph = User.checked_in_users.order(:first_name, :last_name)
     i = 1
     @active_events = {}
+    #Find out which events are active and set to @active_events to display on checkin page
     Event.all.each do |event|
       if event.event_start.to_i-30.minutes < Time.now.to_i && event.event_end.to_i > Time.now.to_i
         @active_events[i] = event
@@ -12,6 +13,8 @@ class CheckinController < ApplicationController
       end
 
     end
+
+
   end
 
   def event_checkin
