@@ -41,14 +41,11 @@
     %h5
       Total Check Ins
 
+%script{src: "https://cdn.plot.ly/plotly-latest.min.js"}
+
 %script
   var trainingCounts = #{raw @training_counts.to_json}
   var reasonCounts = #{raw @reason_counts.to_json}
   var totalUsersCreatedByWeek = #{raw @total_users_created_by_week.to_json}
   var usersCreatedByWeek = #{raw @users_created_by_week.to_json}
   var punchesCreatedByWeek = #{raw @punches_created_by_week.to_json}
-%script{src: "https://cdn.plot.ly/plotly-latest.min.js"}
-
-%script{:src => "http://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js", :type => "text/javascript"}
-
-%script{:src => "http://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js", :type => "text/javascript"}
