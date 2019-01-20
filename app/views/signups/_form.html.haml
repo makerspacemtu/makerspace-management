@@ -13,7 +13,7 @@
     %h5
       .form-group
         = f.label :signup_day
-        = f.select :signup_day, options_for_select(Signup::SIGNUP_DAYS, f.object.signup_day || 'Monday'), {}, class: "form-control"
+        = f.select :signup_day, options_for_select(Signup::SIGNUP_DAYS, f.object.signup_day), {}, class: "form-control"
     %h5
       .form-group
         = f.label :signup_start
