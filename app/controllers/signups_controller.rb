@@ -2,7 +2,7 @@ class SignupsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    # @signup = Signup.new
+    @users = User.where(user_type: ['Admin', 'Staff']).order(first_name: :asc)
     @user_signup = UserSignup.new
     @user = current_user
   end

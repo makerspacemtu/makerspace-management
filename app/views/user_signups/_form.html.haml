@@ -12,5 +12,8 @@
   .form-group
     = f.label :signup
     = f.collection_select :signup_id, Signup.all, :id, :selection_format, {}, class: "form-control"
-
+  .form_group
+    = f.label :user
+    = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name'), {}, class: "form-control"
+  .form_group
   = f.submit class: "btn btn-primary"

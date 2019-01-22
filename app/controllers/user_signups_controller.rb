@@ -5,13 +5,12 @@ class UserSignupsController < ApplicationController
     @user_signups = Signup.all
     @user_signup = UserSignup.new
     @user = User.find(params[:user_id])
-
+    @users = User.where(user_type: ['Admin', 'Staff']).order(first_name: :asc)
   end
 
   def create
-    user = User.find(params[:user_id])
+    user = User.find(user_signup_params[:user_id])
     signup = Signup.find(user_signup_params[:signup_id])
-
     if UserSignup.exists?(user: user, signup: signup)
       redirect_to signups_path, notice: 'Shift already taken.'
       return
@@ -36,6 +35,6 @@ class UserSignupsController < ApplicationController
 private
 
   def user_signup_params
-    params.require(:user_signup).permit(:signup_id, :signup_day, :signup_start)
+    params.require(:user_signup).permit(:user_id, :signup_id, :signup_day, :signup_start)
   end
 end
