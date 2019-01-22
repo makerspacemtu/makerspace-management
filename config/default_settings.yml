@@ -1,0 +1,11 @@
+defaults: &defaults
+  toggle_signup_status: "closed"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
