@@ -97,8 +97,8 @@ small {
 }
 
 table.table-bordered{
-    border:1px solid lightgrey;
-    margin-top:20px;
+  border:1px solid lightgrey;
+  margin-top:20px;
   }
 
 table.table-bordered > thead > tr > th{
@@ -123,7 +123,7 @@ td.signups {
 }
 
 .signup-header {
-  min-width: 130px;
+  //min-width: 130px;
   background-color: #76bf43;
   color: white
 }

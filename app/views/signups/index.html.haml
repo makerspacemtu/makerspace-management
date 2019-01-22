@@ -26,13 +26,13 @@
           %table.table.table-bordered.table-striped
             %thead
               %tr
-                %th.align-middle.signup-header{scope: "col"} Time
+                %th.align-middle.signup-header.text-center{scope: "col"} Time
                 - j = 1
                 -  uniquedays = {}
                 - prev_signup_day = -1
                 - Signup.all.order(:signup_day).each do |id|
                   - if id.signup_day != prev_signup_day
-                    %th.align-middle.signup-header{scope: "col"}
+                    %th.align-middle.signup-header.text-center{scope: "col"}
                       - uniquedays[j] = id.signup_day
                       - j += 1
                       = Signup::SIGNUP_DAYS_R[id.signup_day]
@@ -51,14 +51,14 @@
                     - break
                   - else
                     %tr
-                      %td.signups.align-middle{:style => "font-weight: bold; padding: 8px" }
+                      %td.signups.align-middle.text-nowrap.text-center{:style => "font-weight: bold" }
                         = signup_print_val
                       - uniquedays.each_with_index do |day,index|
                         - success = false
                         - daycol = uniquedays[index + 1]
 
                         %td.signups
-                          .d-flex.justify-content-center
+                          .d-flex.justify-content-center.flex-column
                             - if Signup.where(signup_day: daycol, signup_start: timerow.signup_start).exists?
                               - signup_link = Signup.where(signup_day: daycol, signup_start: timerow.signup_start).take!
 
@@ -69,7 +69,7 @@
                                   = hidden_field_tag(:signup_id, signup_link.id)
                                   = hidden_field_tag(:user_id, current_user.id)
 
-                                  = submit_tag "Drop Shift", class: 'btn btn-outline-danger btn-sm w-100 mb-1', style: "min-width: 27px", data: {:confirm => 'Are you sure you want to drop this shift?'}
+                                  = submit_tag "Drop Shift", class: 'btn btn-outline-danger btn-sm w-100 mb-1', data: {:confirm => 'Are you sure you want to drop this shift?'}
                               - else
                                 - if Setting.signup_status == 'open'
                                   -# Signup for shift button
@@ -81,13 +81,14 @@
 
                               - if can? :dropsignup, Signup
                                 - if Setting.admin_view == "enabled"
+
                                   = link_to 'Remove Slot',{:controller => 'signups', :action => 'destroy', :id => signup_link.id }, class: "btn btn-outline btn-sm signup-delete mb-1", |
                                     data:  {:method => :delete, :remote => true}
-                                  .col
-                                    = form_for [@user, @user_signup] do |f|
-                                      = f.hidden_field :signup_id, :value => signup_link.id
-                                      = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name'), {}, class: "form-control"
-                                      = f.submit "Signup", class: "btn btn-primary signup-delete"
+
+                                  = form_for [@user, @user_signup] do |f|
+                                    = f.hidden_field :signup_id, :value => signup_link.id
+                                    = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name'), {}, class: "form-control"
+                                    = f.submit "Signup", class: "btn btn-primary signup-delete"
 
                               - else
                             - else
@@ -98,8 +99,8 @@
                               - ind_signup = Signup.all.find(usersignup.signup_id)
                               - if ind_signup.signup_start == timerow.signup_start && daycol == ind_signup.signup_day
                                 - user = User.all.find(usersignup.user_id)
-                                .row.d-flex.justify-content-center
-                                  = link_to user.full_name, user_path(user), style: "color:black", class: "mr-3 ml-3"
+                                .text-center
+                                  = link_to user.full_name, user_path(user), style: "color:black", class: "text-nowrap"
 
                             - rescue
 
