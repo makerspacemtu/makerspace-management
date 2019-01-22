@@ -66,6 +66,6 @@ private
     params.permit(:signup_id,:user_id, :utf8, :authenticity_token, :commit)
   end
   def signup_params
-    params.require(:signup).permit(:signup_day, :signup_start, :signup_end, :signup_qty)
+    params.require(:signup).permit(:signup_day, :signup_start, :signup_qty)
   end
 end

@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 20190115153427) do
   create_table "signups", force: :cascade do |t|
     t.integer  "signup_day",   null: false
     t.time     "signup_start"
-    t.time     "signup_end"
     t.integer  "signup_qty",   null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false

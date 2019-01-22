@@ -20,10 +20,10 @@
         - puts lasthour
         = f.label :signup_start
         = f.time_select( :signup_start, default: {minute: 0, hour: lasthour }, ampm: true)
-    %h5
-      .form-group
-        = f.label :signup_end
-        = f.time_select( :signup_end,  ampm: true, default: {minute: 0, hour: lasthour + 1 })
+    -# %h5
+    -#   .form-group
+    -#     = f.label :signup_end
+    -#     = f.time_select( :signup_end,  ampm: true, default: {minute: 0, hour: lasthour + 1 })
     %h5
       .form-group
         = f.label :signup_qty

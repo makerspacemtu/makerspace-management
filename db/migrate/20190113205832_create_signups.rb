@@ -4,7 +4,6 @@ class CreateSignups < ActiveRecord::Migration[5.0]
     create_table :signups do |t|
       t.integer :signup_day, null: false
       t.column :signup_start,  :time
-      t.column :signup_end,  :time
       t.integer :signup_qty, null: false
       t.timestamps
 
