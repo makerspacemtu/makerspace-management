@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190115153426) do
+ActiveRecord::Schema.define(version: 20190115153427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,10 +46,21 @@ ActiveRecord::Schema.define(version: 20190115153426) do
     t.index ["user_id"], name: "index_punches_on_user_id", using: :btree
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.string   "key",           null: false
+    t.text     "value"
+    t.integer  "base_obj_id"
+    t.string   "base_obj_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["base_obj_id"], name: "index_settings_on_base_obj_id", unique: true, using: :btree
+    t.index ["base_obj_type"], name: "index_settings_on_base_obj_type", unique: true, using: :btree
+    t.index ["key"], name: "index_settings_on_key", unique: true, using: :btree
+  end
+
   create_table "signups", force: :cascade do |t|
     t.integer  "signup_day",   null: false
     t.time     "signup_start"
-    t.time     "signup_end"
     t.integer  "signup_qty",   null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -63,7 +74,7 @@ ActiveRecord::Schema.define(version: 20190115153426) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "user_signups", force: :cascade do |t|
+  create_table "user_signups", id: false, force: :cascade do |t|
     t.integer  "user_id",       null: false
     t.integer  "signup_id",     null: false
     t.datetime "created_at",    null: false

@@ -1,38 +1,104 @@
+.row.d-flex.justify-content-center
+  .jumbotron.md-12.d-flex.justify-content-center
+    .div
+      .row.d-flex.justify-content-between
+        %h2 Shifts
 
-%h2
-  Shifts
-  - if can? :create, Signup
-    = link_to new_signup_path do
-      %i.fa.fa-plus
-      Shift Signup Slot
-  - if can? :create, UserSignup
-    = link_to new_user_user_signup_path(:user_id => current_user.id) do
-      Sign up for slot
-
-%row
-  %table.table
-    %thead
-      %tr
-        %th{scope: "col"} Day
-        %th{scope: "col"} Start
-        %th{scope: "col"} End
-
-    %tbody
-      - @signups.order(:signup_start).each do |id|
-        - i = 0
-        - loop do
-
-          %tr
-            %td
-              = id.signup_day
-            %td
-              = id.signup_start.strftime("%I") + " " + id.signup_start.strftime("%p")
-            %td
-              = id.signup_end.strftime("%I") + " " + id.signup_end.strftime("%p")
-
-          .tr
-
-          - if id.signup_qty == i
-            - break
+        - if can? :toggle_signup_status, Setting
+          - if Setting.signup_status == "closed"
+            = link_to  "Open Signups for Coaches (Admin)", settings_toggle_signup_status_path, class: "btn btn-outline signup-delete"
           - else
-          - i += 1
+            = link_to  "Close Signups for Coaches (Admin)", settings_toggle_signup_status_path, class: "btn btn-outline signup-delete"
+        - if can? :toggle_signup_status, Setting
+          = link_to new_user_user_signup_path(:user_id => current_user.id), class: "btn btn-outline signup-delete" do
+            Manual Shift-Assign (Admin)
+        - if can? :toggle_signup_status, Setting
+          = link_to new_signup_path, class: "btn btn-outline signup-delete" do
+            %i.fa.fa-plus
+            Add Shift Slot (Admin)
+
+      .container
+        .table-responsive
+          %table.table.table-bordered.table-striped
+            %thead
+              %tr
+                %th.align-middle.signup-header{scope: "col"} Time
+                - j = 1
+                -  uniquedays = {}
+                - prev_signup_day = -1
+                - Signup.all.order(:signup_day).each do |id|
+                  - if id.signup_day != prev_signup_day
+                    %th.align-middle.signup-header{scope: "col"}
+                      - uniquedays[j] = id.signup_day
+                      - j += 1
+                      = Signup::SIGNUP_DAYS_R[id.signup_day]
+                  - else
+                  - prev_signup_day = id.signup_day
+                - prev_signup_print_val = ""
+
+
+
+            %tbody
+              - @signups.order(:signup_start).each do |timerow|
+                - prev_user = ""
+                - i = 1
+                - loop do
+                  - signup_end = timerow.signup_start + 1.hours
+                  - signup_print_val = timerow.signup_start.strftime("%I") + " " + timerow.signup_start.strftime("%p")+ " - " +  signup_end.strftime("%I") + " " + signup_end.strftime("%p")
+                  - if signup_print_val == prev_signup_print_val
+                    - break
+                  - else
+                    %tr
+                      %td.signups.align-middle{:style => "font-weight: bold; padding: 8px" }
+                        = signup_print_val
+                      - uniquedays.each_with_index do |day,index|
+                        - success = false
+                        - daycol = uniquedays[index + 1]
+
+                        %td.signups
+                          .d-flex.justify-content-center
+                            - if Signup.where(signup_day: daycol, signup_start: timerow.signup_start).exists?
+                              - signup_link = Signup.where(signup_day: daycol, signup_start: timerow.signup_start).take!
+
+                              - if UserSignup.where(user_id: current_user.id, signup_id: signup_link.id).exists? && Setting.signup_status == 'open'
+                                -# Delete shift signup button
+                                = form_tag '/signups/dropsignup' do
+
+                                  = hidden_field_tag(:signup_id, signup_link.id)
+                                  = hidden_field_tag(:user_id, current_user.id)
+
+                                  = submit_tag "Drop Shift", class: 'btn btn-outline-danger btn-sm w-100 mb-1', style: "min-width: 27px", data: {:confirm => 'Are you sure you want to drop this shift?'}
+                              - else
+                                - if Setting.signup_status == 'open'
+                                  -# Signup for shift button
+                                  = form_for [@user, @user_signup] do |f|
+                                    .form_group
+                                      = f.hidden_field :signup_id, :value => signup_link.id
+                                      = f.hidden_field :user_id, :value => current_user.id
+                                    = submit_tag "Take Shift", class: 'btn btn-light btn-sm btn-outline-primary mb-1 w-100'
+
+                              - if can? :destroy, Signup
+                                = link_to 'Remove Slot',{:controller => 'signups', :action => 'destroy', :id => signup_link.id }, class: "btn btn-outline btn-sm signup-delete mb-1", |
+                                  data:  {:method => :delete, :remote => true}
+
+                              - else
+                            - else
+
+                          - k = 1
+                          - UserSignup.all.each do |usersignup|
+                            - begin
+                              - ind_signup = Signup.all.find(usersignup.signup_id)
+                              - if ind_signup.signup_start == timerow.signup_start && daycol == ind_signup.signup_day
+                                - user = User.all.find(usersignup.user_id)
+                                .row.d-flex.justify-content-center
+                                  = link_to user.full_name, user_path(user), style: "color:black", class: "mr-3 ml-3"
+
+                            - rescue
+                  .tr
+                  - if 1 == i
+                    - prev_signup_print_val = signup_print_val
+                    - break
+                  - else
+                  - i += 1
+  - if can? :dropsignup, Signup
+    = render "coaches"

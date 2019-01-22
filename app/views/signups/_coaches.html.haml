@@ -1,0 +1,23 @@
+.jumbotron
+  %h2 Coach Signups
+
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th.signup-header{scope: "col"} Coach Name
+        %th.signup-header{scope: "col"} Number of Shifts Taken
+    %tbody
+      - @users.each do |coach|
+        %tr
+
+          %td.shifts{scope: "row", :class => ("confirmed" if UserSignup.where(user_id: coach.id).exists?)}
+            = link_to coach.full_name, user_path(coach),style: "color:black"
+
+          %td.shifts{:class => ("confirmed" if UserSignup.where(user_id: coach.id).exists?)}
+            - if UserSignup.where(user_id: coach.id).exists?
+              - count = UserSignup.where(user_id: coach.id).count
+              .row.d-flex.justify-content-center
+                = count
+            - else
+              .row.d-flex.justify-content-center
+                0

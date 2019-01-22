@@ -13,15 +13,17 @@
     %h5
       .form-group
         = f.label :signup_day
-        = f.select :signup_day, options_for_select(Signup::SIGNUP_DAYS, f.object.signup_day || 'Monday'), {}, class: "form-control"
+        = f.select :signup_day, options_for_select(Signup::SIGNUP_DAYS, f.object.signup_day), {}, class: "form-control"
     %h5
       .form-group
+        - lasthour = Signup.last.signup_start.strftime("%k").to_i+1
+        - puts lasthour
         = f.label :signup_start
-        = f.time_select( :signup_start, default: {minute: 0, hour: 15 }, ampm: true)
-    %h5
-      .form-group
-        = f.label :signup_end
-        = f.time_select( :signup_end,  ampm: true, default: {minute: 0, hour: 16 })
+        = f.time_select( :signup_start, default: {minute: 0, hour: lasthour }, ampm: true)
+    -# %h5
+    -#   .form-group
+    -#     = f.label :signup_end
+    -#     = f.time_select( :signup_end,  ampm: true, default: {minute: 0, hour: lasthour + 1 })
     %h5
       .form-group
         = f.label :signup_qty

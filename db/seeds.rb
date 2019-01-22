@@ -27,3 +27,15 @@ member = User.where(
   member_since: Time.now,
   user_type: "Member"
 )
+(1...5).each do |day|
+  (15...21).each do |time|
+    time2 = time + 1
+    Signup.create(
+      signup_day: day,
+      signup_start: "#{time}:00:00",
+      signup_qty: 3,
+      created_at: Time.now,
+      updated_at: Time.now
+    )
+  end
+end

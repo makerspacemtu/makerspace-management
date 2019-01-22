@@ -89,3 +89,41 @@ small {
 .card {
   box-shadow: 2px 2px 20px #ccc;
 }
+
+.signup-delete {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #721c24;
+}
+
+table.table-bordered{
+    border:1px solid lightgrey;
+    margin-top:20px;
+  }
+
+table.table-bordered > thead > tr > th{
+  border:1px solid lightgrey;
+}
+
+table.table-bordered > tbody > tr > td{
+  border:1px solid lightgrey;
+  padding: 6px;
+}
+
+td.signups {
+  padding: 0px;
+}
+
+.shifts {
+  background-color: #f8d7da;
+}
+
+.shifts.confirmed {
+  background-color: #d4edda;
+}
+
+.signup-header {
+  min-width: 130px;
+  background-color: #76bf43;
+  color: white
+}
