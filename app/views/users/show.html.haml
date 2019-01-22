@@ -19,11 +19,11 @@
         - if @user.user_type == 'Staff' || @user.user_type == "Admin"
           - if @makeragree == true
             %li.list-group-item{:style => "background-color: #d4edda; color:#155724"}
-              %i.fa.fa-check-square
+              %i.fa.fa-check-square.pr-2
               Completed Maker Coach Agreement
           - else
             %li.list-group-item{:style => "background-color: #ebcccc; color:#a94442"}
-              %i.fa.fa-user-times
+              %i.fa.fa-user-times.pr-2
               Has not Completed Maker Coach Agreement!
         - else
         %li.list-group-item

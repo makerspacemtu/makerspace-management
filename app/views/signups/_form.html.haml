@@ -16,6 +16,8 @@
         = f.select :signup_day, options_for_select(Signup::SIGNUP_DAYS, f.object.signup_day), {}, class: "form-control"
     %h5
       .form-group
+        - lasthour = Signup.last.signup_start.strftime("%k").to_i+1
+        - puts lasthour
         = f.label :signup_start
         = f.time_select( :signup_start, default: {minute: 0, hour: lasthour }, ampm: true)
     %h5
