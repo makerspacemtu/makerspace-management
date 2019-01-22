@@ -36,8 +36,6 @@
                   - prev_signup_day = id.signup_day
                 - prev_signup_print_val = ""
 
-
-
             %tbody
               - @signups.order(:signup_start).each do |timerow|
                 - prev_user = ""
@@ -80,6 +78,11 @@
                               - if can? :destroy, Signup
                                 = link_to 'Remove Slot',{:controller => 'signups', :action => 'destroy', :id => signup_link.id }, class: "btn btn-outline btn-sm signup-delete mb-1", |
                                   data:  {:method => :delete, :remote => true}
+                                .col
+                                  = form_for [@user, @user_signup] do |f|
+                                    = f.hidden_field :signup_id, :value => signup_link.id
+                                    = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name'), {}, class: "form-control"
+                                    = f.submit "Signup", class: "btn btn-primary signup-delete"
 
                               - else
                             - else
@@ -94,6 +97,8 @@
                                   = link_to user.full_name, user_path(user), style: "color:black", class: "mr-3 ml-3"
 
                             - rescue
+
+
                   .tr
                   - if 1 == i
                     - prev_signup_print_val = signup_print_val
