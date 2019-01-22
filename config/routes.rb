@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   get '/settings/toggle_signup_status', to: 'settings#toggle_signup_status'
   post '/settings/toggle_signup_status', to: 'settings#toggle_signup_status'
 
+  get '/settings/toggle_admin_view', to: 'settings#toggle_admin_view'
+  post '/settings/toggle_admin_view', to: 'settings#toggle_admin_view'
+
   # misc. static slack routes
   get '/slack/auth', to: 'slack#auth'
   post '/slack/buttons', to: 'slack#buttons'

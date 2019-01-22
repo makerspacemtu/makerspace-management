@@ -3,7 +3,11 @@
     .div
       .row.d-flex.justify-content-between
         %h2 Shifts
-
+      - if can? :destroy, Signup
+        - if can? :toggle_admin_view, Setting
+          = link_to settings_toggle_admin_view_path, class: "btn btn-outline signup-delete" do
+            Toggle Admin View (Admin)
+      - if Setting.admin_view == "enabled"
         - if can? :toggle_signup_status, Setting
           - if Setting.signup_status == "closed"
             = link_to  "Open Signups for Coaches (Admin)", settings_toggle_signup_status_path, class: "btn btn-outline signup-delete"
@@ -75,14 +79,15 @@
                                       = f.hidden_field :user_id, :value => current_user.id
                                     = submit_tag "Take Shift", class: 'btn btn-light btn-sm btn-outline-primary mb-1 w-100'
 
-                              - if can? :destroy, Signup
-                                = link_to 'Remove Slot',{:controller => 'signups', :action => 'destroy', :id => signup_link.id }, class: "btn btn-outline btn-sm signup-delete mb-1", |
-                                  data:  {:method => :delete, :remote => true}
-                                .col
-                                  = form_for [@user, @user_signup] do |f|
-                                    = f.hidden_field :signup_id, :value => signup_link.id
-                                    = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name'), {}, class: "form-control"
-                                    = f.submit "Signup", class: "btn btn-primary signup-delete"
+                              - if can? :dropsignup, Signup
+                                - if Setting.admin_view == "enabled"
+                                  = link_to 'Remove Slot',{:controller => 'signups', :action => 'destroy', :id => signup_link.id }, class: "btn btn-outline btn-sm signup-delete mb-1", |
+                                    data:  {:method => :delete, :remote => true}
+                                  .col
+                                    = form_for [@user, @user_signup] do |f|
+                                      = f.hidden_field :signup_id, :value => signup_link.id
+                                      = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name'), {}, class: "form-control"
+                                      = f.submit "Signup", class: "btn btn-primary signup-delete"
 
                               - else
                             - else

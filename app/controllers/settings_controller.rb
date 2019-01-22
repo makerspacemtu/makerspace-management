@@ -12,4 +12,17 @@ class SettingsController < ApplicationController
     end
     @signup_status = Setting.signup_status
   end
+
+  def toggle_admin_view
+
+    if Setting.admin_view == "disabled"
+      Setting.admin_view = "enabled"
+      redirect_to signups_path, notice: 'Admin view enabled.'
+    else
+      Setting.admin_view = "disabled"
+      redirect_to signups_path, notice: 'Admin view disabled.'
+    end
+    
+  end
+
 end

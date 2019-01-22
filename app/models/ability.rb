@@ -62,6 +62,8 @@ class Ability
 
       #admins can change signup settings
       can :toggle_signup_status, Setting
+      can :toggle_admin_view, Setting
+
 
     elsif user.staff?
 
