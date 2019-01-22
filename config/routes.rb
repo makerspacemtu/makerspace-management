@@ -31,7 +31,10 @@ Rails.application.routes.draw do
 
   # signup related routes
   post '/signups/dropsignup', to: 'signups#dropsignup'
-  # post '/user_signups/drop_signup', to: 'user_signups#drop_signup'
+
+  # setting related routes
+  get '/settings/toggle_signup_status', to: 'settings#toggle_signup_status'
+  post '/settings/toggle_signup_status', to: 'settings#toggle_signup_status'
 
   # misc. static slack routes
   get '/slack/auth', to: 'slack#auth'

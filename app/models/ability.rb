@@ -8,12 +8,10 @@ class Ability
     return unless user.present?
 
     if user.admin?
-      # admins can see any user
-      can :dropsignup, Signup
-      # admins can see any user
 
+      # admins can see any user
       can :read, User
-      # admins can edit & udate any user
+      # admins can edit & update any user
       can :edit, User
       can :update, User
       # admins can create new users
@@ -48,6 +46,7 @@ class Ability
       can :create, Signup
       can :edit, Signup
       can :update, Signup
+      can :dropsignup, Signup
 
       can :read, UserSignup
       can :destroy, UserSignup
@@ -61,8 +60,11 @@ class Ability
       can :edit, Event
       can :update, Event
 
+      #admins can change signup settings
+      can :toggle_signup_status, Setting
+
     elsif user.staff?
-      can :dropsignup, Signup
+
       # staff can see any user
       can :read, User
       # staff can only edit & update themselves
@@ -86,6 +88,7 @@ class Ability
       can :read, UserSignup
       can :destroy, UserSignup
       can :create, UserSignup
+      can :dropsignup, Signup
 
       #staff can edit and create events
       can :read, Event
