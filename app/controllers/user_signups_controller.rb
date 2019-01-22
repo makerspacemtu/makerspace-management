@@ -13,7 +13,7 @@ class UserSignupsController < ApplicationController
     signup = Signup.find(user_signup_params[:signup_id])
 
     if UserSignup.exists?(user: user, signup: signup)
-      redirect_to new_user_user_signup_path(user), notice: 'Shift already taken.'
+      redirect_to signups_path, notice: 'Shift already taken.'
       return
     end
 
@@ -30,21 +30,12 @@ class UserSignupsController < ApplicationController
   end
 
   def destroy
-    @user_signup = UserSignup.find(params[:id])
-    user = User.find(params[:user_id])
-
-    if @user_signup.destroy
-      redirect_to user_path(user), notice: 'User signup removed.'
-      return
-    else
-      redirect_to user_path(user), notice: 'An error occurred trying to remove the user signup.'
-      return
-    end
+    redirect_to signups_path, notice: "Wrong Method."
   end
 
 private
 
   def user_signup_params
-    params.require(:user_signup).permit(:signup_id, :signup_day, :signup_start,:signup_qty)
+    params.require(:user_signup).permit(:signup_id, :signup_day, :signup_start)
   end
 end

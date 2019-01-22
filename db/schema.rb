@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20190115153426) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "user_signups", force: :cascade do |t|
+  create_table "user_signups", id: false, force: :cascade do |t|
     t.integer  "user_id",       null: false
     t.integer  "signup_id",     null: false
     t.datetime "created_at",    null: false

@@ -8,7 +8,7 @@ class Signup < ApplicationRecord
 
   SIGNUP_QTYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-  has_many :user_signups
+  has_many :user_signups, :foreign_key => [:user_id, :signup_id]#, dependent: :destroy
   has_many :users, :through => :user_signups
 
   #validates :name, presence: true

@@ -9,6 +9,9 @@ class Ability
 
     if user.admin?
       # admins can see any user
+      can :dropsignup, Signup
+      # admins can see any user
+
       can :read, User
       # admins can edit & udate any user
       can :edit, User
@@ -49,6 +52,7 @@ class Ability
       can :read, UserSignup
       can :destroy, UserSignup
       can :create, UserSignup
+      can :delete, UserSignup
 
       #admins can edit and create and destroy events
       can :read, Event
@@ -58,6 +62,7 @@ class Ability
       can :update, Event
 
     elsif user.staff?
+      can :dropsignup, Signup
       # staff can see any user
       can :read, User
       # staff can only edit & update themselves
