@@ -15,9 +15,10 @@ trainings.
 
 ## Users
 
-There are three user types, `Admin`, `Staff` and `Member`.
-- Admins have global access to everything within the system. They can create and
-edit users, check in/out any user, add trainings, change user types, etc.
+There are four user types, `Developer`, `Admin`, `Staff` and `Member`.
+- Admins and Developers have global access to everything within the system. They can create and
+edit users, check in/out any user, add trainings, change user types, etc.  Admins currently
+go to tech, and Developers are legacy Admins.
 - Staff have the ability to login and edit their own account information as
 well as add trainings to any user. These are coaches in the space.
 - Members are only user entities, they cannot login. These are makers in the space.
