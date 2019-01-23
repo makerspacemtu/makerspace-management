@@ -61,34 +61,35 @@
                           .d-flex.justify-content-center.flex-column
                             - if Signup.where(signup_day: daycol, signup_start: timerow.signup_start).exists?
                               - signup_link = Signup.where(signup_day: daycol, signup_start: timerow.signup_start).take!
+                              - if Setting.admin_view == "disabled"
+                                - if UserSignup.where(user_id: current_user.id, signup_id: signup_link.id).exists? && Setting.signup_status == 'open'
+                                  -# Delete shift signup button
+                                  = form_tag '/signups/dropsignup' do
 
-                              - if UserSignup.where(user_id: current_user.id, signup_id: signup_link.id).exists? && Setting.signup_status == 'open'
-                                -# Delete shift signup button
-                                = form_tag '/signups/dropsignup' do
+                                    = hidden_field_tag(:signup_id, signup_link.id)
+                                    = hidden_field_tag(:user_id, current_user.id)
 
-                                  = hidden_field_tag(:signup_id, signup_link.id)
-                                  = hidden_field_tag(:user_id, current_user.id)
-
-                                  = submit_tag "Drop Shift", class: 'btn btn-outline-danger btn-sm w-100 mb-1', data: {:confirm => 'Are you sure you want to drop this shift?'}
-                              - else
-                                - if Setting.signup_status == 'open'
-                                  -# Signup for shift button
-                                  = form_for [@user, @user_signup] do |f|
-                                    .form_group
-                                      = f.hidden_field :signup_id, :value => signup_link.id
-                                      = f.hidden_field :user_id, :value => current_user.id
-                                    = submit_tag "Take Shift", class: 'btn btn-light btn-sm btn-outline-primary mb-1 w-100'
+                                    = submit_tag "Drop Shift", class: 'btn btn-outline-danger btn-sm w-100 mb-1', data: {:confirm => 'Are you sure you want to drop this shift?'}
+                                - else
+                                  - if Setting.signup_status == 'open'
+                                    -# Signup for shift button
+                                    = form_for [@user, @user_signup] do |f|
+                                      .form_group
+                                        = f.hidden_field :signup_id, :value => signup_link.id
+                                        = f.hidden_field :user_id, :value => current_user.id
+                                      = submit_tag "Take Shift", class: 'btn btn-light btn-sm btn-outline-primary mb-1 w-100'
 
                               - if can? :dropsignup, Signup
                                 - if Setting.admin_view == "enabled"
 
-                                  = link_to 'Remove Slot',{:controller => 'signups', :action => 'destroy', :id => signup_link.id }, class: "btn btn-outline btn-sm signup-delete mb-1", |
+                                  = link_to 'Remove Entire Slot',{:controller => 'signups', :action => 'destroy', :id => signup_link.id }, class: "btn btn-primary btn-sm signup-delete mb-1", |
                                     data:  {:method => :delete, :remote => true}
 
                                   = form_for [@user, @user_signup] do |f|
                                     = f.hidden_field :signup_id, :value => signup_link.id
-                                    = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name'), {}, class: "form-control"
-                                    = f.submit "Signup", class: "btn btn-primary signup-delete"
+                                    = f.select :user_id, options_from_collection_for_select(@users, 'id', 'full_name'), { include_blank: true }, class: "form-control form-control-sm"
+                                    .d-flex.justify-content-center
+                                      = f.submit "Add Selected Coach to Shift", class: "btn btn-primary signup-coach-add btn-sm"
 
                               - else
                             - else
