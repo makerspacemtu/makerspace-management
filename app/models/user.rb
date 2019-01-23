@@ -33,7 +33,7 @@
 
 class User < ApplicationRecord
   PAGE_SIZE = 20
-  USER_TYPES = ['Admin', 'Staff', 'Member']
+  USER_TYPES = ['Developer','Admin', 'Staff', 'Member']
 
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -61,6 +61,10 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def developer?
+    user_type == 'Developer'
   end
 
   def admin?
