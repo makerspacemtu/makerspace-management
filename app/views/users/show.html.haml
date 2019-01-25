@@ -121,7 +121,7 @@
 
           - if @user.trainings.count > 0
             - @user.trainings.order(created_at: :desc).each_with_index do |training|
-              %span.training-bubble{ class: "badge badge-#{training.training_type_format}"}
+              %span.training-bubble.mb-1{ class: "badge badge-#{training.training_type_format}"}
                 - if training.icon.present? && !training.icon.blank?
                   %i.training-bubble{ class: "fa fa-#{training.icon}"}
                 - else
