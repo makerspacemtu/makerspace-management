@@ -127,10 +127,13 @@
                 - else
                   %i.training-bubble{ class: "fa fa-trophy"}
                 = training.name
-                = form_tag '/trainings/droptraining' do
-                  = hidden_field_tag(:training_id, training.id)
-                  = hidden_field_tag(:user_id, current_user.id)
-                  = submit_tag "X", class: 'btn btn-danger btn-sm admin-delete-nice mt-2', data: {:confirm => 'Are you sure you want to remove this user training?'}
+                .badge
+                  = form_tag '/trainings/droptraining' do
+
+                    = hidden_field_tag(:training_id, training.id)
+                    = hidden_field_tag(:user_id, current_user.id)
+                    = submit_tag "X", class: 'btn btn-danger btn-sm admin-delete-nice '
+
 
     - if can? :read, Punch
       .card
