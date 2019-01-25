@@ -1,5 +1,6 @@
 class TrainingsController < ApplicationController
   load_and_authorize_resource
+  respond_to :html, :json
 
   def index
   end
@@ -10,10 +11,12 @@ class TrainingsController < ApplicationController
 
   def new
     @training = Training.new
+    respond_modal_with @training
   end
 
   def create
     @training = Training.new(training_params)
+
 
     if @training.save
       redirect_to trainings_path, notice: 'Training created.'

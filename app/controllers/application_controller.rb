@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def respond_modal_with(*args, &blk)
+    options = args.extract_options!
+    options[:responder] = ModalResponder
+    respond_with *args, options, &blk
+  end
+
   # override the Devise path after a user is signed in, for more information:
   # https://github.com/plataformatec/devise/wiki/How-To:-redirect-to-a-specific-page-on-successful-sign-in
   def after_sign_in_path_for(resource)

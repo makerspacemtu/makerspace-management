@@ -1,8 +1,6 @@
-.row
-  .col-lg-6.offset-lg-3.col-md-12
-    .card
-      .card-block
-        %h4.card-title
-          New Training
+.modal-header
+  %h5.modal-title New Training
+  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span{"aria-hidden" => "true"} ×
 
-        = render 'form'
+= render 'form', training: @training

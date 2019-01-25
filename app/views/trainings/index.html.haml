@@ -5,7 +5,9 @@
       (#{@trainings.count})
 
       - if can? :create, Training
-        = link_to new_training_path do
+        -# = link_to new_training_path do
+        = link_to new_training_path, data: { modal: true } do
+
           %i.fa.fa-plus
           Add a Training
 

@@ -1,28 +1,30 @@
-- unless @training.errors.empty?
-  .alert.alert-danger
-    %strong
-      #{pluralize(@training.errors.size, 'error')} occurred
+.modal-body
+  - unless @training.errors.empty?
+    .alert.alert-danger
+      %strong
+        #{pluralize(@training.errors.size, 'error')} occurred
 
-    %ul
-      - @training.errors.full_messages.each do |error|
-        %li
-          = error
+      %ul
+        - @training.errors.full_messages.each do |error|
+          %li
+            = error
 
-= form_for @training do |f|
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: "form-control"
+  = form_for(@training, remote: request.xhr?, html: { data: { modal: true } }) do |f|
 
-  .form-group
-    = f.label :training_type
-    = f.select :training_type, options_for_select(Training::TRAINING_TYPES, f.object.training_type || 'Level 1'), {}, class: "form-control"
+    .form-group
+      = f.label :name
+      = f.text_field :name, class: "form-control"
 
-  .form-group
-    = f.label :icon
-    = f.text_field :icon, class: "form-control"
-    %small.form-text.text-muted
-      Optional field, add a CSS class to use from Font Awesome. For example: if you want
-      to use <code>fa fa-user</code> enter only <code>user</code> in this field.
-      To easily search visit #{link_to nil, "http://glyphsearch.com/?library=font-awesome", target: :_blank}
+    .form-group
+      = f.label :training_type
+      = f.select :training_type, options_for_select(Training::TRAINING_TYPES, f.object.training_type || 'Level 1'), {}, class: "form-control"
 
-  = f.submit class: "btn btn-primary"
+    .form-group
+      = f.label :icon
+      = f.text_field :icon, class: "form-control"
+      %small.form-text.text-muted
+        Optional field, add a CSS class to use from Font Awesome. For example: if you want
+        to use <code>fa fa-user</code> enter only <code>user</code> in this field.
+        To easily search visit #{link_to nil, "http://glyphsearch.com/?library=font-awesome", target: :_blank}
+    .modal-footer
+      = f.button :submit, class: 'btn btn-primary'

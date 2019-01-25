@@ -1,5 +1,6 @@
 !!!
 %html
+
   %head
     %title Makerspace
     = csrf_meta_tags
@@ -8,7 +9,11 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = yield :css
 
+
+
+
   %body{ class: "#{yield(:body_class)}"}
+
     %nav.navbar.navbar-toggleable-md.navbar-inverse.navbar-custom.fixed-top
       %button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbar", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
         %span.navbar-toggler-icon
@@ -86,3 +91,4 @@
 
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = yield :javascript
+  #modal-holder
