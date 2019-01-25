@@ -33,11 +33,15 @@ Rails.application.routes.draw do
   post '/signups/dropsignup', to: 'signups#dropsignup'
 
   # setting related routes
+    #Open or close the signups for coaches
   get '/settings/toggle_signup_status', to: 'settings#toggle_signup_status'
   post '/settings/toggle_signup_status', to: 'settings#toggle_signup_status'
-
+    #Toggle admin view
   get '/settings/toggle_admin_view', to: 'settings#toggle_admin_view'
   post '/settings/toggle_admin_view', to: 'settings#toggle_admin_view'
+
+  # training related routes
+  post '/trainings/droptraining', to: 'trainings#droptraining'
 
   # misc. static slack routes
   get '/slack/auth', to: 'slack#auth'

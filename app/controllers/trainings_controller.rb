@@ -42,7 +42,21 @@ class TrainingsController < ApplicationController
     end
   end
 
+  def droptraining
+
+    if UserTraining.all.where(training_id: droptraining_params[:training_id]).where(user_id: droptraining_params[:user_id]).exists?
+      user_training = UserTraining.all.where(training_id: droptraining_params[:training_id]).where(user_id: droptraining_params[:user_id])
+      user_training.first.delete
+      redirect_to trainings_path, notice: "User training deleted."
+    else
+      redirect_to trainings_path, notice: "Could not delete user training."
+    end
+  end
+
 private
+  def droptraining_params
+    params.permit(:training_id,:user_id, :utf8, :authenticity_token, :commit)
+  end
 
   def training_params
     params.require(:training).permit(:name, :icon, :training_type)

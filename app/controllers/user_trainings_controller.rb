@@ -31,17 +31,7 @@ class UserTrainingsController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:user_id])
-    @user_training = @user.trainings.find(params[:training_id])
-    @user_training.destroy
-
-    if @user_training.destroyed?
-      redirect_to user_path(@user), notice: 'User training removed.'
-      return
-    else
-      redirect_to user_path(@user), notice: 'An error occurred trying to remove the user training.'
-      return
-    end
+      redirect_to users_path, notice: 'Wrong Method.'
   end
 
 

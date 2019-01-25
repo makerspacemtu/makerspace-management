@@ -19,9 +19,9 @@ class Ability
       # admins can change anyones password (might want to change in the future)
       can :password, User
       can :update_password, User
-      # only admins can see punches
+      # admins can see punches
       can :read, Punch
-      # only admins can modify the actual trainings themselves
+      # admins can modify the actual trainings themselves
       can :read, Training
       can :edit, Training
       can :create, Training
@@ -31,6 +31,8 @@ class Ability
       can :read, UserTraining
       can :create, UserTraining
       can :destroy, UserTraining
+      can :droptraining, Training
+
       can :coaches, User
       can :metrics, User
       can :destroy, User
@@ -76,9 +78,9 @@ class Ability
       # developers can change anyones password (might want to change in the future)
       can :password, User
       can :update_password, User
-      # only developers can see punches
+      # developers can see punches
       can :read, Punch
-      # only developers can modify the actual trainings themselves
+      # developers can modify the actual trainings themselves
       can :read, Training
       can :edit, Training
       can :create, Training
@@ -88,6 +90,8 @@ class Ability
       can :read, UserTraining
       can :create, UserTraining
       can :destroy, UserTraining
+      can :droptraining, Training
+
       can :coaches, User
       can :metrics, User
       can :destroy, User

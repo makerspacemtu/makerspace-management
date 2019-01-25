@@ -107,7 +107,7 @@
       .card.mb-2
         .card-block
           %h5.card-title.mb-0
-            %i.fa.fa-trophy
+            %i.fa.fa-trophy.mb-2
             User Trainings
             - if can? :create, UserTraining
               %small
@@ -120,16 +120,17 @@
               #{@user.first_name} has no trainings
 
           - if @user.trainings.count > 0
-            - @user.trainings.order(created_at: :desc).each_with_index do |training, id|
-              %span{ class: "badge badge-#{training.training_type_format}" }
+            - @user.trainings.order(created_at: :desc).each_with_index do |training|
+              %span.training-bubble{ class: "badge badge-#{training.training_type_format}"}
                 - if training.icon.present? && !training.icon.blank?
-                  %i{ class: "fa fa-#{training.icon}" }
+                  %i.training-bubble{ class: "fa fa-#{training.icon}"}
                 - else
-                  %i{ class: "fa fa-trophy"}
+                  %i.training-bubble{ class: "fa fa-trophy"}
                 = training.name
-
-                -# = link_to user_user_training_path(@user, training_id: training), method: :delete do
-                -#   %i.fa.fa-times
+                = form_tag '/trainings/droptraining' do
+                  = hidden_field_tag(:training_id, training.id)
+                  = hidden_field_tag(:user_id, current_user.id)
+                  = submit_tag "X", class: 'btn btn-danger btn-sm admin-delete-nice mt-2', data: {:confirm => 'Are you sure you want to remove this user training?'}
 
     - if can? :read, Punch
       .card
