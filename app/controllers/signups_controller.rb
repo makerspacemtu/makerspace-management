@@ -47,13 +47,8 @@ class SignupsController < ApplicationController
   end
 
   def dropsignup
-    # puts "HERE"
-    # puts "HEREEE2: ##{dropsignup_params['signup_id']}"
-    # puts "HEREEEE3: ##{dropsignup_params['user_id']}"
     if UserSignup.all.where(signup_id: dropsignup_params[:signup_id]).where(user_id: dropsignup_params[:user_id]).exists?
       user_signup = UserSignup.all.where(signup_id: dropsignup_params[:signup_id]).where(user_id: dropsignup_params[:user_id])
-      # puts "HEREEEE4: ##{user_signup}"
-    # user = User.find(params[:user_id])
       user_signup.first.delete
       redirect_to signups_path, notice: "Shift dropped."
     else

@@ -90,10 +90,16 @@ small {
   box-shadow: 2px 2px 20px #ccc;
 }
 
-.signup-delete {
+.admin-delete {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #721c24;
+}
+
+.admin-delete-nice {
+  color: black;
+  background-color: white;
+  border-color: black;
 }
 
 table.table-bordered{
@@ -132,4 +138,8 @@ td.signups {
   color: black;
   background-color: #f8d7da;
   border-color: #f8d7da;
+}
+
+.training-bubble {
+  font-size:17px;
 }
