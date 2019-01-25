@@ -2,5 +2,5 @@
   %h5.modal-title New Training
   %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
     %span{"aria-hidden" => "true"} ×
-
-= render 'form', training: @training
+.modal-body
+  = render 'form', training: @training

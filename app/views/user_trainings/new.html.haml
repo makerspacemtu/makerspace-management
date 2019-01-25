@@ -1,21 +1,27 @@
-.row
-  .col-lg-6.offset-lg-3.col-md-12
-    .card
-      .card-block
-        %h4.card-title
-          New Training
-        - unless @user.trainings.count > 0
-          %p.card-text.text-muted
-            #{@user.first_name} has no trainings
+-# .row
+-#   .col-lg-6.offset-lg-3.col-md-12
+-#     .card
+-#       .card-block
+-#         %h4.card-title
+-#           New Training
+-#         - unless @user.trainings.count > 0
+-#           %p.card-text.text-muted
+-#             #{@user.first_name} has no trainings
+-#
+-#         - if @user.trainings.count > 0
+-#           - @user.trainings.order(created_at: :desc).each do |training|
+-#             %span{ class: "badge badge-#{training.training_type_format}" }
+-#               - if training.icon.present? && !training.icon.blank?
+-#                 %i{ class: "fa fa-#{training.icon}" }
+-#               - else
+-#                 %i{ class: "fa fa-trophy"}
+-#               = training.name
+-#               = #link_to user_user_training_path(@user, training_id: training), method: :delete do
+-#               = #  %i.fa.fa-times
+-#         = render 'form'
+.modal-header
+  %h5.modal-title New User Training
+  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+    %span{"aria-hidden" => "true"} ×
 
-        - if @user.trainings.count > 0
-          - @user.trainings.order(created_at: :desc).each do |training|
-            %span{ class: "badge badge-#{training.training_type_format}" }
-              - if training.icon.present? && !training.icon.blank?
-                %i{ class: "fa fa-#{training.icon}" }
-              - else
-                %i{ class: "fa fa-trophy"}
-              = training.name
-              = #link_to user_user_training_path(@user, training_id: training), method: :delete do
-              = #  %i.fa.fa-times
-        = render 'form'
+= render 'form', user_training: @user_training

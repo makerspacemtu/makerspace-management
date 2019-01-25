@@ -111,7 +111,7 @@
             User Trainings
             - if can? :create, UserTraining
               %small
-                = link_to new_user_user_training_path(@user) do
+                = link_to new_user_user_training_path(@user), data: { modal: true } do
                   %i.fa.fa-plus
                   Add Training
 

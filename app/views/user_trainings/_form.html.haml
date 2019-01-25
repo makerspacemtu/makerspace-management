@@ -1,19 +1,17 @@
-- unless @user_training.errors.empty?
-  .alert.alert-danger
-    %strong
-      #{pluralize(@user_training.errors.size, 'error')} occurred
+.modal-body
+  - unless @user_training.errors.empty?
+    .alert.alert-danger
+      %strong
+        #{pluralize(@user_training.errors.size, 'error')} occurred
 
-    %ul
-      - @user_training.errors.full_messages.each do |error|
-        %li
-          = error
+      %ul
+        - @user_training.errors.full_messages.each do |error|
+          %li
+            = error
 
-= form_for [@user, @user_training] do |f|
-  .form-group
-    = f.label :training
-    = f.collection_select :training_id, Training.all, :id, :name, {}, class: "form-control"
-
-  = f.submit class: "btn btn-primary"
-
-  = link_to checkin_path, class: "btn btn-primary" do
-    Back to Checkin
+  = form_for([@user, @user_training], html: { data: { modal: true } }) do |f|
+    .form-group
+      = f.label :training
+      = f.collection_select :training_id, Training.all, :id, :name, {}, class: "form-control"
+    .modal-footer
+      = f.button :submit, class: "btn btn-primary"
