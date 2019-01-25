@@ -19,10 +19,8 @@ class UserTraining < ApplicationRecord
     usertrainings = self.group(:training_id).count
     usertrainings = usertrainings.sort.to_h
     usertrainings = usertrainings.reject{|i,j| !Training.exists?(id: i)}
-
     usertrainings = usertrainings.transform_keys { |key| Training.find(key).name }
     usertrainings
-    # puts "USERTRAININGSSSS: #{usertrainings}"
   end
 
 end

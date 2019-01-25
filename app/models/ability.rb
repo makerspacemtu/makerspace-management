@@ -139,6 +139,7 @@ class Ability
       can :create, UserTraining
       can :destroy, UserTraining
       can :metrics, User
+      can :droptraining, Training
       # staff can see and create daily reports
       can :read, DailyReport
       can :create, DailyReport

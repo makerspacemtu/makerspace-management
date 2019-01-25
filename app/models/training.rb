@@ -11,7 +11,7 @@
 #
 
 class Training < ApplicationRecord
-  TRAINING_TYPES = ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5']
+  TRAINING_TYPES = ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Paperwork']
 
   has_many :user_trainings
   has_many :users, :through => :user_trainings
@@ -29,7 +29,7 @@ class Training < ApplicationRecord
       "success"
     when "Level 4"
       "warning"
-    when "Level 5"
+    when "Paperwork"
       "danger"
     else
       "default"
