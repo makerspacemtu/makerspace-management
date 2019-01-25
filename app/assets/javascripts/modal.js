@@ -24,7 +24,7 @@ $(function() {
       // Update modal content
       const modal = $(data).find('body').html();
       $(modal_holder_selector).html(modal).find(modal_selector).modal();
-    };
+    }
 
     return false;
   });
