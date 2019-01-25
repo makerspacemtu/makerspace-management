@@ -2,7 +2,7 @@
   - @past_events.each do |event|
     .col-lg-6.col-xl-3.d-flex.align-items-stretch.p-1{:style=>"max-width: 270px"}
       .card.mb-10.w-100.d-flex.text-center{:style=>" border: 1px solid #76bf43"}
-        .card-header.text-white{:style => "background-color: #76bf43"}
+        .card-header.text-white{:style => "background-color: darkgray"}
           %h5.p.1.mb-1
             = link_to event[1].name, event_path(event[1]), class: "text-white",style: "color: rgba(70, 74, 76, 1)"
         .card-title
