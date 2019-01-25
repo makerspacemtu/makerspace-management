@@ -11,7 +11,7 @@
           .card-text.mb-10
             - if can? :read, UserTraining
               %h6
-                = link_to new_user_user_training_path(user) do
+                = link_to new_user_user_training_path(user), data: { modal: true } do
                   %i.fa.fa-plus
                   Add Training
               - if user.trainings.count <= 0
