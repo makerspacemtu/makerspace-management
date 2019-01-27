@@ -1,5 +1,6 @@
 class SignupsController < ApplicationController
   load_and_authorize_resource
+  respond_to :html, :json
 
   def index
     @users = User.where(user_type: ['Admin', 'Staff']).order(first_name: :asc)
@@ -14,6 +15,8 @@ class SignupsController < ApplicationController
   def new
     @user = current_user
     @signup = Signup.new
+
+    respond_modal_with @signup
   end
 
   def create

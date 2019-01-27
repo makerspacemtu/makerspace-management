@@ -129,10 +129,9 @@
                 = training.name
                 .badge
                   = form_tag '/trainings/droptraining' do
-
                     = hidden_field_tag(:training_id, training.id)
                     = hidden_field_tag(:user_id, current_user.id)
-                    = submit_tag "X", class: 'btn btn-danger btn-sm admin-delete-nice '
+                    = submit_tag "X", class: 'btn btn-outline-primary admin-delete-nice btn-sm'
 
 
     - if can? :read, Punch
