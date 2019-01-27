@@ -9,7 +9,7 @@
           %li
             = error
 
-  = form_for([@user, @user_training], html: { data: { modal: true } }) do |f|
+  = form_for([@user, @user_training], remote: request.xhr?, html: { data: { modal: true } }) do |f|
     .form-group
       = f.label :training
       = f.collection_select :training_id, Training.all, :id, :name, {}, class: "form-control"
