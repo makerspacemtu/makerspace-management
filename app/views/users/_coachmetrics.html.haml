@@ -1,19 +1,31 @@
+%h2.mt-4.mb-2 List Metrics
 
-%h2.mt-4.mb-2 Coach Metrics
-
-%table.table.table-bordered
+%table.table.table-bordered.table-responsive
   %thead
     %tr
-      %th.signup-header{scope: "col"} Coach Name
-      %th.signup-header{scope: "col"} Number of Shifts Taken
+      %th.signup-header.text-center{scope: "col"} Coach Name
+      %th.signup-header.text-center{scope: "col"} Number of Shifts Taken
+      %th.signup-header.text-center{scope: "col"} Maker Coach Agreement?
+      %th.signup-header.text-center{scope: "col"} On Slack?
+      %th.signup-header.text-center{scope: "col"} Nametag Made?
+      %th.signup-header.text-center{scope: "col"} Picture Taken?
+      %th.signup-header.text-center{scope: "col"} On Email List?
+      %th.signup-header.text-center{scope: "col"} Has Shirt?
+
   %tbody
     - @users.each do |coach|
       %tr
+        - makeragree = coach.trainings.exists?(name: 'Maker Coach Agreement')
+        - slack = coach.trainings.exists?(name: 'On Slack')
+        - nametag = coach.trainings.exists?(name: 'Nametag')
+        - has_pic = coach.trainings.exists?(name: 'Picture Taken')
+        - email_list = coach.trainings.exists?(name: 'On Email List')
+        - has_shirt = coach.trainings.exists?(name: 'Has Shirt')
 
-        %td.shifts{scope: "row", :class => ("confirmed" if UserSignup.where(user_id: coach.id).exists?)}
+        %td.text-center{scope: "row"}
           = link_to coach.full_name, user_path(coach),style: "color:black"
 
-        %td.shifts{:class => ("confirmed" if UserSignup.where(user_id: coach.id).exists?)}
+        %td.shifts.text-center{scope: "row", :class => ("confirmed" if UserSignup.where(user_id: coach.id).exists?)}
           - if UserSignup.where(user_id: coach.id).exists?
             - count = UserSignup.where(user_id: coach.id).count
             .row.d-flex.justify-content-center
@@ -21,3 +33,37 @@
           - else
             .row.d-flex.justify-content-center
               0
+        %td.shifts.text-center{scope: "row", :class => ("confirmed" if makeragree == true)}
+          - if makeragree == true
+            Yes
+          - else
+            No
+        %td.shifts.text-center{scope: "row", :class => ("confirmed" if slack == true)}
+          - if slack == true
+            Yes
+          - else
+            No
+        %td.shifts.text-center{scope: "row", :class => ("confirmed" if nametag == true)}
+          - if nametag == true
+            Yes
+          - else
+            No
+        %td.shifts.text-center{scope: "row", :class => ("confirmed" if has_pic == true)}
+          - if has_pic == true
+            Yes
+          - else
+            No
+        %td.shifts.text-center{scope: "row", :class => ("confirmed" if email_list == true)}
+          - if email_list == true
+            Yes
+          - else
+            No
+        %td.shifts.text-center{scope: "row", :class => ("confirmed" if has_shirt == true)}
+          - if has_shirt == true
+            Yes
+          - else
+            No
+        -if can? :destroy, User
+          %td.text-center
+            = link_to new_user_user_training_path(coach), data: { modal: true } do
+              %i.fa.fa-plus

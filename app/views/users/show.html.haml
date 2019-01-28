@@ -13,8 +13,6 @@
             %small.block
               = @user.user_type
 
-
-
       %ul.list-group.list-group-flush
         - if @user.user_type == 'Staff' || @user.user_type == "Admin"
           - if @makeragree == true

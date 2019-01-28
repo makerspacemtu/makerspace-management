@@ -13,20 +13,20 @@
 .jumbotron{:style => "padding-top: 32px; padding-bottom: 32px"}
   %ul#myTab.nav.nav-tabs.justify-content-center{:role => "tablist"}
     %li.nav-item
-      %a#home-tab.nav-link.active{"aria-controls" => "home", "aria-selected" => "true", "data-toggle" => "tab", :href => "#home", :role => "tab"} All Coaches
+      %a#home-tab.nav-link{"aria-controls" => "home", "aria-selected" => "true", "data-toggle" => "tab", :href => "#home", :role => "tab"} Coach Cards
     - if can? :dropsignup, Signup
 
       %li.nav-item
-        %a#metrics-tab.nav-link{"aria-controls" => "metrics", "aria-selected" => "false", "data-toggle" => "tab", :href => "#metrics", :role => "tab"} Coach Metrics
+        %a#metrics-tab.nav-link.active{"aria-controls" => "metrics", "aria-selected" => "false", "data-toggle" => "tab", :href => "#metrics", :role => "tab"} List Metrics
     -# %li.nav-item
     -#   %a#contact-tab.nav-link{"aria-controls" => "contact", "aria-selected" => "false", "data-toggle" => "tab", :href => "#contact", :role => "tab"} Contact
 
 
   #myTabContent.tab-content
-    #home.tab-pane.fade.show.active{"aria-labelledby" => "all-coaches-tab", :role => "tabpanel"}
+    #home.tab-pane.fade{"aria-labelledby" => "all-coaches-tab", :role => "tabpanel"}
       .d-flex
         %h2.mb-2.mt-4{:style => "padding-bottom: 12px"}
-          All Coaches
+          Coach Cards
           %small
             (#{@users.count} total)
 
@@ -34,6 +34,6 @@
       = render 'cards'
 
 
-    #metrics.tab-pane.fade{"aria-labelledby" => "coach-metrics-tab", :role => "tabpanel"}
+    #metrics.tab-pane.fade.show.active{"aria-labelledby" => "coach-metrics-tab", :role => "tabpanel"}
       = render "coachmetrics"
     -# #contact.tab-pane.fade{"aria-labelledby" => "contact-tab", :role => "tabpanel"} ...

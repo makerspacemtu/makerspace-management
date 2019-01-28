@@ -12,13 +12,13 @@
             - if can? :read, UserTraining
               %h6
 
-              - if user.trainings.count <= 0
+              - if user.trainings.where(training_type: "Paperwork").count <= 0
                 %p.card-text.text-muted{:style => "padding-bottom: 10px"}
-                  #{user.first_name} has no trainings
+                  #{user.first_name} has no onboarding
 
               - if user.trainings.count > 0
 
-                - user.trainings.first(6).each do |training|
+                - user.trainings.where(training_type: "Paperwork").each do |training|
                   %span{ class: "badge badge-#{training.training_type_format}" }
                     - if training.icon.present? && !training.icon.blank?
                       %i{ class: "fa fa-#{training.icon}" }

@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def coaches
     @users = User.where(user_type: ['Admin', 'Staff']).order(:first_name, :last_name)
+    
   end
 
   def metrics
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @makeragree = @user.trainings.exists?(name: 'Maker Coach Agreement')
+
 
     if @user.slack_user_id.present? && valid_slack_client?
       @slack_username = slack_client.users_info(user: @user.slack_user_id)[:user][:name]

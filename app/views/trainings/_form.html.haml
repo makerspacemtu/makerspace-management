@@ -10,7 +10,6 @@
           = error
 
 = form_for(@training, html: { data: { modal: true } }) do |f|
-
   .form-group
     = f.label :name
     = f.text_field :name, class: "form-control"
@@ -29,4 +28,3 @@
   .modal-footer
     = f.button :submit, class: 'btn btn-primary' do
       Submit
-  
