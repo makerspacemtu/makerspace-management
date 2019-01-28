@@ -17,7 +17,7 @@
           = link_to new_user_user_signup_path(:user_id => current_user.id), class: "btn btn-outline admin-delete" do
             Manual Shift-Assign (Admin)
         - if can? :toggle_signup_status, Setting
-          = link_to new_signup_path, class: "btn btn-outline admin-delete" do
+          = link_to new_signup_path, data: { modal: true }, class: "btn btn-outline admin-delete" do
             %i.fa.fa-plus
             Add Shift Slot (Admin)
 
