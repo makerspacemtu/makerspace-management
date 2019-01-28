@@ -14,13 +14,13 @@
                 = link_to new_user_user_training_path(user), data: { modal: true } do
                   %i.fa.fa-plus
                   Add Training
-              - if user.trainings.count <= 0
+              - if user.trainings.where.not(training_type: "Paperwork").count <= 0
                 %p.card-text.text-muted{:style => "padding-bottom: 10px"}
                   #{user.first_name} has no trainings
 
-              - if user.trainings.count > 0
+              - if user.trainings.where.not(training_type: "Paperwork").count > 0
 
-                - user.trainings.first(6).each do |training_i|
+                - user.trainings.where.not(training_type: "Paperwork").first(6).each do |training_i|
                   %span{ class: "badge badge-#{training_i.training_type_format}" }
                     - if training_i.icon.present? && !training_i.icon.blank?
                       %i{ class: "fa fa-#{training_i.icon}" }
@@ -29,12 +29,12 @@
                     = training_i.name
                     = #link_to new_user_user_training_path(user, training_id: training_i), method: :delete do
                     =#  %i.fa.fa-times
-              - if user.trainings.count > 6
+              - if user.trainings.where.not(training_type: "Paperwork").count > 6
                 .d-flex.justify-content-start
                   %h6
                     = link_to user_path(user), style: "color: rgba(70, 74, 76, 0.8)" do
                       +
-                      = user.trainings.count - 6
+                      = user.trainings.where.not(training_type: "Paperwork").count - 6
                       more...
 
         .mt-auto
