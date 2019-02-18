@@ -1,6 +1,6 @@
 # Makerspace Management App
 
-This is a simple app to assist in [The Alley](makerspace.mtu.edu) Makerspace.
+This is a simple app to assist in [The Alley](http://makerspace.mtu.edu) Makerspace.
 It is designed to handle maker and coach (staff volunteers) check in/out and
 trainings.
 
