@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   def coaches
     @users = User.where(user_type: ['Admin', 'Staff']).order(:first_name, :last_name)
-    
+
   end
 
   def metrics
@@ -26,6 +26,27 @@ class UsersController < ApplicationController
     @punches_created_by_week = Punch.punches_created_by_week
     @reason_counts = Punch.reason_counts
     @training_counts = UserTraining.training_counts
+    @events_count = Event.all.count
+
+    punches_per_day = Punch.group("DATE_TRUNC('day', created_at)").count.sort
+    punches_per_work_day_t = {}
+    punches_per_day.to_h.each do |key,value|
+
+      # is only on weekdays and not in May through August
+      if key.strftime('%u').to_i < 5 && (key.strftime('%m').to_i < 5 || key.strftime('%m').to_i > 8)
+        # puts("KEY: #{key}")
+        # puts("VALUE: #{value}")
+        punches_per_work_day_t[key] = value
+        # puts("PER WORK DAY: #{punches_per_work_day_t}")
+
+      end
+    end
+
+    puts("PER DAY: #{punches_per_day}")
+    puts("PER WORK DAY: #{punches_per_work_day_t}")
+
+    @punches_per_work_day = punches_per_work_day_t.sum{|k,v| v} / punches_per_work_day_t.to_h.keys.count
+
   end
 
   def show
