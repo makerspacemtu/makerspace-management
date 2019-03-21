@@ -56,7 +56,7 @@
 
   .col-3.text-center.card.ml-2.mb-2
     %h1
-      #{Punch.where("created_at > ?", 365.days.ago).count}
+      #{Punch.where(in:true).where("created_at > ?", 365.days.ago).count}
     %h5
       Check Ins This Year
 

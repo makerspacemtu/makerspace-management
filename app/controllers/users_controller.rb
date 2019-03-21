@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @training_counts = UserTraining.training_counts
     @events_count = Event.all.count
 
-    punches_per_day = Punch.group("DATE_TRUNC('day', created_at)").count.sort
+    punches_per_day = Punch.where(in: true).group("DATE_TRUNC('day', created_at)").count.sort
     punches_per_work_day_t = {}
     punches_per_day.to_h.each do |key,value|
 
@@ -46,6 +46,7 @@ class UsersController < ApplicationController
     puts("PER WORK DAY: #{punches_per_work_day_t}")
 
     @punches_per_work_day = punches_per_work_day_t.sum{|k,v| v} / punches_per_work_day_t.to_h.keys.count
+    
 
   end
 
