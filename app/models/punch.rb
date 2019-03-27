@@ -53,7 +53,9 @@ class Punch < ApplicationRecord
   def self.reason_counts
     punches = self.where(in: true).group("DATE_TRUNC('week', created_at)").count
     event_validationarray = [ "event" ].to_a.concat((0.to_s...1000.to_s).to_a)
-    punches_last_range = Punch.where(in: true).where("created_at > ?", Time.now-3.months)
+    # punches_last_range = Punch.where(in: true).where("created_at > ?", Time.now-3.months)
+    punches_last_range = Punch.where(in: true)
+
 
     personal_project_count = punches_last_range.all.where(reason: "personal_project").count
     class_project_count = punches_last_range.all.where(reason: "class_project").count
