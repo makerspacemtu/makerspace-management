@@ -128,7 +128,7 @@
                 .badge
                   = form_tag '/trainings/droptraining' do
                     = hidden_field_tag(:training_id, training.id)
-                    = hidden_field_tag(:user_id, current_user.id)
+                    = hidden_field_tag(:user_id, @user.id)
                     = submit_tag "X", class: 'btn btn-outline-primary admin-delete-nice btn-sm'
 
 
