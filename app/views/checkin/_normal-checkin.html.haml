@@ -19,19 +19,30 @@
             @mtu.edu
       %h4.mb-2
         What are you here for?
-      .btn-group-vertical.btn-group-toggle.btn-block{"data-toggle" => "buttons"}
-        %label.btn.btn-secondary
-          %input#personal_project{autocomplete: "off", name: :reason, type: "radio", value: 'personal_project'}/
-          Personal Project
-        %label.btn.btn-secondary
-          %input#class_project{autocomplete: "off", name: :reason, type: "radio", value: 'class_project'}/
-          Class Project
-        %label.btn.btn-secondary
-          %input#class_session{autocomplete: "off", name: :reason, type: "radio", value: 'class_session'}/
-          Class Session
-        %label.btn.btn-secondary
-          %input#coaching{autocomplete: "off", name: :reason, type: "radio", value: 'coaching'}/
-          Coaching
+      .btn-group-vertical.btn-group-toggle.btn-block
+        .label.btn.btn-primary.i.fa.fa-sign-in{:style => "border-bottom-width:3px; padding-right:35px; border-bottom-color:rgb(236,238,239)"}
+          = button_tag 'Personal Project', name: :reason, value: 'personal_project', class: ' btn btn-primary'
 
-      .input-group-btn
-        = submit_tag 'Submit', class: 'btn btn-primary'
+        -#   %input#personal_project{autocomplete: "off", name: :reason, type: "radio", value: 'personal_project'}/
+        -#   Personal Project
+        .label.btn.btn-primary.i.fa.fa-sign-in{:style => "border-bottom-width:3px; padding-right:35px; border-bottom-color:rgb(236,238,239)"}
+          = button_tag 'Class Project', name: :reason, value: 'class_project', class: 'btn btn-primary'
+        -#   %input#class_project{autocomplete: "off", name: :reason, type: "radio", value: 'class_project'}/
+        -#   Class Project
+        .label.btn.btn-primary.i.fa.fa-sign-in{:style => "border-bottom-width:3px; padding-right:35px; border-bottom-color:rgb(236,238,239)"}
+          = button_tag 'Class Session', name: :reason, value: 'class_session', class: 'btn btn-primary'
+        -#   %input#class_session{autocomplete: "off", name: :reason, type: "radio", value: 'class_session'}/
+        -#   Class Session
+        .label.btn.btn-primary.i.fa.fa-sign-in{:style => "border-bottom-width:3px; padding-right:35px; border-bottom-color:rgb(236,238,239)"}
+          = button_tag 'Coaching', name: :reason, value: 'coaching', class: 'btn btn-primary'
+        -#   %input#coaching{autocomplete: "off", name: :reason, type: "radio", value: 'coaching'}/
+        -#   Coaching
+
+
+
+
+
+
+
+
+      =# submit_tag 'Submit', name: :reason,
