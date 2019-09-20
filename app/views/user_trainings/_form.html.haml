@@ -11,7 +11,22 @@
 
   = form_for([@user, @user_training], remote: request.xhr?, html: { data: { modal: true } }) do |f|
     .form-group
-      = f.label :training
-      = f.collection_select :training_id, Training.all, :id, :name, {}, class: "form-control"
+      .row
+        .col-2
+          = f.label :training
+
+        .col-10
+          = select_tag "training_ids", options_from_collection_for_select(Training.select(:id, :name), "id", "name"), {:multiple => true, :size => 20}
+          -# %select#training-select{multiple: "multiple"}
+            -# - Training.select(:id, :name).each do |training|
+            -#   %option{value: training.id}
+            -#     = training.name
+
+
+          =# select("training", "training_id", Training.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'None'})
+
+      = #f.collection_select :training_id, Training.all, :id, :name, {}, class: "form-control"
+
+      =# f.collection_select(:training_id, Training.all, :id, :name, {:prompt => "Please Select a Sector"}, {:multiple => true, :id => "training-select"})
     .modal-footer
       = f.button :submit, class: "btn btn-primary"
