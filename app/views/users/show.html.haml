@@ -15,7 +15,9 @@
 
       %ul.list-group.list-group-flush
         - if @user.user_type == 'Staff' || @user.user_type == "Admin"
-          - if @makeragree == true
+          -# if @makeragree == true
+          -if @user.trainings.exists?(name: 'Maker Coach Agreement')
+
             %li.list-group-item{:style => "background-color: #d4edda; color:#155724"}
               %i.fa.fa-check-square.pr-2
               Completed Maker Coach Agreement

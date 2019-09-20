@@ -50,9 +50,9 @@ class TrainingsController < ApplicationController
     if UserTraining.all.where(training_id: droptraining_params[:training_id]).where(user_id: droptraining_params[:user_id]).exists?
       user_training = UserTraining.all.where(training_id: droptraining_params[:training_id]).where(user_id: droptraining_params[:user_id])
       user_training.first.delete
-      redirect_to user_path(user), notice: "User training deleted."
+      redirect_to user_path(droptraining_params[:user_id]), notice: "User training deleted."
     else
-      redirect_to user_path(user), notice: "Could not delete user training."
+      redirect_to user_path(droptraining_params[:user_id]), notice: "Could not delete user training."
     end
   end
 
