@@ -6,7 +6,7 @@ class EventsController < ApplicationController
     @past_events = {}
     i = 1
     j = 1
-    Event.all.order(:event_start).each do |event|
+    Event.all.order(:event_start).reverse.each do |event|
       if event.event_end.to_i < Time.now.to_i
         @past_events[i] = event
         i += 1
