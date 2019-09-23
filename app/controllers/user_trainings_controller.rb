@@ -20,6 +20,7 @@ class UserTrainingsController < ApplicationController
     success = true
     trainings.each do |training|
       # If user already has this training, skip adding it, move onto next in list
+      saveStatus = false
       next if UserTraining.exists?(user: user, training: training)
 
       # Otherwise, create the user training and save it
@@ -38,7 +39,11 @@ class UserTrainingsController < ApplicationController
     end
 
     if success
-      redirect_to session.delete(:return_to), notice: "User trained successfully on: #{successfulTrainings.join(", ")}"
+      if successfulTrainings.length > 0
+        redirect_to session.delete(:return_to), notice: "User trained successfully on: #{successfulTrainings.join(", ")}"
+      else
+        redirect_to session.delete(:return_to), notice: "No new trainings added."
+      end
     else
       render 'new'
     end
