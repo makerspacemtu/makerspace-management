@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   # training related routes
   post '/trainings/droptraining', to: 'trainings#droptraining'
-
+  post '/trainings/nullifyagreements', to: 'trainings#nullifyagreements'
   # misc. static slack routes
   get '/slack/auth', to: 'slack#auth'
   post '/slack/buttons', to: 'slack#buttons'
