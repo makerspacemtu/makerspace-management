@@ -102,6 +102,12 @@
                                 - user = User.all.find(usersignup.user_id)
                                 .text-center
                                   = link_to user.full_name, user_path(user), style: "color:black", class: "text-nowrap"
+                                  - if Setting.admin_view == "enabled"
+                                    .d-inline-block
+                                      = form_tag '/signups/dropsignup' do
+                                        = hidden_field_tag(:signup_id, signup_link.id)
+                                        = hidden_field_tag(:user_id, user.id)
+                                        = submit_tag "X", class: 'd-inline-block btn btn-outline-danger btn-sm mb-1'
 
                             - rescue
 
