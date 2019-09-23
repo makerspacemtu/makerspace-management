@@ -16,7 +16,7 @@
           = f.label :training
 
         .col-10
-          = select_tag "training_ids", options_from_collection_for_select(Training.select(:id, :name), "id", "name"), {:multiple => true, :size => 20}
+          = select_tag "training_ids", options_from_collection_for_select(Training.order(:name).select(:id, :name), "id", "name"), {:multiple => true, :size => 20}
           -# %select#training-select{multiple: "multiple"}
             -# - Training.select(:id, :name).each do |training|
             -#   %option{value: training.id}

@@ -13,7 +13,7 @@
 
   - if @trainings.count > 0
     %hr{:style => "margin-top:5px; margin-bottom:5px"}
-    - @trainings.each do |training|
+    - @trainings.order(:name).each do |training|
       %div
         %h4
           %span{ class: "badge badge-#{training.training_type_format}" }
