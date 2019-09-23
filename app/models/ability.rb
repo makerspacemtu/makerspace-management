@@ -32,6 +32,7 @@ class Ability
       can :create, UserTraining
       can :destroy, UserTraining
       can :droptraining, Training
+      can :nullifyagreements, Training
 
       can :coaches, User
       can :metrics, User
@@ -91,6 +92,7 @@ class Ability
       can :create, UserTraining
       can :destroy, UserTraining
       can :droptraining, Training
+      can :nullifyagreements, Training
 
       can :coaches, User
       can :metrics, User

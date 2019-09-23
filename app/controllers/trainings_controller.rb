@@ -35,6 +35,28 @@ class TrainingsController < ApplicationController
     end
   end
 
+  def nullifyagreements
+    @training = Training.where(name: "Maker Coach Agreement")
+    if @training.exists? == true
+      if @training.first.id == Training.all.last.id
+        maker_agree_id = Training.all.last.id.to_i + 1
+        puts "IF STATE TRUE: #{maker_agree_id}"
+        @training.first.delete
+      else
+        @training.first.delete
+        maker_agree_id = Training.all.last.id.to_i + 1
+        #puts "IF STATE FALSE: #{maker_agree_id}"
+      end
+      @training2 = Training.new(id: (maker_agree_id).to_s, name: "Maker Coach Agreement", training_type: "Paperwork", icon: "")
+      @training2.save
+      redirect_to coaches_users_path, notice: 'All Current Maker Coach Agreements Nullified.'
+    else
+      @training2 = Training.new(id: (Training.all.last.id.to_i + 1).to_s, name: "Maker Coach Agreement", training_type: "Paperwork", icon: "")
+      @training2.save
+      redirect_to coaches_users_path, notice: "Created new 'Maker Coach Agreement' training."
+    end
+  end
+
   def update
     @training = Training.find(params[:id])
 
@@ -57,6 +79,10 @@ class TrainingsController < ApplicationController
   end
 
 private
+
+  # def nullifyagreements_params
+  #   params.permit(:training_id,:user_id, :utf8, :authenticity_token, :commit)
+  # end
   def droptraining_params
     params.permit(:training_id,:user_id, :utf8, :authenticity_token, :commit)
   end
