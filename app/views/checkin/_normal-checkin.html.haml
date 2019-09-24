@@ -37,12 +37,6 @@
           = button_tag 'Coaching', name: :reason, value: 'coaching', class: 'btn btn-primary'
         -#   %input#coaching{autocomplete: "off", name: :reason, type: "radio", value: 'coaching'}/
         -#   Coaching
-
-
-
-
-
-
-
-
-      =# submit_tag 'Submit', name: :reason,
+  .jumbotron.text-center
+    - if can? :destroy, User
+      = link_to "View Checkin History", checkin_checkin_history_path

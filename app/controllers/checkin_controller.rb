@@ -116,6 +116,10 @@ class CheckinController < ApplicationController
     redirect_to checkin_path, notice: "Everyone has been checked out."
   end
 
+  def checkin_history
+    
+
+  end
 
 
 private

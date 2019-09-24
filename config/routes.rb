@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   # checkin related routes
   get '/checkin', to: 'checkin#index'
   get '/checkin/first_time', to: 'checkin#first_time'
+  get '/checkin/checkin_history', to: 'checkin#checkin_history'
   post '/checkin', to: 'checkin#checkin'
   post '/slack/checkin', to: 'slack#checkin'
   post '/slack/checkout', to: 'slack#checkout'
