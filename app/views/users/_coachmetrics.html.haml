@@ -1,14 +1,22 @@
 %h2.mt-4.mb-2 List Metrics
-- if can? :nullifyagreements, Training
-  = form_tag '/trainings/nullifyagreements' do
-    = submit_tag "Nullify All Maker Coach Agreements", class: 'btn btn-secondary', data: {:confirm => 'Are you sure you want to nullify all current Maker Coach Agreements?'}
+
 %table.table.table-bordered.table-responsive
   %thead
     %tr
       %th.signup-header.text-center{scope: "col"} Coach Name
       %th.signup-header.text-center{scope: "col"} Number of Shifts Taken
-      %th.signup-header.text-center{scope: "col"} Maker Coach Agreement?
-      -# %th.signup-header.text-center{scope: "col"} On Slack?
+      %th.signup-header.text-center{scope: "col"}
+        Maker Coach Agreement?
+        - if can? :nullifyagreements, Training
+          = form_tag '/trainings/nullifyagreements' do
+            = hidden_field_tag :name, "Maker Coach Agreement"
+            = submit_tag "Nullify All", class: 'btn btn-sm btn-secondary', data: {:confirm => 'Are you sure you want to nullify all?'}
+      %th.signup-header.text-center{scope: "col"}
+        Operations Training
+        - if can? :nullifyagreements, Training
+          = form_tag '/trainings/nullifyagreements' do
+            = hidden_field_tag :name, "Operations Training"
+            = submit_tag "Nullify All", class: 'btn btn-sm btn-secondary', data: {:confirm => 'Are you sure you want to nullify all?'}
       -# %th.signup-header.text-center{scope: "col"} Nametag Made?
       -# %th.signup-header.text-center{scope: "col"} Picture Taken?
       -# %th.signup-header.text-center{scope: "col"} On Email List?
@@ -18,7 +26,7 @@
     - @users.each do |coach|
       %tr
         - makeragree = coach.trainings.exists?(name: 'Maker Coach Agreement')
-        - slack = coach.trainings.exists?(name: 'On Slack')
+        - op_training = coach.trainings.exists?(name: 'Operations Training')
         - nametag = coach.trainings.exists?(name: 'Nametag')
         - has_pic = coach.trainings.exists?(name: 'Picture Taken')
         - email_list = coach.trainings.exists?(name: 'On Email List')
@@ -40,11 +48,11 @@
             Yes
           - else
             No
-        -# %td.shifts.text-center{scope: "row", :class => ("confirmed" if slack == true)}
-        -#   - if slack == true
-        -#     Yes
-        -#   - else
-        -#     No
+        %td.shifts.text-center{scope: "row", :class => ("confirmed" if op_training == true)}
+          - if op_training == true
+            Yes
+          - else
+            No
         -# %td.shifts.text-center{scope: "row", :class => ("confirmed" if nametag == true)}
         -#   - if nametag == true
         -#     Yes

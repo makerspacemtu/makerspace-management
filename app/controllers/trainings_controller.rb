@@ -36,24 +36,25 @@ class TrainingsController < ApplicationController
   end
 
   def nullifyagreements
-    @training = Training.where(name: "Maker Coach Agreement")
+
+    @training = Training.where(name: params[:name])
     if @training.exists? == true
       if @training.first.id == Training.all.last.id
         maker_agree_id = Training.all.last.id.to_i + 1
-        puts "IF STATE TRUE: #{maker_agree_id}"
+        #puts "IF STATE TRUE: #{maker_agree_id}"
         @training.first.delete
       else
         @training.first.delete
         maker_agree_id = Training.all.last.id.to_i + 1
         #puts "IF STATE FALSE: #{maker_agree_id}"
       end
-      @training2 = Training.new(id: (maker_agree_id).to_s, name: "Maker Coach Agreement", training_type: "Paperwork", icon: "")
+      @training2 = Training.new(id: (maker_agree_id).to_s, name: params[:name], training_type: "Paperwork", icon: "")
       @training2.save
-      redirect_to coaches_users_path, notice: 'All Current Maker Coach Agreements Nullified.'
+      redirect_to coaches_users_path, notice: "All Current #{params[:name]}s Nullified."
     else
-      @training2 = Training.new(id: (Training.all.last.id.to_i + 1).to_s, name: "Maker Coach Agreement", training_type: "Paperwork", icon: "")
+      @training2 = Training.new(id: (Training.all.last.id.to_i + 1).to_s,name: params[:name], training_type: "Paperwork", icon: "")
       @training2.save
-      redirect_to coaches_users_path, notice: "Created new 'Maker Coach Agreement' training."
+      redirect_to coaches_users_path, notice: "Created new Paperwork training."
     end
   end
 
