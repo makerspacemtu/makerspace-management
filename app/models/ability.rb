@@ -21,6 +21,7 @@ class Ability
       can :update_password, User
       # admins can see punches
       can :read, Punch
+      can :checkin_history, Punch
       # admins can modify the actual trainings themselves
       can :read, Training
       can :edit, Training
@@ -35,6 +36,7 @@ class Ability
       can :nullifyagreements, Training
 
       can :coaches, User
+
       can :metrics, User
       can :destroy, User
       # admins have full access to daily reports
@@ -81,6 +83,7 @@ class Ability
       can :update_password, User
       # developers can see punches
       can :read, Punch
+      can :checkin_history, Punch
       # developers can modify the actual trainings themselves
       can :read, Training
       can :edit, Training
