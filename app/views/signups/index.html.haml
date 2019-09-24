@@ -112,9 +112,11 @@
                                         = submit_tag "X", class: 'd-inline-block btn btn-outline-danger btn-sm mb-1'
                             - rescue
                           - unique_trainings = Set[]
+                          - trainings_left = []
                           - user_day_arr.each do |day_user|
                             - unique_trainings.merge(User.find(day_user).trainings.select(:id).map{|k| k.id}.to_a)
-                          - unique_trainings.each do |uniq_training|
+                            - trainings_left = Training.select(:id).map{|k| k.id}.to_a - unique_trainings.to_a
+                          - trainings_left.each do |uniq_training|
                             - training_i = Training.find(uniq_training)
                             - puts "UNIQUE TRAINING YO #{uniq_training}"
                             -# user.trainings.where.not(training_type: "Paperwork").first(6).each do |training_i|
