@@ -68,6 +68,7 @@ class Ability
       #admins can change signup settings
       can :toggle_signup_status, Setting
       can :toggle_admin_view, Setting
+      can :toggle_deficient_trainings_view, Setting
 
     elsif user.developer?
       # developers have same permissions as developers
@@ -129,6 +130,7 @@ class Ability
       #developers can change signup settings
       can :toggle_signup_status, Setting
       can :toggle_admin_view, Setting
+      can :toggle_deficient_trainings_view, Setting
 
     elsif user.staff?
 
@@ -164,6 +166,7 @@ class Ability
       can :edit, Event
 
       can :update, Event
+      can :toggle_deficient_trainings_view, Setting
     end
     # members cannot currently do anything
   end

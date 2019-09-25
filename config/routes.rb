@@ -40,6 +40,9 @@ Rails.application.routes.draw do
     #Toggle admin view
   get '/settings/toggle_admin_view', to: 'settings#toggle_admin_view'
   post '/settings/toggle_admin_view', to: 'settings#toggle_admin_view'
+    #toggle deficient trainings display on signups page
+  get '/settings/toggle_deficient_trainings_view', to: 'settings#toggle_deficient_trainings_view'
+  post '/settings/toggle_deficient_trainings_view', to: 'settings#toggle_deficient_trainings_view'
 
   # training related routes
   post '/trainings/droptraining', to: 'trainings#droptraining'

@@ -21,6 +21,13 @@
             %i.fa.fa-plus
             Add Shift Slot (Admin)
 
+      = link_to settings_toggle_deficient_trainings_view_path, class: "btn btn-outline toggle-display-btn" do
+        - if Setting.deficient_trainings_view == "disabled"
+          %i.fa.fa-eye
+          Show Deficient Trainings
+        - else
+          %i.fa.fa-eye-slash
+          Hide Deficient Trainings
       .container
         .table-responsive
           %table.table.table-bordered.table-striped
@@ -87,9 +94,6 @@
                                     .d-flex.justify-content-center
                                       = f.submit "Add Selected Coach to Shift", class: "btn btn-primary signup-coach-add btn-sm"
 
-
-
-
                               - else
                             - else
 
@@ -101,7 +105,6 @@
                               - if ind_signup.signup_start == timerow.signup_start && daycol == ind_signup.signup_day
                                 - user = User.all.find(usersignup.user_id)
                                 - user_day_arr.push(user)
-                                - puts "USER DAY ARRAY #{user_day_arr}"
                                 .text-center
                                   = link_to user.full_name, user_path(user), style: "color:black", class: "text-nowrap"
                                   - if Setting.admin_view == "enabled"
@@ -116,27 +119,15 @@
                           - user_day_arr.each do |day_user|
                             - unique_trainings.merge(User.find(day_user).trainings.select(:id).map{|k| k.id}.to_a)
                             - trainings_left = Training.select(:id).map{|k| k.id}.to_a - unique_trainings.to_a
-                          - trainings_left.each do |uniq_training|
-                            - training_i = Training.find(uniq_training)
-                            - puts "UNIQUE TRAINING YO #{uniq_training}"
-                            -# user.trainings.where.not(training_type: "Paperwork").first(6).each do |training_i|
-                            %span{ class: "badge badge-#{training_i.training_type_format}" }
-                              - if training_i.icon.present? && !training_i.icon.blank?
-                                %i{ class: "fa fa-#{training_i.icon}" }
-                              - else
-                                %i{ class: "fa fa-trophy"}
-                              = training_i.name
-                              = #link_to new_user_user_training_path(user, training_id: training_i), method: :delete do
-                              =#  %i.fa.fa-times
-                            -# - if training_i.training_type != "Paperwork"
-                            -#   .d-flex.justify-content-start
-                            -#     %h6
-                            -#       = link_to user_path(user), style: "color: rgba(70, 74, 76, 0.8)" do
-                            -#         +
-                            -#         = user.trainings.where.not(training_type: "Paperwork").count - 6
-                            -#         more...
-
-
+                          - if Setting.deficient_trainings_view == "enabled"
+                            - trainings_left.each do |uniq_training|
+                              - training_i = Training.find(uniq_training)
+                              %span{ class: "badge badge-#{training_i.training_type_format}" }
+                                - if training_i.icon.present? && !training_i.icon.blank?
+                                  %i{ class: "fa fa-#{training_i.icon}" }
+                                - else
+                                  %i{ class: "fa fa-trophy"}
+                                = training_i.name
                   .tr
                   - if 1 == i
                     - prev_signup_print_val = signup_print_val

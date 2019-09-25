@@ -1,6 +1,7 @@
 defaults: &defaults
   toggle_signup_status: "closed"
   toggle_admin_view: "enabled"
+  toggle_deficient_trainings_view: "enabled"
 
 development:
   <<: *defaults
