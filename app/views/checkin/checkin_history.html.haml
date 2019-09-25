@@ -12,7 +12,9 @@
               - user_id = punch.user_id
 
               %h7.mb-0.mr-5
-                = User.where(id: user_id).first.email
+                
+                - user = User.find(user_id)
+                = link_to user.full_name, user_path(user), { :style => "color: rgba(70, 74, 76, 1)"}
               %h6.mb-0
                 = punch.created_at.strftime("%r on %B %-d, %Y")
                 %small

@@ -6,12 +6,16 @@
       .card-block
         %h5.card-title.mb-0
           = @user.full_name
+
           - if @user.position_name.present?
             %small.block
               = @user.position_name
+
           - if @user.user_type.present?
             %small.block
               = @user.user_type
+      .card-block
+        = "#{@user.email}"
 
       %ul.list-group.list-group-flush
         - if @user.user_type == 'Staff' || @user.user_type == "Admin"
