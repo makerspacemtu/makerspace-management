@@ -22,7 +22,7 @@
             - else
               %i{ class: "fa fa-trophy"}
             = #training.name
-            = link_to training.name,{:controller => 'trainings', :action => 'show', :id => training.id}, {:style => "color: white"}
+            = link_to training.name,{:controller => 'trainings', :action => 'show', :id => training.id}, {:class => "badge badge-#{training.training_type_format}" }
 
           %small
             = link_to edit_training_path(training) do
