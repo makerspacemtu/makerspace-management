@@ -5,6 +5,10 @@ class TrainingsController < ApplicationController
   def index
   end
 
+  def show
+    @training = Training.find(params[:id])
+  end
+
   def edit
     @training = Training.find(params[:id])
   end

@@ -21,7 +21,9 @@
               %i{ class: "fa fa-#{training.icon}" }
             - else
               %i{ class: "fa fa-trophy"}
-            = training.name
+            = #training.name
+            = link_to training.name,{:controller => 'trainings', :action => 'show', :id => training.id}, {:style => "color: white"}
+
           %small
             = link_to edit_training_path(training) do
               %i.fa.fa-pencil
