@@ -21,16 +21,25 @@ class Training < ApplicationRecord
 
   def training_type_format
     case self.training_type
-    when "Level 1" || 'Woodworking'
+    when "Level 1" 
       "warning"
-    when "Level 2" || '3D Printing'
+    when 'Woodworking'
+      "warning"
+    when "Level 2"
       "primary"
-    when "Level 3" || 'Crafting'
+    when '3D Printing'
+      "primary"
+    when "Level 3"
       "info"
-    when "Level 4" || 'Electronics'
+    when 'Crafting'
+      "info"
+    when "Level 4"
+      "secondary"
+    when 'Electronics'
       "secondary"
     when "Paperwork"
       "danger"
+
     else
       "default"
     end
