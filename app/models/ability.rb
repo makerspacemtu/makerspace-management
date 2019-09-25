@@ -141,6 +141,10 @@ class Ability
       can :update, User, id: user.id
       can :update_password, User, id: user.id
       can :password, User, id: user.id
+
+      # staff can view the actual trainings themselves
+      can :read, Training
+
       # staff can see, create and remove user trainings for everyone
       can :read, UserTraining
       can :create, UserTraining

@@ -11,7 +11,7 @@
 #
 
 class Training < ApplicationRecord
-  TRAINING_TYPES = ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Paperwork','Woodworking','3D Printing','Crafting','Electronics','Other']
+  TRAINING_TYPES = ['Paperwork','Woodworking','3D Printing','Crafting','Electronics','Other']
 
   has_many :user_trainings
   has_many :users, :through => :user_trainings
@@ -21,20 +21,12 @@ class Training < ApplicationRecord
 
   def training_type_format
     case self.training_type
-    when "Level 1"
-      "warning"
     when 'Woodworking'
       "warning"
-    when "Level 2"
-      "primary"
     when '3D Printing'
       "primary"
-    when "Level 3"
-      "info"
     when 'Crafting'
       "info"
-    when "Level 4"
-      "success"
     when 'Electronics'
       "success"
     when "Paperwork"

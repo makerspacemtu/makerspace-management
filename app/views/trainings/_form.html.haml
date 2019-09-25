@@ -16,7 +16,7 @@
 
   .form-group
     = f.label :training_type
-    = f.select :training_type, options_for_select(Training::TRAINING_TYPES, f.object.training_type || 'Level 1'), {}, class: "form-control"
+    = f.select :training_type, options_for_select(Training::TRAINING_TYPES, f.object.training_type || 'Woodworking'), {}, class: "form-control"
 
   .form-group
     = f.label :icon

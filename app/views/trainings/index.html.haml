@@ -10,29 +10,34 @@
 
           %i.fa.fa-plus
           Add a Training
-
-  - if @trainings.count > 0
     %hr{:style => "margin-top:5px; margin-bottom:5px"}
-    - @trainings.order(:name).each do |training|
-      %div
-        %h4
-          %span{ class: "badge badge-#{training.training_type_format}" }
-            - if training.icon.present? && !training.icon.blank?
-              %i{ class: "fa fa-#{training.icon}" }
-            - else
-              %i{ class: "fa fa-trophy"}
-            = #training.name
-            = link_to training.name,{:controller => 'trainings', :action => 'show', :id => training.id}, {:class => "badge badge-#{training.training_type_format}" }
+  - if @trainings.count > 0
+    - Training::TRAINING_TYPES.each do |training_type_i|
+      %h4
+        = training_type_i
 
-          %small
-            = link_to edit_training_path(training) do
-              %i.fa.fa-pencil
-              Edit
-          %small.tab{:style => "margin-left:10px",:class => "btn btn-outline-danger btn-sm pull-right"}
-            %i.fa.fa-trash
-            = link_to 'Delete',{:controller => 'trainings', :action => 'destroy', :id => training.id }, |
-              data:  {:method => :delete, :remote => true}
-          %hr{:style => "margin-top:5px; margin-bottom:5px"}
+      %hr{:style => "margin-top:5px; margin-bottom:5px"}
+      - @trainings.where(training_type: training_type_i).order(:name).each do |training|
+        %div
+          %h4
+            %span{ class: "badge badge-#{training.training_type_format}" }
+              - if training.icon.present? && !training.icon.blank?
+                %i{ class: "fa fa-#{training.icon}" }
+              - else
+                %i{ class: "fa fa-trophy"}
+              = #training.name
+              = link_to training.name,{:controller => 'trainings', :action => 'show', :id => training.id}, {:class => "badge badge-#{training.training_type_format}" }
+            - if can? :edit, Training
+              %small
+                = link_to edit_training_path(training) do
+                  %i.fa.fa-pencil
+                  Edit
+            - if can? :destroy, Training
+              %small.tab{:style => "margin-left:10px",:class => "btn btn-outline-danger btn-sm pull-right"}
+                %i.fa.fa-trash
+                = link_to 'Delete',{:controller => 'trainings', :action => 'destroy', :id => training.id }, |
+                  data:  {:method => :delete, :remote => true}
+            %hr{:style => "margin-top:5px; margin-bottom:5px"}
 
   - else
     %p.text-muted
