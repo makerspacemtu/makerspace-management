@@ -5,6 +5,7 @@
     %tr
       %th.signup-header.text-center{scope: "col"} Coach Name
       %th.signup-header.text-center{scope: "col"} Number of Shifts Taken
+      %th.signup-header.text-center{scope: "col"} Number of Trainings
       %th.signup-header.text-center{scope: "col"}
         Maker Coach Agreement?
         - if can? :nullifyagreements, Training
@@ -17,7 +18,7 @@
           = form_tag '/trainings/nullifyagreements' do
             = hidden_field_tag :name, "Operations Training"
             = submit_tag "Nullify All", class: 'btn btn-sm btn-secondary', data: {:confirm => 'Are you sure you want to nullify all?'}
-      -# %th.signup-header.text-center{scope: "col"} Nametag Made?
+
       -# %th.signup-header.text-center{scope: "col"} Picture Taken?
       -# %th.signup-header.text-center{scope: "col"} On Email List?
       -# %th.signup-header.text-center{scope: "col"} Has Shirt?
@@ -31,6 +32,7 @@
         - has_pic = coach.trainings.exists?(name: 'Picture Taken')
         - email_list = coach.trainings.exists?(name: 'On Email List')
         - has_shirt = coach.trainings.exists?(name: 'Has Shirt')
+        - num_trainings = coach.trainings.count
 
         %td.text-center{scope: "row"}
           = link_to coach.full_name, user_path(coach),style: "color:black"
@@ -43,6 +45,8 @@
           - else
             .row.d-flex.justify-content-center
               0
+        %td.shifts.text-center{scope: "row", :class => ("confirmed" if num_trainings > 0)}
+          = num_trainings
         %td.shifts.text-center{scope: "row", :class => ("confirmed" if makeragree == true)}
           - if makeragree == true
             Yes
