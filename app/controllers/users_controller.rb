@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @reason_counts = Punch.reason_counts
     @training_counts = UserTraining.training_counts
     @events_count = Event.all.count
-    date_from  = Date.parse('2017-01-01')
+    date_from  = Date.parse('2018-01-01')
 
     date_to    = Time.new(Time.now.year, Time.now.month, Time.now.day, 0, 0, 0)
     date_range_f = (date_from..date_to).map(&:to_s)
