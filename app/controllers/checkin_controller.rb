@@ -1,4 +1,5 @@
 class CheckinController < ApplicationController
+  respond_to :html, :json
   def index
     @currently_checked_in = User.checked_in_users
     @currently_checked_in_alph = User.checked_in_users.order(:first_name, :last_name)
@@ -92,6 +93,7 @@ class CheckinController < ApplicationController
     if last_punch.present? && last_punch.in?
       # the user was checked in, we need to check them out
       user.punch_out!
+
       message = "been checked out."
     else
       # this is the user's first time, or they were checked out last, check them in
@@ -100,7 +102,13 @@ class CheckinController < ApplicationController
     end
 
     if current_user.present?
-      redirect_to checkin_path, notice: "#{user.first_name} has #{message}"
+      #Direct to survey HERE
+      if last_punch.present? && last_punch.in?
+        redirect_to new_survey_path, data: { modal: true }, controller:"SurveysController#new"  #, notice: "Thanks #{user.first_name}! You've #{message}"
+        #respond_modal_with @survey, location: new_survey_path
+      else
+        redirect_to checkin_path, notice: "#{user.first_name} has #{message}"
+      end
       return
     else
       redirect_to checkin_path, notice: "Thanks #{user.first_name}! You've #{message}"
@@ -117,7 +125,7 @@ class CheckinController < ApplicationController
   end
 
   def checkin_history
-    
+
 
   end
 
