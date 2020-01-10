@@ -70,6 +70,12 @@ class Ability
       can :toggle_admin_view, Setting
       can :toggle_deficient_trainings_view, Setting
 
+      can :read, Survey
+      can :destroy, Survey
+      can :create, Survey
+      can :edit, Survey
+      can :update, Survey
+
     elsif user.developer?
       # developers have same permissions as developers
       # developers can see any user
@@ -132,6 +138,13 @@ class Ability
       can :toggle_admin_view, Setting
       can :toggle_deficient_trainings_view, Setting
 
+      can :read, Survey
+      can :destroy, Survey
+      can :create, Survey
+      can :edit, Survey
+      can :update, Survey
+
+
     elsif user.staff?
 
       # staff can see any user
@@ -171,7 +184,19 @@ class Ability
 
       can :update, Event
       can :toggle_deficient_trainings_view, Setting
+
+      can :read, Survey
+      can :destroy, Survey
+      can :create, Survey
+      can :edit, Survey
+      can :update, Survey
+
+
+    elsif user.member?
+      can :read, Survey
+      can :create, Survey
+      can :update, Survey
     end
-    # members cannot currently do anything
+
   end
 end
