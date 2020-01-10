@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :events
 
+  resources :surveys
+
   # checkin related routes
   get '/checkin', to: 'checkin#index'
   get '/checkin/first_time', to: 'checkin#first_time'
