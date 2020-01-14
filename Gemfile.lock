@@ -43,12 +43,13 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (7.1.4)
-    autoprefixer-rails (6.6.1)
+    autoprefixer-rails (9.7.3)
       execjs
     bcrypt (3.1.11)
-    bootstrap (4.0.0.alpha6)
-      autoprefixer-rails (>= 6.0.3)
-      sass (>= 3.4.19)
+    bootstrap (4.3.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     builder (3.2.2)
     byebug (9.0.6)
     cancancan (1.15.0)
@@ -133,6 +134,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     pg (0.19.0)
+    popper_js (1.16.0)
     puma (3.6.2)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -189,13 +191,25 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    sass (3.4.23)
+    sass (3.7.4)
+      sass-listen (~> 4.0.0)
+    sass-listen (4.0.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sassc (2.2.1)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     slack-ruby-client (0.7.9)
       activesupport
       faraday (>= 0.9)
@@ -243,7 +257,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  bootstrap (~> 4.0.0.alpha6)
+  bootstrap (~> 4.3.1)
   byebug
   cancancan
   coffee-rails (~> 4.2)
