@@ -1,5 +1,10 @@
 
 .row.d-flex.justify-content-center
+  -if can? :read, Survey
+    .col-11.card.mb-2
+      .card-header.d-flex.justify-content-center
+        %h4 Total Competencies
+      #competency-counts{:style => "width: 100%; height: 400px;"}
   .col-11.card.mb-2
     .card-header.d-flex.justify-content-center
       %h4 Total Trainings
@@ -63,6 +68,7 @@
 %script{src: "https://cdn.plot.ly/plotly-latest.min.js"}
 
 %script
+  var competencyCounts = #{raw @competency_counts.to_json}
   var trainingCounts = #{raw @training_counts.to_json}
   var reasonCounts = #{raw @reason_counts.to_json}
   var totalUsersCreatedByWeek = #{raw @total_users_created_by_week.to_json}

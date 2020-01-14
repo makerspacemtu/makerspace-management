@@ -36,49 +36,7 @@ class UsersController < ApplicationController
 
     @punches_per_work_day = punches_count/date_count
 
-    puts ("PUNCH: #{ Punch.where(in: true).count}")
-    puts ("DATE RANGE2: #{(date_range_f.count)}")
-    puts ("DATE RANGE2: #{(@punches_per_work_day)}")
-
-    # work_days = Hash
-    # punches_per_day = Punch.where(in: true).group("DATE_TRUNC('day', created_at)").count.sort
-    # punches_per_work_day_t = {}
-    # date_range = {}
-    # k=1
-    # date_range_f.each do |date_f,ind|
-    # # punches_per_day.to_h.each do |key,value|
-    #   convert = Time.parse("#{date_f} 00:00:00 UTC")
-    #   # puts("CONVERT: #{convert}")
-    #   # is only on weekdays and not in May through August
-    #   if convert.strftime('%u').to_i < 5 && (convert.strftime('%m').to_i < 5 || convert.strftime('%m').to_i > 8)
-    #     date_range[convert] = 0
-    #     # punches_per_work_day_t[key] = value
-    #     k+=1
-    #   end
-    #   # puts("COMPARATOR 1 #{  punches_per_day.to_h[date_f]}")
-    #   # puts("COMPARATOR 2 #{  punches_per_day.to_h[date_f]}")
-    # end
-    # # puts date_range
-    # date_range.each do |date,ind|
-    #
-    #   if punches_per_day.to_h[date] != nil && punches_per_day == date
-    #     punches_per_work_day_t[date] = value
-    #     puts ("POSITIVE DAY: #{punches_per_work_day_t[date]}")
-    #   else
-    #     punches_per_work_day_t[date] = 0
-    #
-    #   end
-    # end
-    # # puts ("POSITIVE DAYS: #{punches_per_work_day_t}")
-    #
-    # # puts("DATE F LG: #{date_range_f.length}")
-    # # puts("DATE RANGE LG: #{date_range.length}")
-    # puts("PER DAY: #{punches_per_day}")
-    # # puts("PER WORK DAY: #{punches_per_work_day_t}")
-    #
-    # @punches_per_work_day = punches_per_work_day_t.sum{|k,v| v} / punches_per_work_day_t.to_h.keys.count
-
-
+    @competency_counts = Survey.competency_counts
   end
 
   def show

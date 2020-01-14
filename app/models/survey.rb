@@ -21,4 +21,9 @@ class Survey < ApplicationRecord
   validates :user_id, presence: true
   #validates :audience,  inclusion: { in: %w[Private Public] }
 
+  def self.competency_counts
+    usercompetencies = self.group(:tool_name).average(:competency).sort.to_h
+    usercompetencies
+  end
+
 end

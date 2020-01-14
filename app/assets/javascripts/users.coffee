@@ -101,3 +101,21 @@ if trainingCounts?
   data = [trace];
 
   Plotly.newPlot('training-counts', data);
+
+if competencyCounts?
+  yData = Object.values(competencyCounts);
+
+  xData = Object.keys(competencyCounts);
+
+  trace = {
+    x: xData,
+    y: yData,
+    type: 'bar',
+    marker: {
+      color: '#76bf43'
+    }
+  };
+
+  data = [trace];
+
+  Plotly.newPlot('competency-counts', data);
