@@ -1,8 +1,7 @@
 .jumbotron
 
   .modal-header
-    %h5.modal-title How skilled are you at using the following tool:
-    %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-      %span{"aria-hidden" => "true"} ×
+    %h5.modal-title How confident are you at using the following tool:
+
   .modal-body
     = render 'form', survey: @survey
