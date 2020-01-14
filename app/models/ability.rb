@@ -185,15 +185,11 @@ class Ability
       can :update, Event
       can :toggle_deficient_trainings_view, Setting
 
-      can :read, Survey
-      can :destroy, Survey
       can :create, Survey
-      can :edit, Survey
       can :update, Survey
 
 
     elsif user.member?
-      can :read, Survey
       can :create, Survey
       can :update, Survey
     end
