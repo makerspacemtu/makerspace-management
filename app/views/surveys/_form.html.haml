@@ -17,7 +17,7 @@
     = available_training.name
   .form-group
     = hidden_field_tag :survey, @survey
-    = hidden_field_tag :user_id, current_user.id
+    = hidden_field_tag :user_id, @survey_user.id
     =# hidden_field_tag :user_id, current_user.id
   .form-group
     = hidden_field_tag :tool_id, available_training.id
