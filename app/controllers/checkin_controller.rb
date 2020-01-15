@@ -32,6 +32,7 @@ class CheckinController < ApplicationController
 
   def checkin
     # if the user id param is passed, find the user's email address by their user id
+    survey_user = User.all.where(id: Punch.all.last.user_id)
     if checkin_params[:user_id].present?
       email = User.find(checkin_params[:user_id]).email
 
@@ -104,14 +105,19 @@ class CheckinController < ApplicationController
     if current_user.present?
       #Direct to survey HERE
       if last_punch.present? && last_punch.in?
-        redirect_to new_survey_path, data: { modal: true }, controller:"SurveysController#new"  #, notice: "Thanks #{user.first_name}! You've #{message}"
+        redirect_to surveys_new_path, data: { modal: true }, controller:"SurveysController#new"  #, notice: "Thanks #{user.first_name}! You've #{message}"
         #respond_modal_with @survey, location: new_survey_path
       else
         redirect_to checkin_path, notice: "#{user.first_name} has #{message}"
       end
       return
     else
-      redirect_to checkin_path, notice: "Thanks #{user.first_name}! You've #{message}"
+      if message == "been checked in."
+        redirect_to checkin_path, notice: "Thanks #{user.first_name}! You've #{message}"
+      else
+        redirect_to surveys_new_path, data: { modal: true }, controller:"SurveysController#new"
+      end
+
       return
     end
 

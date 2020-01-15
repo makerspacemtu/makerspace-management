@@ -71,10 +71,10 @@ class Ability
       can :toggle_deficient_trainings_view, Setting
 
       can :read, Survey
-      can :destroy, Survey
+      # can :destroy, Survey
       can :create, Survey
-      can :edit, Survey
-      can :update, Survey
+      # can :edit, Survey
+      # can :update, Survey
 
     elsif user.developer?
       # developers have same permissions as developers
@@ -139,10 +139,10 @@ class Ability
       can :toggle_deficient_trainings_view, Setting
 
       can :read, Survey
-      can :destroy, Survey
+      # can :destroy, Survey
       can :create, Survey
-      can :edit, Survey
-      can :update, Survey
+      # can :edit, Survey
+      # can :update, Survey
 
 
     elsif user.staff?
@@ -186,12 +186,11 @@ class Ability
       can :toggle_deficient_trainings_view, Setting
 
       can :create, Survey
-      can :update, Survey
-
+      # can :update, Survey
 
     elsif user.member?
       can :create, Survey
-      can :update, Survey
+      # can :update, Survey
     end
 
   end

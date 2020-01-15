@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
   respond_to :html, :json
 
   #def index
@@ -11,23 +11,27 @@ class SurveysController < ApplicationController
   end
 
   def new
-
-    current_trainings = current_user.trainings
-    current_user_surveys = Survey.where(user_id: current_user.id)
-    ids = current_user_surveys.map{|x| x.tool_id.to_i}
-    @available_trainings = current_trainings.reject{|x| ids.include? x.id.to_i}
-
-
-    #@users = User.where(user_type: ['Admin', 'Staff']).order(first_name: :asc)
-    @survey = Survey.new
-    respond_modal_with @survey
+    @survey_user = User.where(id: Punch.all.last.user_id).first
+    current_trainings = @survey_user.trainings
+    current_user_surveys = Survey.where(user_id: @survey_user.id)
+    ids = current_user_surveys.map{|x| x.tool_id.to_i} #ids are all the surveys that pertain to the user
+    @available_trainings = current_trainings.reject{|x| ids.include? x.id.to_i} #find all the trainings that the user has not done a survey on
+    #Go back to checkin path if you have already completed your surveys
+    if @available_trainings.count == 0
+      redirect_to checkin_path
+    else
+      @survey = Survey.new
+      respond_modal_with @survey
+   end
   end
 
   def create
-    current_trainings = current_user.trainings
-    current_user_surveys = Survey.where(user_id: current_user.id)
+    @survey_user = User.where(id: Punch.all.last.user_id).first
+    current_trainings = @survey_user.trainings
+    current_user_surveys = Survey.where(user_id: @survey_user.id)
     ids = current_user_surveys.map{|x| x.tool_id.to_i}
     @available_trainings = current_trainings.reject{|x| ids.include? x.id.to_i}
+
     @survey = Survey.new(survey_params)
 
     if @survey.save

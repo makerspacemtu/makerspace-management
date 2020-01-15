@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :events
 
-  resources :surveys
+  #resources :surveys
 
   # checkin related routes
   get '/checkin', to: 'checkin#index'
@@ -31,6 +31,12 @@ Rails.application.routes.draw do
   post '/slack/checkin', to: 'slack#checkin'
   post '/slack/checkout', to: 'slack#checkout'
   post '/checkin/checkout_all', to: 'checkin#checkout_all'
+
+  # survey related routes
+  get '/surveys/new', to: 'surveys#new'
+  # get '/surveys/new' to: 'surveys#new'
+
+  post '/surveys', to: 'surveys#create'
 
   # signup related routes
   post '/signups/dropsignup', to: 'signups#dropsignup'

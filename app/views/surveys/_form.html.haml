@@ -9,7 +9,7 @@
         %li
           = error
 
-= form_tag @survey do
+= form_tag(@survey, remote: true) do
 
   - available_training = @available_trainings.first
 
