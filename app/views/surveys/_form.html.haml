@@ -27,13 +27,16 @@
 
   .btn-group-vertical.btn-group-toggle.btn-block
     .label.btn.btn-primary{:style => "border-bottom-width:3px; padding-right:35px; border-bottom-color:rgb(236,238,239)"}
-      = button_tag '1 (Very Unconfident)', name: :competency, value: '1', class: ' btn btn-primary'
+      = button_tag '0 (Very Unconfident)', name: :competency, value: '0', class: ' btn btn-primary'
 
     .label.btn.btn-primary{:style => "border-bottom-width:3px; padding-right:35px; border-bottom-color:rgb(236,238,239)"}
-      = button_tag '2 (Small Amount of Actual Experience)', name: :competency, value: '2', class: 'btn btn-primary'
+      = button_tag '1 (Small Amount of Actual Experience)', name: :competency, value: '1', class: 'btn btn-primary'
 
     .label.btn.btn-primary{:style => "border-bottom-width:3px; padding-right:35px; border-bottom-color:rgb(236,238,239)"}
-      = button_tag '3 (Reasonably Confident)', name: :competency, value: '3', class: 'btn btn-primary'
+      = button_tag '2 (Somewhat Confident)', name: :competency, value: '2', class: 'btn btn-primary'
+
+    .label.btn.btn-primary{:style => "border-bottom-width:3px; padding-right:35px; border-bottom-color:rgb(236,238,239)"}
+      = button_tag '3 (Confident)', name: :competency, value: '3', class: 'btn btn-primary'
 
     .label.btn.btn-primary{:style => "border-bottom-width:3px; padding-right:35px; border-bottom-color:rgb(236,238,239)"}
       = button_tag '4 (Very Confident)', name: :competency, value: '4', class: 'btn btn-primary'

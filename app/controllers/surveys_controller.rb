@@ -27,7 +27,7 @@ class SurveysController < ApplicationController
 
   def create
     @survey_user = User.where(id: Punch.all.last.user_id).first
-    current_trainings = @survey_user.trainings
+    current_trainings = @survey_user.trainings.where.not(training_type: "Paperwork")
     current_user_surveys = Survey.where(user_id: @survey_user.id)
     ids = current_user_surveys.map{|x| x.tool_id.to_i}
     @available_trainings = current_trainings.reject{|x| ids.include? x.id.to_i}
