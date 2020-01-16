@@ -120,6 +120,7 @@ class Ability
       can :edit, Signup
       can :update, Signup
       can :dropsignup, Signup
+      can :clearusersignups, Signup
 
       can :read, UserSignup
       can :destroy, UserSignup

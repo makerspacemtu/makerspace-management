@@ -41,11 +41,17 @@ class SignupsController < ApplicationController
 
   def destroy
     @signup = Signup.find(params[:id])
+    #if a signup slot is deleted, then also delete the associated user signups
+    if UserSignup.where(signup_id: @signup.id).exists?
+      UserSignup.where(signup_id: @signup.id).each do |user_signup|
+        user_signup.delete
+      end
+    end
     @signup.delete
     if @signup.destroy
       redirect_to signups_path, notice: 'Slot deleted.'
     else
-      # render 'edit', error: @signup.errors
+      redirect_to signups_path, notice: 'Error deleting slot.'
     end
   end
 
@@ -57,6 +63,19 @@ class SignupsController < ApplicationController
     else
       redirect_to signups_path, notice: "Could not drop shift."
     end
+  end
+
+  def clearusersignups
+    #Clear out all the existing usersignups
+    if UserSignup.all.exists?
+      UserSignup.all.each do |user_signup|
+        user_signup.delete
+        puts user_signup
+      end
+    else
+      redirect_to signups_path, notice: "No user signups currently exist."
+    end
+    redirect_to signups_path, notice: "All current User Signups have been cleared."
   end
 
 private

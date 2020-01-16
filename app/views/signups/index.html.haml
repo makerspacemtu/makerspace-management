@@ -20,6 +20,11 @@
           = link_to new_signup_path, data: { modal: true }, class: "btn btn-outline admin-delete" do
             %i.fa.fa-plus
             Add Shift Slot (Admin)
+        - if can? :clearusersignups, Signup
+          = form_tag '/signups/clearusersignups' do
+            = submit_tag "Clear All Current User Signups (Developer)", class: 'btn btn-outline admin-delete', data: {:confirm => 'Are you sure you want to clear all current coach signups? (This will remove the user signups, not the slots.)'}
+          -# = link_to  "Clear all Current User Signups (Admin)", signups_clearusersignups_path, class: "btn btn-outline admin-delete"
+
 
       = link_to settings_toggle_deficient_trainings_view_path, class: "btn btn-outline toggle-display-btn" do
         - if Setting.deficient_trainings_view == "disabled"

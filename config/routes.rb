@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   # signup related routes
   post '/signups/dropsignup', to: 'signups#dropsignup'
+  post '/signups/clearusersignups', to: 'signups#clearusersignups'
 
   # setting related routes
     #Open or close the signups for coaches
