@@ -36,4 +36,16 @@ class SettingsController < ApplicationController
     @deficient_trainings_view = Setting.deficient_trainings_view
   end
 
+  def toggle_surveys_active
+
+    if Setting.surveys_active == "disabled"
+      Setting.surveys_active = "enabled"
+      redirect_to metrics_users_path, notice: 'Checkout surveys enabled.'
+    else
+      Setting.surveys_active = "disabled"
+      redirect_to metrics_users_path, notice: 'Checkout surveys disabled.'
+    end
+
+  end
+
 end

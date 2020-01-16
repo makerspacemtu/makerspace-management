@@ -52,6 +52,9 @@ Rails.application.routes.draw do
     #toggle deficient trainings display on signups page
   get '/settings/toggle_deficient_trainings_view', to: 'settings#toggle_deficient_trainings_view'
   post '/settings/toggle_deficient_trainings_view', to: 'settings#toggle_deficient_trainings_view'
+    #toggle whether surveys are on or off
+  get '/settings/toggle_surveys_active', to: 'settings#toggle_surveys_active'
+  post '/settings/toggle_surveys_active', to: 'settings#toggle_surveys_active'
 
   # training related routes
   post '/trainings/droptraining', to: 'trainings#droptraining'

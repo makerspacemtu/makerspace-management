@@ -104,7 +104,8 @@ class CheckinController < ApplicationController
 
     if current_user.present?
       #Direct to survey HERE
-      if last_punch.present? && last_punch.in?
+      if last_punch.present? && last_punch.in? && Setting.surveys_active == "enabled"
+
         redirect_to surveys_new_path, data: { modal: true }, controller:"SurveysController#new"  #, notice: "Thanks #{user.first_name}! You've #{message}"
         #respond_modal_with @survey, location: new_survey_path
       else
@@ -114,8 +115,10 @@ class CheckinController < ApplicationController
     else
       if message == "been checked in."
         redirect_to checkin_path, notice: "Thanks #{user.first_name}! You've #{message}"
-      else
+      elsif message == "been checked out." && Setting.surveys_active == "enabled"
         redirect_to surveys_new_path, data: { modal: true }, controller:"SurveysController#new"
+      else
+        redirect_to checkin_path, notice: "Thanks #{user.first_name}! You've #{message}"
       end
 
       return

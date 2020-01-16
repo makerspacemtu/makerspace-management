@@ -69,6 +69,7 @@ class Ability
       can :toggle_signup_status, Setting
       can :toggle_admin_view, Setting
       can :toggle_deficient_trainings_view, Setting
+      can :toggle_surveys_active, Setting
 
       can :read, Survey
       # can :destroy, Survey
@@ -138,6 +139,7 @@ class Ability
       can :toggle_signup_status, Setting
       can :toggle_admin_view, Setting
       can :toggle_deficient_trainings_view, Setting
+      can :toggle_surveys_active, Setting
 
       can :read, Survey
       # can :destroy, Survey

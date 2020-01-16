@@ -1,6 +1,11 @@
 
 .row.d-flex.justify-content-center
   -if can? :read, Survey
+    - if can? :toggle_surveys_active, Setting
+      - if Setting.surveys_active == "disabled"
+        = link_to  "Enable Surveys (Admin)", settings_toggle_surveys_active_path, class: "btn btn-outline admin-delete"
+      - else
+        = link_to  "Disable Surveys (Admin)", settings_toggle_surveys_active_path, class: "btn btn-outline admin-delete"
     .col-11.card.mb-2
       .card-header.d-flex.justify-content-center
         %h4 Average Tool Confidence Ratings by Tool
@@ -68,6 +73,7 @@
 %script{src: "https://cdn.plot.ly/plotly-latest.min.js"}
 
 %script
+  var competencyCountsQty = #{raw @competency_counts_qty.to_json}
   var competencyCounts = #{raw @competency_counts.to_json}
   var trainingCounts = #{raw @training_counts.to_json}
   var reasonCounts = #{raw @reason_counts.to_json}
