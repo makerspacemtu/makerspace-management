@@ -37,6 +37,7 @@ class UsersController < ApplicationController
     @punches_per_work_day = punches_count/date_count
 
     @competency_counts = Survey.competency_counts
+    @competency_counts_qty = Survey.competency_counts_qty
   end
 
   def show

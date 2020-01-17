@@ -110,7 +110,9 @@ if competencyCounts?
   trace = {
     x: xData,
     y: yData,
+    hoverinfo: "text"
     type: 'bar',
+    hovertext: Object.values(competencyCountsQty);
     marker: {
       color: '#76bf43'
     }

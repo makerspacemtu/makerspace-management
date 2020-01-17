@@ -27,7 +27,10 @@ class Survey < ApplicationRecord
     usercompetencies = self.group(:tool_name).average(:competency).sort.to_h
     usercompetencies
   end
+
   def self.competency_counts_qty
     usercompetencies_qty = self.group(:tool_name).count.sort.to_h
+    usercompetencies_qty = usercompetencies_qty.each{ |key,str| usercompetencies_qty[key] = "# of Data Points: #{str}" }
+    usercompetencies_qty
   end
 end
