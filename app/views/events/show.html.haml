@@ -73,7 +73,7 @@
                 %h6.mb-0
                   - attendee = User.all.find(punch.user_id)
                   - attendee_type = User.where(id: attendee.id).first.user_type
-                  - if attendee_type != "member"
+                  - if attendee_type != "Member"
                     = link_to "#{attendee.full_name}", user_path(attendee),style: "color:#76bf43"
                     = "(Coach)"
                   - else

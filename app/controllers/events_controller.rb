@@ -48,7 +48,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
-    @attendees = Punch.all.where(reason: @event.id).select("DISTINCT ON (user_id) *")
+    @punches = Punch.all.where(reason: @event.id).select("DISTINCT ON (user_id) *")
+    @attendees = @punches.all.sort_by {|t| User.all.where(id: t.user_id).first.user_type.downcase.sub("s","a")}
   end
 
   def update

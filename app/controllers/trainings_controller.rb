@@ -7,6 +7,9 @@ class TrainingsController < ApplicationController
 
   def show
     @training = Training.find(params[:id])
+    @usertrainings = UserTraining.where(training_id: @training.id)
+    # order users by user type using the User model and sort_by
+    @users_trained_on = @usertrainings.all.sort_by {|t| User.all.where(id: t.user_id).first.user_type.downcase.sub("s","a")}
   end
 
   def edit
