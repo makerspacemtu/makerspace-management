@@ -143,7 +143,7 @@ private
       :interests
     ]
 
-    if current_user && current_user.admin?
+    if current_user && (current_user.admin? or current_user.developer?) 
       base << :member_since
       base << :user_type
     end

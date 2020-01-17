@@ -71,7 +71,7 @@
     %small.form-text.text-muted
       Direct link to an image to use as your profile image
 
-  - if current_user.admin?
+  - if current_user.admin? or current_user.developer?
     %h5.mb-1
       Admin only options
 
