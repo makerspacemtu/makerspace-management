@@ -50,6 +50,22 @@ class Punch < ApplicationRecord
     punches.sort.to_h
   end
 
+  def self.punches_created_by_month
+    punches = self.where(in: true).group("DATE_TRUNC('month', created_at)").count
+
+    current_month = punches.keys[0]
+    while current_month < Time.now
+      unless punches.key?(current_month)
+        # add the missing months
+        punches[current_month] = 0
+      end
+
+      current_month += 30.days
+    end
+
+    punches.sort.to_h
+  end
+
   def self.reason_counts
     punches = self.where(in: true).group("DATE_TRUNC('week', created_at)").count
     event_validationarray = [ "event" ].to_a.concat((0.to_s...1000.to_s).to_a)

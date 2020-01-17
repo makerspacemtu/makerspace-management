@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     @total_users_created_by_week = User.total_users_created_by_week
     @users_created_by_week = User.users_created_by_week
     @punches_created_by_week = Punch.punches_created_by_week
+    @punches_created_by_month = Punch.punches_created_by_month
     @reason_counts = Punch.reason_counts
     @training_counts = UserTraining.training_counts
     @events_count = Event.all.count
@@ -143,7 +144,7 @@ private
       :interests
     ]
 
-    if current_user && (current_user.admin? or current_user.developer?) 
+    if current_user && (current_user.admin? or current_user.developer?)
       base << :member_since
       base << :user_type
     end
