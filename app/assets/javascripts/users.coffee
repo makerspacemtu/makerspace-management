@@ -49,8 +49,8 @@ if punchesCreatedByMonth?
   yAxis = Object.values(punchesCreatedByMonth);
 
   xAxis = [];
-  for week in Object.keys(punchesCreatedByMonth)
-    d = new Date(week)
+  for month in Object.keys(punchesCreatedByMonth)
+    d = new Date(month)
     xAxis.push((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear())
 
   trace = {

@@ -60,7 +60,7 @@ class Punch < ApplicationRecord
         punches[current_month] = 0
       end
 
-      current_month += 30.days
+      current_month += 1.month
     end
 
     punches.sort.to_h
