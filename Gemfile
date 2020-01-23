@@ -49,6 +49,9 @@ gem 'haml'
 
 gem 'cancancan'
 
+gem  'figaro'
+
+gem 'whenever', require: false
 # Slack controller. Read more: https://github.com/slack-ruby/slack-ruby-client
 gem 'slack-ruby-client'
 
