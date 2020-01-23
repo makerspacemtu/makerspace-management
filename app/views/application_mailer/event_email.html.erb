@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <div class="jumbotron">
+    <head>
+      <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    </head>
+    <body>
+      <h2>
+        Events this past week in the Makerspace:
+        <% Event.all.each do |event| %>
+          <% if Punch.all.where(reason: event.id).count > 0 %>
+            <% attendees = Punch.all.where(reason: event.id).select("DISTINCT ON (user_id) *").size %>
+          <% else %>
+            <% attendees = 0 %>
+          <% end %>
+          <h3>
+            <div class="d-flex justify-content-between">
+              <%= "#{event.name}:"%>
+              <%= "#{attendees} attendees" %>
+            </div>
+          </h3>
+        <% end %>
+      </h2>
+    </body>
+  </div>
+  <h6>
+    To unsubscribe from this email list, simply login to
+    <%= link_to "The Alley Management App", "http://www.thealley.mtu.edu" %>
+    , go to your profile, click "Edit Profile", and change your user type to "Member"
+  </h6>
+</html>

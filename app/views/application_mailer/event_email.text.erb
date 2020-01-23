@@ -1,0 +1,13 @@
+Events this past week in the Makerspace:
+<% Event.all.each do |event| %>
+  <% if Punch.all.where(reason: event.id).count > 0 %>
+    <% attendees = Punch.all.where(reason: event.id).select("DISTINCT ON (user_id) *").size %>
+  <% else %>
+    <% attendees = 0 %>
+  <% end %>
+  <%= "#{event.name}:"%>
+  <%= "#{attendees} attendees" %>
+<% end %>
+To unsubscribe from this email list, simply login to
+<%= link_to "The Alley Management App", "http://www.thealley.mtu.edu" %>
+, go to your profile, click "Edit Profile", and change your user type to "Member"
