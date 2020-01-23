@@ -36,9 +36,6 @@ gem 'responders'
 # gem 'capistrano-rails', group: :development
 
 gem 'bootstrap', '~> 4.0.0.alpha6'
-# gem 'popper_js', '~> 1.11.1'
-
-# gem 'mailgun-ruby', '~>1.1.6'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
@@ -52,11 +49,13 @@ gem 'haml'
 
 gem 'cancancan'
 
-# gem  'figaro'
-
-# gem 'whenever', require: false
 # Slack controller. Read more: https://github.com/slack-ruby/slack-ruby-client
 gem 'slack-ruby-client'
+
+#Use figaro and whenever for cron jobs
+gem  'figaro'
+
+gem 'whenever', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
