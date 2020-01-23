@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :sunday, :at => '12pm' do
+every :wednesday, :at => '11pm' do
   rake "send_weekly_update"
 end
