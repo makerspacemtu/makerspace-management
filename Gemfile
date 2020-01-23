@@ -38,7 +38,7 @@ gem 'responders'
 gem 'bootstrap', '~> 4.0.0.alpha6'
 gem 'popper_js', '~> 1.11.1'
 
-gem 'mailgun-ruby', '~>1.1.6'
+# gem 'mailgun-ruby', '~>1.1.6'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.3.3'
