@@ -36,7 +36,7 @@ gem 'responders'
 # gem 'capistrano-rails', group: :development
 
 gem 'bootstrap', '~> 4.0.0.alpha6'
-gem 'popper_js', '~> 1.11.1'
+# gem 'popper_js', '~> 1.11.1'
 
 # gem 'mailgun-ruby', '~>1.1.6'
 
@@ -52,8 +52,7 @@ gem 'haml'
 
 gem 'cancancan'
 
-gem  'figaro'
-gem 'figaro'
+# gem  'figaro'
 
 gem 'whenever', require: false
 # Slack controller. Read more: https://github.com/slack-ruby/slack-ruby-client
