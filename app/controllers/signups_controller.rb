@@ -20,12 +20,15 @@ class SignupsController < ApplicationController
   end
 
   def create
-    @signup = Signup.new(signup_params)
-
-    if @signup.save
-      redirect_to signups_path, notice: 'Shift Slot Created.'
+      @signup = Signup.new(signup_params)
+    if !(Signup.exists?(signup_day: @signup.signup_day) && Signup.exists?(signup_start: @signup.signup_start))
+      if @signup.save
+        redirect_to signups_path, notice: 'Shift Slot Created.'
+      else
+        render 'new'
+      end
     else
-      render 'new'
+      redirect_to signups_path, notice: 'Shift Slot Exists.'
     end
   end
 
@@ -74,8 +77,20 @@ class SignupsController < ApplicationController
       end
     else
       redirect_to signups_path, notice: "No user signups currently exist."
+      return
     end
     redirect_to signups_path, notice: "All current User Signups have been cleared."
+  end
+
+  def clearslots
+    #Clear out all the existing usersignups
+    if Signup.exists?
+      Signup.destroy_all
+    else
+      redirect_to signups_path, notice: "No slots currently exist."
+      return
+    end
+    redirect_to signups_path, notice: "All current slots have been cleared."
   end
 
 private
