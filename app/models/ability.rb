@@ -122,6 +122,7 @@ class Ability
       can :update, Signup
       can :dropsignup, Signup
       can :clearusersignups, Signup
+      can :clearslots, Signup
 
       can :read, UserSignup
       can :destroy, UserSignup

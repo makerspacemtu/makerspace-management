@@ -24,6 +24,9 @@
           = form_tag '/signups/clearusersignups' do
             = submit_tag "Clear All Current User Signups (Developer)", class: 'btn btn-outline admin-delete', data: {:confirm => 'Are you sure you want to clear all current coach signups? (This will remove the user signups, not the slots.)'}
           -# = link_to  "Clear all Current User Signups (Admin)", signups_clearusersignups_path, class: "btn btn-outline admin-delete"
+        - if can? :clearslots, Signup
+          = form_tag '/signups/clearslots' do
+            = submit_tag "Clear All Current Slots (Developer)", class: 'btn btn-outline admin-delete', data: {:confirm => 'Are you sure you want to clear all current signup slots? (This will remove the user signups and the slots.)'}
 
 
       = link_to settings_toggle_deficient_trainings_view_path, class: "btn btn-outline toggle-display-btn" do
