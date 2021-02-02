@@ -21,7 +21,7 @@ class SignupsController < ApplicationController
 
   def create
       @signup = Signup.new(signup_params)
-    if !(Signup.exists?(signup_day: @signup.signup_day) && Signup.exists?(signup_start: @signup.signup_start))
+    if !(Signup.exists?(signup_day: @signup.signup_day, signup_start: @signup.signup_start))
       if @signup.save
         redirect_to signups_path, notice: 'Shift Slot Created.'
       else

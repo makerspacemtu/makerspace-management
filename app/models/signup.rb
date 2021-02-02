@@ -14,7 +14,7 @@ class Signup < ApplicationRecord
   #validates :name, presence: true
   #validates :signup_day, inclusion: { in: SIGNUP_DAYS }
   def selection_format
-    signup_end = signup_start + 1.hours
+    signup_end = signup_start + 2.hours
     time_val = signup_start.strftime("%I") + " " + signup_start.strftime("%p")+ " - " +  signup_end.strftime("%I") + " " + signup_end.strftime("%p")
     "#{SIGNUP_DAYS_R[signup_day]} #{time_val}"
   end
