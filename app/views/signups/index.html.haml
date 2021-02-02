@@ -60,7 +60,7 @@
                 - prev_user = ""
                 - i = 1
                 - loop do
-                  - signup_end = timerow.signup_start + 1.hours
+                  - signup_end = timerow.signup_start + 2.hours
                   - signup_print_val = timerow.signup_start.strftime("%I") + " " + timerow.signup_start.strftime("%p")+ " - " +  signup_end.strftime("%I") + " " + signup_end.strftime("%p")
                   - if signup_print_val == prev_signup_print_val
                     - break
