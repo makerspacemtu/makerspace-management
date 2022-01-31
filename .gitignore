@@ -20,5 +20,9 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+# Ignore changes to database schema(temporary)
+config/database.yml
+db/schema.rb
+
 # Environment specific variables
 .env
