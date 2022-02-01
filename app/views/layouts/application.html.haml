@@ -5,12 +5,9 @@
     %title Makerspace
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %script{:src => "https://code.jquery.com/jquery-3.2.1.slim.min.js", "integrity" => "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", "crossorigin" => "anonymous"}
     %script{:src => "https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = yield :css
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = yield :javascript
 
 
   %body{ class: "#{yield(:body_class)}"}
@@ -89,3 +86,5 @@
               = alert
 
           = yield
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = yield :javascript
