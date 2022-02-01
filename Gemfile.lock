@@ -288,7 +288,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  bootstrap (~> 4.0.0.alpha5)
+  bootstrap (= 4.0.0)
   byebug
   cancancan
   coffee-rails (~> 4.2)
