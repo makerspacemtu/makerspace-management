@@ -10,6 +10,8 @@
     %script{:src => "https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = yield :css
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = yield :javascript
 
 
   %body{ class: "#{yield(:body_class)}"}
@@ -88,5 +90,3 @@
               = alert
 
           = yield
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = yield :javascript
