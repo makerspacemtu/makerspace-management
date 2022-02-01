@@ -31,7 +31,7 @@
 #  slack_user_id          :string
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
     sequence(:first_name) { |n| "First Name #{n}" }

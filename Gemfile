@@ -20,6 +20,7 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -65,7 +66,7 @@ group :development, :test do
 
   gem 'rspec-rails'
 
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -85,3 +86,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'composite_primary_keys'
 
 gem 'rails-settings-manager'
+
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
